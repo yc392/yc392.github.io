@@ -11,5 +11,40 @@
 	<atom:link href="https://yc392.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title>About Me</title>
+      <link>https://yc392.github.io/aboutme/</link>
+      <pubDate>Wed, 09 Sep 2020 16:57:33 -0400</pubDate>
+      
+      <guid>https://yc392.github.io/aboutme/</guid>
+      <description>This is Yuhua Cai.
+Education Duke University
+Master of Engineering in Electrical and Computer Engineering
+Data Analyst and Machine Learning Engineer
+Hobby Basketball
+Contact Me Email: yuhua.cai@duke.edu</description>
+    </item>
+    
+    <item>
+      <title>Euler Project</title>
+      <link>https://yc392.github.io/euler/</link>
+      <pubDate>Tue, 08 Sep 2020 20:14:38 +0530</pubDate>
+      
+      <guid>https://yc392.github.io/euler/</guid>
+      <description>Project Euler is a series of challenging mathematical/computer programming problems that will require more than just mathematical insights to solve. In this post, three problems solved from the Euler Project using Python. Every function was annotated with nuympy-styple docstrings.
+1001st prime Problem 7	(420680 Solved) By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+What is the 10 001st prime number?</description>
+    </item>
+    
+    <item>
+      <title>Build My Personal Blog with Hugo and Github Pages</title>
+      <link>https://yc392.github.io/blogs/</link>
+      <pubDate>Sun, 23 Aug 2020 20:14:38 +0530</pubDate>
+      
+      <guid>https://yc392.github.io/blogs/</guid>
+      <description>Introduction Hugo is one of the most popular open-source static generator and is written in GO. It is simple and easy to deploy. And Github Pages is a static web hosting service provided by Github which provides convenient deployment directly through Github repository.
+In this brief post I’ll walk you through how I created this website in 5 simple steps using Hugo and GitHub Pages. Step 1: Install Hugo and get a GitHub account As I’m a mac user, I’ll provide instructions here for installing Hugo on macOS.</description>
+    </item>
+    
   </channel>
 </rss>
