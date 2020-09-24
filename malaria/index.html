@@ -1,18 +1,29 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en-us">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title>Malaria Data Visualization · Yuhua Cai</title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="1894.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
-    span.s1 {font-kerning: none}
-  </style>
-</head>
-<body>
-<p class="p1"><span class="s1">
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
     
         <meta name="twitter:card" content="summary"/>
     
@@ -23,7 +34,73 @@
 <meta name="twitter:description" content=""/>
 <meta name="twitter:site" content="@"/>
 
-                 <meta name="generator" content="Hugo 0.74.3" />  
+
+
+      <meta property="og:title" content="Malaria Data Visualization &middot; Yuhua Cai" />
+      <meta property="og:site_name" content="Yuhua Cai" />
+      <meta property="og:url" content="https://yc392.github.io/malaria/" />
+        <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+    </script>
+
+    
+        
+            <meta property="og:image" content="/images/cover1.png"/>
+        
+    
+
+    
+    <meta property="og:description" content="" />
+      <meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2020-09-08T20:14:38&#43;05:30" />
+
+    
+    
+
+    <title>Malaria Data Visualization &middot; Yuhua Cai</title>
+
+    
+    <meta name="description" content="Three informative visualizations about malaria are created using Python, starting with the data sets at https://github.com/rfordatascience/tidytuesday/tree/mast" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+      <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/css/nav.css" />
+
+    
+
+    
+
+    
+      
+          <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Yuhua Cai" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.74.3" />
+
+    <link rel="canonical" href="https://yc392.github.io/malaria/" />
+
+    
+      
     
     <script type="application/ld+json">
 {
@@ -59,8 +136,8 @@
     },
     "headline": "Malaria Data Visualization",
     "name": "Malaria Data Visualization",
-    "wordCount":  424 ,
-    "timeRequired": "PT2M",
+    "wordCount":  493 ,
+    "timeRequired": "PT3M",
     "inLanguage": {
       "@type": "Language",
       "alternateName": "en"
@@ -79,7 +156,16 @@
     </script>
     
 
-    <div class="nav">
+
+    
+
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
     <h3 class="nav-title">Menu</h3>
     <a href="#" class="nav-close">
         <span class="hidden">Close</span>
@@ -108,6 +194,11 @@
             	<a href="/euler">Euler Project</a>
             </li>
         
+            <br />
+            <li class="nav-opened" role="presentation">
+            	<a href="/malaria">Malaria Data Visualization</a>
+            </li>
+        
         
     </ul>
 
@@ -116,10 +207,9 @@
     
 </div>
 <span class="nav-cover"></span>
-</span></p>
-<p class="p1"><span class="s1"> </span></p>
-</body>
-</html>
+
+
+ <div class="site-wrapper">
 
 
 
@@ -152,6 +242,8 @@
   <article class="post ">
     <header class="post-header">
       <nav class="breadcrumb">
+        
+        
         
         
         
@@ -201,33 +293,37 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">df1 <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;malaria_deaths.csv&#39;</span>)
 df1 <span style="color:#f92672">=</span> df1<span style="color:#f92672">.</span>rename(columns<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;Deaths - Malaria - Sex: Both - Age: Age-standardized (Rate) (per 100,000 people)&#34;</span>: <span style="color:#e6db74">&#34;Deaths per 100,000 People&#34;</span>})
 df1<span style="color:#f92672">.</span>head()
-</code></pre></div><p>![Screen Shot 2020-09-23 at 10.58.37 AM](/Users/eddie/Library/Application Support/typora-user-images/Screen Shot 2020-09-23 at 10.58.37 AM.png)</p>
+</code></pre></div><p><img src="/images/malaria4.png" alt="malaria4"></p>
 <h4 id="malaria_deaths_agecsv">malaria_deaths_age.csv</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">df2 <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;malaria_deaths_age.csv&#39;</span>)
 df2<span style="color:#f92672">.</span>head()
-</code></pre></div><p>![Screen Shot 2020-09-23 at 11.01.50 AM](/Users/eddie/Library/Application Support/typora-user-images/Screen Shot 2020-09-23 at 11.01.50 AM.png)</p>
+</code></pre></div><p><img src="/images/malaria5.png" alt="malaria5"></p>
 <h4 id="malaria_deaths_agecsv-1">malaria_deaths_age.csv</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df3 <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;malaria_inc.csv&#39;</span>)
 df3 <span style="color:#f92672">=</span> df3<span style="color:#f92672">.</span>rename(columns<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;Incidence of malaria (per 1,000 population at risk) (per 1,000 population at risk)&#34;</span>: <span style="color:#e6db74">&#34;Incidence per 1,000 population at risk&#34;</span>})
 df3<span style="color:#f92672">.</span>head()
-</code></pre></div><p>![Screen Shot 2020-09-23 at 11.03.08 AM](/Users/eddie/Library/Application Support/typora-user-images/Screen Shot 2020-09-23 at 11.03.08 AM.png)</p>
-<h2 id="data-visualizations-with-seaborn">Data Visualizations with seaborn</h2>
+</code></pre></div><p><img src="/images/malaria8.png" alt="malaria8"></p>
+<h2 id="data-visualizations-with-seaborn">Data Visualizations with Seaborn</h2>
 <p>In these datasets, there are totally 228 different countries (&lsquo;Entity&rsquo;) recorded. For simplicity, I decided to divided them into 6 continents which is  &lsquo;Africa&rsquo;, &lsquo;Asia&rsquo;, &lsquo;Europe&rsquo;, &lsquo;North America&rsquo;,&lsquo;Oceania&rsquo; and &lsquo;South America&rsquo;. I found another dataset &lsquo;Countries-Continents.csv&rsquo; and merged with the dataset &lsquo;malaria_deaths_age.csv&rsquo;.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df4 <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;Countries-Continents.csv&#39;</span>)
 df_merge <span style="color:#f92672">=</span> df2<span style="color:#f92672">.</span>merge(df4,left_on<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;entity&#39;</span>, right_on<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Country&#39;</span>)
 df_merge<span style="color:#f92672">.</span>head()
-</code></pre></div><p>![Screen Shot 2020-09-23 at 11.21.18 AM](/Users/eddie/Library/Application Support/typora-user-images/Screen Shot 2020-09-23 at 11.21.18 AM.png)</p>
+</code></pre></div><p><img src="/images/malaria7.png" alt="malaria7"></p>
 <p>Group by &lsquo;Continent&rsquo; and &lsquo;year&rsquo; and have a sum on &lsquo;deaths&rsquo;. Then we have the total number of deaths for a certain Continent in a certain year.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_total <span style="color:#f92672">=</span> df_merge[[<span style="color:#e6db74">&#39;deaths&#39;</span>,<span style="color:#e6db74">&#39;Continent&#39;</span>,<span style="color:#e6db74">&#39;year&#39;</span>]]<span style="color:#f92672">.</span>groupby([<span style="color:#e6db74">&#39;Continent&#39;</span>,<span style="color:#e6db74">&#39;year&#39;</span>])<span style="color:#f92672">.</span>sum()<span style="color:#f92672">.</span>reset_index()
 df_total<span style="color:#f92672">.</span>head()
-</code></pre></div><p>![Screen Shot 2020-09-23 at 11.34.25 AM](/Users/eddie/Library/Application Support/typora-user-images/Screen Shot 2020-09-23 at 11.34.25 AM.png)</p>
-<p>Line Plot with Seaborn. With yscale = &lsquo;log&rsquo; for clear seperation and with plt.xkcd() for fun!</p>
+</code></pre></div><p><img src="/images/malaria6.png" alt="malaria6"></p>
+<p>Line Plot with Seaborn. With yscale = &lsquo;log&rsquo; for clear seperations and with plt.xkcd() for fun!</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> plt<span style="color:#f92672">.</span>xkcd():
     fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">5</span>))
     sns<span style="color:#f92672">.</span>lineplot(data<span style="color:#f92672">=</span>df_total, x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;year&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;deaths&#34;</span>, hue<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Continent&#34;</span>)
+    ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;total deaths over years&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>)
     plt<span style="color:#f92672">.</span>legend(bbox_to_anchor<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1.01</span>, <span style="color:#ae81ff">1</span>),borderaxespad<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
     plt<span style="color:#f92672">.</span>yscale(<span style="color:#e6db74">&#39;log&#39;</span>)
-</code></pre></div><p>![Screen Shot 2020-09-23 at 11.38.45 AM](/Users/eddie/Library/Application Support/typora-user-images/Screen Shot 2020-09-23 at 11.38.45 AM.png)</p>
+</code></pre></div><p><img src="/images/malaria1.png" alt="malaria1"></p>
+<ul>
+<li>The total number of deaths due to malaria differs on different continents. From the largest to least: Africa, Asia, Europe, North America, Oceania, South America. The rank has not changed for many years (from 1990 to 2015).</li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x_axis <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;Under 5&#39;</span>, <span style="color:#e6db74">&#39;5-14&#39;</span>, <span style="color:#e6db74">&#39;15-49&#39;</span>, <span style="color:#e6db74">&#39;50-69&#39;</span>, <span style="color:#e6db74">&#39;70 or older&#39;</span>]
 
 <span style="color:#66d9ef">with</span> plt<span style="color:#f92672">.</span>xkcd():
@@ -235,7 +331,8 @@ df_total<span style="color:#f92672">.</span>head()
     sns<span style="color:#f92672">.</span>barplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;age_group&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;deaths&#39;</span>, data<span style="color:#f92672">=</span>df2,order <span style="color:#f92672">=</span> x_axis);
     ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;age VS deaths over all countries&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>)
     plt<span style="color:#f92672">.</span>show()
-</code></pre></div><p>![Screen Shot 2020-09-23 at 12.23.01 PM](/Users/eddie/Library/Application Support/typora-user-images/Screen Shot 2020-09-23 at 12.23.01 PM.png)</p>
+</code></pre></div><p><img src="/images/malaria2.png" alt="malaria2"></p>
+<p>As the figure shown above, it is quite obvious that the total number of deaths for people under 5 is the largest. But we cannot conclude that the people under 5 (children) are much more likely to be dead due to malaria since we have no idea about the situation of infections for each age group. The world wide total number of deaths reduces as the growth of age. However, since we don&rsquo;t know the populations in different age group, we cannot say that the number of deaths is inversely proportional to the age.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">grouped_1 <span style="color:#f92672">=</span> df1[[<span style="color:#e6db74">&#39;Year&#39;</span>,<span style="color:#e6db74">&#39;Deaths per 100,000 People&#39;</span>]]<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;Year&#39;</span>)<span style="color:#f92672">.</span>mean()<span style="color:#f92672">.</span>reset_index()
 
 grouped_3 <span style="color:#f92672">=</span> df3[[<span style="color:#e6db74">&#39;Year&#39;</span>,<span style="color:#e6db74">&#39;Incidence per 1,000 population at risk&#39;</span>]]<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;Year&#39;</span>)<span style="color:#f92672">.</span>mean()<span style="color:#f92672">.</span>reset_index()
@@ -250,7 +347,11 @@ grouped_3 <span style="color:#f92672">=</span> df3[[<span style="color:#e6db74">
     plt<span style="color:#f92672">.</span>show()
 
 
-</code></pre></div><p>![Screen Shot 2020-09-23 at 12.25.24 PM](/Users/eddie/Library/Application Support/typora-user-images/Screen Shot 2020-09-23 at 12.25.24 PM.png)</p>
+</code></pre></div><p><img src="/images/malaria3.png" alt="malaria3"></p>
+<ul>
+<li>The death rate of malaria for per 100,000 people first increases and then decreases. 2000 to 2003 is the peak.</li>
+<li>Incidence per 1,000 population at risk decrease over years.</li>
+</ul>
 
 
 

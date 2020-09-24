@@ -33,7 +33,7 @@ Contact Me Email: yuhua.cai@duke.edu</description>
       <guid>https://yc392.github.io/euler/</guid>
       <description>Project Euler is a series of challenging mathematical/computer programming problems that will require more than just mathematical insights to solve. In this post, three problems solved from the Euler Project using Python. Every function was annotated with nuympy-styple docstrings.
 1001st prime Problem 7	(420680 Solved) By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
-What is the 10 001st prime number?</description>
+What is the 10, 001st prime number?</description>
     </item>
     
     <item>

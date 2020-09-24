@@ -1,18 +1,29 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en-us">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title>Euler Project · Yuhua Cai</title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="1894.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
-    span.s1 {font-kerning: none}
-  </style>
-</head>
-<body>
-<p class="p1"><span class="s1">
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
     
         <meta name="twitter:card" content="summary"/>
     
@@ -23,7 +34,73 @@
 <meta name="twitter:description" content=""/>
 <meta name="twitter:site" content="@"/>
 
-                 <meta name="generator" content="Hugo 0.74.3" />  
+
+
+      <meta property="og:title" content="Euler Project &middot; Yuhua Cai" />
+      <meta property="og:site_name" content="Yuhua Cai" />
+      <meta property="og:url" content="https://yc392.github.io/euler/" />
+        <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+    </script>
+
+    
+        
+            <meta property="og:image" content="/images/cover1.png"/>
+        
+    
+
+    
+    <meta property="og:description" content="" />
+      <meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2020-09-08T20:14:38&#43;05:30" />
+
+    
+    
+
+    <title>Euler Project &middot; Yuhua Cai</title>
+
+    
+    <meta name="description" content="Project Euler is a series of challenging mathematical/computer programming problems that will require more than just mathematical insights to solve. In this pos" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+      <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/css/nav.css" />
+
+    
+
+    
+
+    
+      
+          <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Yuhua Cai" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.74.3" />
+
+    <link rel="canonical" href="https://yc392.github.io/euler/" />
+
+    
+      
     
     <script type="application/ld+json">
 {
@@ -59,7 +136,7 @@
     },
     "headline": "Euler Project",
     "name": "Euler Project",
-    "wordCount":  713 ,
+    "wordCount":  709 ,
     "timeRequired": "PT4M",
     "inLanguage": {
       "@type": "Language",
@@ -79,7 +156,16 @@
     </script>
     
 
-    <div class="nav">
+
+    
+
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
     <h3 class="nav-title">Menu</h3>
     <a href="#" class="nav-close">
         <span class="hidden">Close</span>
@@ -108,6 +194,11 @@
             	<a href="/euler">Euler Project</a>
             </li>
         
+            <br />
+            <li class="nav-opened" role="presentation">
+            	<a href="/malaria">Malaria Data Visualization</a>
+            </li>
+        
         
     </ul>
 
@@ -116,10 +207,9 @@
     
 </div>
 <span class="nav-cover"></span>
-</span></p>
-<p class="p1"><span class="s1"> </span></p>
-</body>
-</html>
+
+
+ <div class="site-wrapper">
 
 
 
@@ -163,6 +253,8 @@
         
         
         
+        
+        
       </nav>
 
 
@@ -182,9 +274,9 @@
 <h2 id="1001st-prime">1001st prime</h2>
 <h4 id="problem-7420680-solved">Problem 7		(420680 Solved)</h4>
 <p>By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.</p>
-<p>What is the 10 001st prime number?</p>
+<p>What is the 10, 001st prime number?</p>
 <h4 id="my-solution">My solution:</h4>
-<p>For solving this problem, we can first find a list of the first n prime number and then return the last one. The helper function isPrime() is to determine whether an interger is prime. Once isPrime(x) returns True, we put the int x to the prime_list[]. Append the prime_list[] until the length of prime_list equals to 10 001. Return the last element of the prime_list which is the 10 001st prime number.</p>
+<p>For solving this problem, we can first find a list of the first n prime number and then return the last one. The helper function <code>isPrime()</code> is to determine whether an interger is prime. Once <code>isPrime(x)</code> returns True, we put the int x to the <code>prime_list[]</code>. Append the <code>prime_list[]</code> until the length of <code>prime_list</code> equals to 10 001. Return the last element of the <code>prime_list</code> which is the 10 001st prime number.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isPrime</span>(x):
   	<span style="color:#e6db74">&#34;&#34;&#34;
 </span><span style="color:#e6db74">  	Determine whether an integer is prime
@@ -228,11 +320,11 @@
 <span style="color:#ae81ff">104743</span>
 </code></pre></div><h2 id="double-base-palindromes">Double-base palindromes</h2>
 <h4 id="problem-3687508-solved">Problem 36		(87508 Solved)</h4>
-<p>The decimal number, 585 = 1001001001<!-- raw HTML omitted -->2<!-- raw HTML omitted -->(binary), is palindromic in both bases.</p>
+<p>The decimal number, 585 = $1001001001_2$(binary), is palindromic in both bases.</p>
 <p>Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.</p>
 <p>(Please note that the palindromic number, in either base, may not include leading zeros.)</p>
 <h4 id="my-solution-1">My solution:</h4>
-<p>For solving this problem, we can count from 0 to one million and determine whether each number is  double-base palindromes. Finally, add all double-base palindromes up. Note: in the function isPalindrome(), s[ : : -1] will return the reverse string, and bin(n) will method converts and returns the binary equivalent string of a given integer n.</p>
+<p>For solving this problem, we can count from 0 to one million and determine whether each number is  double-base palindromes. Finally, add all double-base palindromes up. Note: in the function <code>isPalindrome()</code>, <code>s[::-1]</code> will return the reverse string, and <code>bin(n)</code> will method converts and returns the binary equivalent string of a given integer n.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sumPalindrome</span>(n):
   	<span style="color:#e6db74">&#34;&#34;&#34;
 </span><span style="color:#e6db74">  	The sum of all numbers, less than n, which are double-base palindromes
@@ -272,12 +364,12 @@
 <span style="color:#ae81ff">872187</span>
 </code></pre></div><h2 id="palindromic-sums">Palindromic sums</h2>
 <h4 id="problem-12512856-solved">Problem 125		(12856 Solved)</h4>
-<p>The palindromic number 595 is interesting because it can be written as the sum of consecutive squares: 6^2^ + 7^2^ + 8^2^ + 9^2^ + 10^2^ + 11^2^ + 12^2^.</p>
-<p>There are exactly eleven palindromes below one-thousand that can be written as consecutive square sums, and the sum of these palindromes is 4164. Note that 1 = 0^2^ + 1^2^ has not been included as this problem is concerned with the squares of positive integers.</p>
-<p>Find the sum of all the numbers less than 10^8^ that are both palindromic and can be written as the sum of consecutive squares.</p>
+<p>The palindromic number 595 is interesting because it can be written as the sum of consecutive squares:$ 6^2 + 7^2 + 8^2 + 9^2 + 10^2 + 11^2+ 12^2$.</p>
+<p>There are exactly eleven palindromes below one-thousand that can be written as consecutive square sums, and the sum of these palindromes is 4164. Note that $1 = 0^2 + 1^2$ has not been included as this problem is concerned with the squares of positive integers.</p>
+<p>Find the sum of all the numbers less than $10^8$ that are both palindromic and can be written as the sum of consecutive squares.</p>
 <h4 id="my-solution-2">My solution:</h4>
-<p>For solving this problem, we can simply try every possible sum of consecutive squares and determine whether the sum is palindromic. Note that in the for loop, we limit the start number of consecutive squares from 1 to 10000 because 1 = 0^2^ + 1^2^ not included and 10001^2^ &gt; 10^8^ which is not what we need to consider.</p>
-<p>Besides, to get rid of duplications, I put all these palindromes into a set. So this set contains all the numbers less than 10^8^ that are both palindromic and can be written as the sum of consecutive squares. Then we add them up.</p>
+<p>For solving this problem, we can simply try every possible sum of consecutive squares and determine whether the sum is palindromic. Note that in the for loop, we limit the start number of consecutive squares from 1 to 10000 because $1 = 0^2 + 1^2$ not included and $10001^2 &gt; 10^8$ which is not what we need to consider.</p>
+<p>Besides, to get rid of duplications, I put all these palindromes into a set. So this set contains all the numbers less than $10^8$ that are both palindromic and can be written as the sum of consecutive squares. Then we add them up.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sumPalindrome</span>(n):
   	<span style="color:#e6db74">&#34;&#34;&#34;
 </span><span style="color:#e6db74">  	Find the sum of all the numbers less than 10^8^ that are both palindromic and can be written as the sum of consecutive squares.
