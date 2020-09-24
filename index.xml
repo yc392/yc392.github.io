@@ -37,6 +37,19 @@ What is the 10 001st prime number?</description>
     </item>
     
     <item>
+      <title>Malaria Data Visualization</title>
+      <link>https://yc392.github.io/malaria/</link>
+      <pubDate>Tue, 08 Sep 2020 20:14:38 +0530</pubDate>
+      
+      <guid>https://yc392.github.io/malaria/</guid>
+      <description>Three informative visualizations about malaria are created using Python, starting with the data sets at https://github.com/rfordatascience/tidytuesday/tree/master/data/2018/2018-11-13.
+Malaria Dataset Malaria Dataset includes 3 informative datasets.
+3 Datasets   malaria_inc.csv - Malaria incidence by country for all ages across the world across time.
+  malaria_deaths.csv - Malaria deaths by country for all ages across the world and time.
+  malaria_deaths_age.csv - Malaria deaths by age across the world and time.</description>
+    </item>
+    
+    <item>
       <title>Build My Personal Blog with Hugo and Github Pages</title>
       <link>https://yc392.github.io/blogs/</link>
       <pubDate>Sun, 23 Aug 2020 20:14:38 +0530</pubDate>

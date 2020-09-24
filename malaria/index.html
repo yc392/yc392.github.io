@@ -1,0 +1,371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Malaria Data Visualization · Yuhua Cai</title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="Malaria Data Visualization"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@"/>
+
+                 <meta name="generator" content="Hugo 0.74.3" />  
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name":  null ,
+        "logo": "https://yc392.github.ioimages/logo.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name":  null ,
+        
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://yc392.github.ioimages/logo.png",
+            "width": 250,
+            "height": 250
+        }, 
+        
+        "url":  null ,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": "Malaria Data Visualization",
+    "name": "Malaria Data Visualization",
+    "wordCount":  424 ,
+    "timeRequired": "PT2M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": "en"
+    },
+    "url": "https://yc392.github.io/malaria/",
+    "datePublished": "2020-09-08T20:14Z",
+    "dateModified": "2020-09-08T20:14Z",
+    
+    
+    "description": "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://yc392.github.io/malaria/"
+    }
+}
+    </script>
+    
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            <br />
+            <li class="nav-opened" role="presentation">
+            	<a href="/">Home</a>
+            </li>
+        
+            <br />
+            <li class="nav-opened" role="presentation">
+            	<a href="/aboutme">About Me</a>
+            </li>
+        
+            <br />
+            <li class="nav-opened" role="presentation">
+            	<a href="/blogs">Build my personal blog</a>
+            </li>
+        
+            <br />
+            <li class="nav-opened" role="presentation">
+            	<a href="/euler">Euler Project</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+</span></p>
+<p class="p1"><span class="s1"> </span></p>
+</body>
+</html>
+
+
+
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav overlay clearfix">
+
+
+      
+        <a class="blog-logo" href="https://yc392.github.io"><img src="/images/logo.png" alt="Home" /></a>
+      
+      
+          <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+      
+    </nav>
+
+    
+
+
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post ">
+    <header class="post-header">
+      <nav class="breadcrumb">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </nav>
+
+
+        <h1 class="post-title">Malaria Data Visualization</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+
+
+<p>Three informative visualizations about malaria are created using Python, starting with the data sets at <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2018/2018-11-13">https://github.com/rfordatascience/tidytuesday/tree/master/data/2018/2018-11-13</a>.</p>
+<h2 id="malaria-dataset">Malaria Dataset</h2>
+<p>Malaria Dataset includes 3 informative datasets.</p>
+<h4 id="3-datasets">3 Datasets</h4>
+<ul>
+<li>
+<p><a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2018-11-13/malaria_inc.csv"><code>malaria_inc.csv</code></a> - Malaria incidence by country for all ages across the world across time.</p>
+</li>
+<li>
+<p><a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2018-11-13/malaria_deaths.csv"><code>malaria_deaths.csv</code></a> - Malaria deaths by country for all ages across the world and time.</p>
+</li>
+<li>
+<p><a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2018-11-13/malaria_deaths_age.csv"><code>malaria_deaths_age.csv</code></a> - Malaria deaths by age across the world and time.</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python"><span style="color:#f92672">%</span>matplotlib inline
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> seaborn <span style="color:#f92672">as</span> sns
+</code></pre></div><h4 id="malaria_deathscsv">malaria_deaths.csv</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">df1 <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;malaria_deaths.csv&#39;</span>)
+df1 <span style="color:#f92672">=</span> df1<span style="color:#f92672">.</span>rename(columns<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;Deaths - Malaria - Sex: Both - Age: Age-standardized (Rate) (per 100,000 people)&#34;</span>: <span style="color:#e6db74">&#34;Deaths per 100,000 People&#34;</span>})
+df1<span style="color:#f92672">.</span>head()
+</code></pre></div><p>![Screen Shot 2020-09-23 at 10.58.37 AM](/Users/eddie/Library/Application Support/typora-user-images/Screen Shot 2020-09-23 at 10.58.37 AM.png)</p>
+<h4 id="malaria_deaths_agecsv">malaria_deaths_age.csv</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python" data-lang="Python">df2 <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;malaria_deaths_age.csv&#39;</span>)
+df2<span style="color:#f92672">.</span>head()
+</code></pre></div><p>![Screen Shot 2020-09-23 at 11.01.50 AM](/Users/eddie/Library/Application Support/typora-user-images/Screen Shot 2020-09-23 at 11.01.50 AM.png)</p>
+<h4 id="malaria_deaths_agecsv-1">malaria_deaths_age.csv</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df3 <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;malaria_inc.csv&#39;</span>)
+df3 <span style="color:#f92672">=</span> df3<span style="color:#f92672">.</span>rename(columns<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;Incidence of malaria (per 1,000 population at risk) (per 1,000 population at risk)&#34;</span>: <span style="color:#e6db74">&#34;Incidence per 1,000 population at risk&#34;</span>})
+df3<span style="color:#f92672">.</span>head()
+</code></pre></div><p>![Screen Shot 2020-09-23 at 11.03.08 AM](/Users/eddie/Library/Application Support/typora-user-images/Screen Shot 2020-09-23 at 11.03.08 AM.png)</p>
+<h2 id="data-visualizations-with-seaborn">Data Visualizations with seaborn</h2>
+<p>In these datasets, there are totally 228 different countries (&lsquo;Entity&rsquo;) recorded. For simplicity, I decided to divided them into 6 continents which is  &lsquo;Africa&rsquo;, &lsquo;Asia&rsquo;, &lsquo;Europe&rsquo;, &lsquo;North America&rsquo;,&lsquo;Oceania&rsquo; and &lsquo;South America&rsquo;. I found another dataset &lsquo;Countries-Continents.csv&rsquo; and merged with the dataset &lsquo;malaria_deaths_age.csv&rsquo;.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df4 <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;Countries-Continents.csv&#39;</span>)
+df_merge <span style="color:#f92672">=</span> df2<span style="color:#f92672">.</span>merge(df4,left_on<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;entity&#39;</span>, right_on<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Country&#39;</span>)
+df_merge<span style="color:#f92672">.</span>head()
+</code></pre></div><p>![Screen Shot 2020-09-23 at 11.21.18 AM](/Users/eddie/Library/Application Support/typora-user-images/Screen Shot 2020-09-23 at 11.21.18 AM.png)</p>
+<p>Group by &lsquo;Continent&rsquo; and &lsquo;year&rsquo; and have a sum on &lsquo;deaths&rsquo;. Then we have the total number of deaths for a certain Continent in a certain year.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_total <span style="color:#f92672">=</span> df_merge[[<span style="color:#e6db74">&#39;deaths&#39;</span>,<span style="color:#e6db74">&#39;Continent&#39;</span>,<span style="color:#e6db74">&#39;year&#39;</span>]]<span style="color:#f92672">.</span>groupby([<span style="color:#e6db74">&#39;Continent&#39;</span>,<span style="color:#e6db74">&#39;year&#39;</span>])<span style="color:#f92672">.</span>sum()<span style="color:#f92672">.</span>reset_index()
+df_total<span style="color:#f92672">.</span>head()
+</code></pre></div><p>![Screen Shot 2020-09-23 at 11.34.25 AM](/Users/eddie/Library/Application Support/typora-user-images/Screen Shot 2020-09-23 at 11.34.25 AM.png)</p>
+<p>Line Plot with Seaborn. With yscale = &lsquo;log&rsquo; for clear seperation and with plt.xkcd() for fun!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> plt<span style="color:#f92672">.</span>xkcd():
+    fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">5</span>))
+    sns<span style="color:#f92672">.</span>lineplot(data<span style="color:#f92672">=</span>df_total, x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;year&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;deaths&#34;</span>, hue<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Continent&#34;</span>)
+    plt<span style="color:#f92672">.</span>legend(bbox_to_anchor<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1.01</span>, <span style="color:#ae81ff">1</span>),borderaxespad<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+    plt<span style="color:#f92672">.</span>yscale(<span style="color:#e6db74">&#39;log&#39;</span>)
+</code></pre></div><p>![Screen Shot 2020-09-23 at 11.38.45 AM](/Users/eddie/Library/Application Support/typora-user-images/Screen Shot 2020-09-23 at 11.38.45 AM.png)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x_axis <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;Under 5&#39;</span>, <span style="color:#e6db74">&#39;5-14&#39;</span>, <span style="color:#e6db74">&#39;15-49&#39;</span>, <span style="color:#e6db74">&#39;50-69&#39;</span>, <span style="color:#e6db74">&#39;70 or older&#39;</span>]
+
+<span style="color:#66d9ef">with</span> plt<span style="color:#f92672">.</span>xkcd():
+    fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(nrows<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, ncols<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">6</span>))
+    sns<span style="color:#f92672">.</span>barplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;age_group&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;deaths&#39;</span>, data<span style="color:#f92672">=</span>df2,order <span style="color:#f92672">=</span> x_axis);
+    ax<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;age VS deaths over all countries&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">16</span>)
+    plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p>![Screen Shot 2020-09-23 at 12.23.01 PM](/Users/eddie/Library/Application Support/typora-user-images/Screen Shot 2020-09-23 at 12.23.01 PM.png)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">grouped_1 <span style="color:#f92672">=</span> df1[[<span style="color:#e6db74">&#39;Year&#39;</span>,<span style="color:#e6db74">&#39;Deaths per 100,000 People&#39;</span>]]<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;Year&#39;</span>)<span style="color:#f92672">.</span>mean()<span style="color:#f92672">.</span>reset_index()
+
+grouped_3 <span style="color:#f92672">=</span> df3[[<span style="color:#e6db74">&#39;Year&#39;</span>,<span style="color:#e6db74">&#39;Incidence per 1,000 population at risk&#39;</span>]]<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;Year&#39;</span>)<span style="color:#f92672">.</span>mean()<span style="color:#f92672">.</span>reset_index()
+
+<span style="color:#66d9ef">with</span> plt<span style="color:#f92672">.</span>xkcd():
+    fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(nrows<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, ncols<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">6</span>))
+    sns<span style="color:#f92672">.</span>lineplot(data<span style="color:#f92672">=</span>grouped_1, x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Year&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Deaths per 100,000 People&#39;</span>, ax<span style="color:#f92672">=</span>ax[<span style="color:#ae81ff">0</span>])
+    ax[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;Deaths over Years&#39;</span>)
+    sns<span style="color:#f92672">.</span>lineplot(data<span style="color:#f92672">=</span>grouped_3, x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Year&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Incidence per 1,000 population at risk&#39;</span>, ax<span style="color:#f92672">=</span>ax[<span style="color:#ae81ff">1</span>])
+    ax[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;Incidence over Years&#39;</span>)
+    plt<span style="color:#f92672">.</span>tight_layout()
+    plt<span style="color:#f92672">.</span>show()
+
+
+</code></pre></div><p>![Screen Shot 2020-09-23 at 12.25.24 PM](/Users/eddie/Library/Application Support/typora-user-images/Screen Shot 2020-09-23 at 12.25.24 PM.png)</p>
+
+
+
+
+
+
+
+
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+        <a class="img" href="https://yc392.github.io" style="background-image: url(/images/logo.png)"><span class="hidden">Yuhua Cai's Picture</span></a>
+    </figure>
+    
+
+    
+
+
+
+
+
+
+
+
+<figure class="author-image">
+    <a class="img" href="https://yc392.github.io" style="background-image: url(/images/logo.png)"><span class="hidden">Yuhua Cai's Picture</span></a>
+</figure>
+
+
+<section class="author">
+  <h4><a href="https://yc392.github.io">Yuhua Cai</a></h4>
+  
+  <p>Read <a href="https://yc392.github.io">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Durham, NC, USA</span>
+    
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this page</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Malaria%20Data%20Visualization&nbsp;-&nbsp;Yuhua%20Cai&amp;url=https%3a%2f%2fyc392.github.io%2fmalaria%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyc392.github.io%2fmalaria%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fyc392.github.io%2fmalaria%2f&amp;description=Malaria%20Data%20Visualization"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=https%3a%2f%2fyc392.github.io%2fmalaria%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+<aside class="read-next">
+  
+      <a class="read-next-story" style="no-cover" href="/euler/">
+          <section class="post">
+              <h2>Euler Project</h2>
+              
+          </section>
+      </a>
+  
+  
+      <a class="read-next-story prev" style="no-cover" href="/blogs/">
+          <section class="post">
+              <h2>Build My Personal Blog with Hugo and Github Pages</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">Yuhua Cai</a> © Yuhua Cai Duke 2021</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    
+</body>
+</html>
+
