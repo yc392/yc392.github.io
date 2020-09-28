@@ -1,0 +1,1747 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="Adaboost Ensembling"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@"/>
+
+
+
+      <meta property="og:title" content="Adaboost Ensembling &middot; Yuhua Cai" />
+      <meta property="og:site_name" content="Yuhua Cai" />
+      <meta property="og:url" content="https://yc392.github.io/adaboost/" />
+        <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+    </script>
+
+    
+        
+            <meta property="og:image" content="/images/cover1.png"/>
+        
+    
+
+    
+    <meta property="og:description" content="" />
+      <meta property="og:type" content="article" />
+    <meta property="article:published_time" content="0001-01-01T00:00:00Z" />
+
+    
+    
+
+    <title>Adaboost Ensembling &middot; Yuhua Cai</title>
+
+    
+    <meta name="description" content="Boosting a decision stump The goal of this notebook is to implement your own boosting module.
+ Go through an implementation of decision trees. Implement Adaboos" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+      <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/css/nav.css" />
+
+    
+
+    
+
+    
+      
+          <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Yuhua Cai" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.74.3" />
+
+    <link rel="canonical" href="https://yc392.github.io/adaboost/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name":  null ,
+        "logo": "https://yc392.github.ioimages/logo.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name":  null ,
+        
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://yc392.github.ioimages/logo.png",
+            "width": 250,
+            "height": 250
+        }, 
+        
+        "url":  null ,
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ]
+    },
+    "headline": "Adaboost Ensembling",
+    "name": "Adaboost Ensembling",
+    "wordCount":  6123 ,
+    "timeRequired": "PT29M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": "en"
+    },
+    "url": "https://yc392.github.io/adaboost/",
+    "datePublished": "0001-01-01T00:00Z",
+    "dateModified": "0001-01-01T00:00Z",
+    
+    
+    "description": "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://yc392.github.io/adaboost/"
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            <br />
+            <li class="nav-opened" role="presentation">
+            	<a href="/">Home</a>
+            </li>
+        
+            <br />
+            <li class="nav-opened" role="presentation">
+            	<a href="/aboutme">About Me</a>
+            </li>
+        
+            <br />
+            <li class="nav-opened" role="presentation">
+            	<a href="/adaboost">Adaboost ensembling</a>
+            </li>
+        
+            <br />
+            <li class="nav-opened" role="presentation">
+            	<a href="/blogs">Build my personal blog</a>
+            </li>
+        
+            <br />
+            <li class="nav-opened" role="presentation">
+            	<a href="/trees">CART4.5, ID3 and Random Forest</a>
+            </li>
+        
+            <br />
+            <li class="nav-opened" role="presentation">
+            	<a href="/euler">Euler Project</a>
+            </li>
+        
+            <br />
+            <li class="nav-opened" role="presentation">
+            	<a href="/linear_svm">Linear SVM</a>
+            </li>
+        
+            <br />
+            <li class="nav-opened" role="presentation">
+            	<a href="/malaria">Malaria Data Visualization</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav overlay clearfix">
+
+
+      
+        <a class="blog-logo" href="https://yc392.github.io"><img src="/images/logo.png" alt="Home" /></a>
+      
+      
+          <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+      
+    </nav>
+
+    
+
+
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post ">
+    <header class="post-header">
+      <nav class="breadcrumb">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </nav>
+
+
+        <h1 class="post-title">Adaboost Ensembling</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+
+
+<h1 id="boosting-a-decision-stump">Boosting a decision stump</h1>
+<p>The goal of this notebook is to implement your own boosting module.</p>
+<ul>
+<li>Go through an implementation of decision trees.</li>
+<li>Implement Adaboost ensembling.</li>
+<li>Use your implementation of Adaboost to train a boosted decision stump ensemble.</li>
+<li>Evaluate the effect of boosting (adding more decision stumps) on performance of the model.</li>
+<li>Explore the robustness of Adaboost to overfitting.</li>
+</ul>
+<p><em>This file is adapted from course material by Carlos Guestrin and Emily Fox.</em></p>
+<p>Let&rsquo;s get started!</p>
+<h2 id="import-some-libraries">Import some libraries</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">## please make sure that the packages are updated to the newest version. </span>
+
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">%</span>matplotlib inline
+</code></pre></div><h1 id="getting-the-data-ready">Getting the data ready</h1>
+<p>We will be using a subset of the <a href="https://www.lendingclub.com/info/statistics.action">LendingClub</a> dataset.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">loans <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;loan_small.csv&#39;</span>)
+</code></pre></div><h3 id="recoding-the-target-column">Recoding the target column</h3>
+<p>We re-assign the target to have +1 as a safe (good) loan, and -1 as a risky (bad) loan. In the next cell, the features are also briefly explained.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">features <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;grade&#39;</span>,              <span style="color:#75715e"># grade of the loan</span>
+            <span style="color:#e6db74">&#39;term&#39;</span>,               <span style="color:#75715e"># the term of the loan</span>
+            <span style="color:#e6db74">&#39;home_ownership&#39;</span>,     <span style="color:#75715e"># home ownership status: own, mortgage or rent</span>
+            <span style="color:#e6db74">&#39;emp_length&#39;</span>,         <span style="color:#75715e"># number of years of employment</span>
+           ]
+
+loans[<span style="color:#e6db74">&#39;safe_loans&#39;</span>] <span style="color:#f92672">=</span> loans[<span style="color:#e6db74">&#39;loan_status&#39;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x : <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">if</span> x<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;Fully Paid&#39;</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+
+<span style="color:#75715e">## please update pandas to the newest version in order to execute the following line</span>
+loans<span style="color:#f92672">.</span>drop(columns<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;loan_status&#39;</span>], inplace<span style="color:#f92672">=</span>True)
+
+target <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;safe_loans&#39;</span> <span style="color:#75715e"># this variable will be used later</span>
+</code></pre></div><h3 id="transform-categorical-data-into-binary-features">Transform categorical data into binary features</h3>
+<p>In this assignment, we will work with <strong>binary decision trees</strong>. Since all of our features are currently categorical features, we want to turn them into binary features using 1-hot encoding.</p>
+<p>We can do so with the following code block:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">loans <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>get_dummies(loans)
+</code></pre></div><p>Let&rsquo;s see what the feature columns look like now:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">features <span style="color:#f92672">=</span> list(loans<span style="color:#f92672">.</span>columns)
+features<span style="color:#f92672">.</span>remove(<span style="color:#e6db74">&#39;safe_loans&#39;</span>)  <span style="color:#75715e"># Remove the response variable</span>
+features
+</code></pre></div><pre><code>['term_ 36 months',
+ 'term_ 60 months',
+ 'grade_A',
+ 'grade_B',
+ 'grade_C',
+ 'grade_D',
+ 'grade_E',
+ 'grade_F',
+ 'grade_G',
+ 'home_ownership_MORTGAGE',
+ 'home_ownership_NONE',
+ 'home_ownership_OTHER',
+ 'home_ownership_OWN',
+ 'home_ownership_RENT',
+ 'emp_length_1 year',
+ 'emp_length_10+ years',
+ 'emp_length_2 years',
+ 'emp_length_3 years',
+ 'emp_length_4 years',
+ 'emp_length_5 years',
+ 'emp_length_6 years',
+ 'emp_length_7 years',
+ 'emp_length_8 years',
+ 'emp_length_9 years',
+ 'emp_length_&lt; 1 year']
+</code></pre>
+<h3 id="train-test-split">Train-test split</h3>
+<p>We split the data into training and test sets with 80% of the data in the training set and 20% of the data in the test set. We use <code>seed=1</code> so that everyone gets the same result.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+
+train_data, test_data <span style="color:#f92672">=</span> train_test_split(loans, test_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.2</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</code></pre></div><h1 id="weighted-decision-trees">Weighted decision trees</h1>
+<p>Since the data weights change as we build an AdaBoost model, we need to first code a decision tree that supports weighting of individual data points.</p>
+<h3 id="weighted-error-definition">Weighted error definition</h3>
+<p>Consider a model with $N$ data points with:</p>
+<ul>
+<li>Predictions $\hat{y}_1 &hellip; \hat{y}_n$</li>
+<li>Target $y_1 &hellip; y_n$</li>
+<li>Data point weights $\alpha_1 &hellip; \alpha_n$.</li>
+</ul>
+<p>Then the <strong>weighted error</strong> is defined by:
+$$
+\mathrm{E}(\mathbf{\alpha}, \mathbf{\hat{y}}) = \frac{\sum_{i=1}^{n} \alpha_i \times 1[y_i \neq \hat{y_i}]}{\sum_{i=1}^{n} \alpha_i}
+$$
+where $1[y_i \neq \hat{y_i}]$ is an indicator function that is set to $1$ if $y_i \neq \hat{y_i}$.</p>
+<h3 id="write-a-function-to-compute-weight-of-mistakes">Write a function to compute weight of mistakes</h3>
+<p>Write a function that calculates the weight of mistakes for making the &ldquo;weighted-majority&rdquo; predictions for a dataset. The function accepts two inputs:</p>
+<ul>
+<li><code>labels_in_node</code>: Targets $y_1 &hellip; y_n$</li>
+<li><code>data_weights</code>: Data point weights $\alpha_1 &hellip; \alpha_n$</li>
+</ul>
+<p>We are interested in computing the (total) weight of mistakes, i.e.
+$$
+\mathrm{WM}(\mathbf{\alpha}, \mathbf{\hat{y}}) = \sum_{i=1}^{n} \alpha_i \times 1[y_i \neq \hat{y_i}].
+$$
+This quantity is analogous to the number of mistakes, except that each mistake now carries different weight. It is related to the weighted error in the following way:
+$$
+\mathrm{E}(\mathbf{\alpha}, \mathbf{\hat{y}}) = \frac{\mathrm{WM}(\mathbf{\alpha}, \mathbf{\hat{y}})}{\sum_{i=1}^{n} \alpha_i}
+$$</p>
+<p>The function <strong>intermediate_node_weighted_mistakes</strong> should first compute two weights:</p>
+<ul>
+<li>$\mathrm{WM}_{-1}$: weight of mistakes when all predictions are $\hat{y}_i = -1$ i.e $\mathrm{WM}(\mathbf{\alpha}, \mathbf{-1}$)</li>
+<li>$\mathrm{WM}_{+1}$: weight of mistakes when all predictions are $\hat{y}_i = +1$ i.e $\mbox{WM}(\mathbf{\alpha}, \mathbf{+1}$)</li>
+</ul>
+<p>where $\mathbf{-1}$ and $\mathbf{+1}$ are vectors where all values are -1 and +1 respectively.</p>
+<p>After computing $\mathrm{WM}<em>{-1}$ and $\mathrm{WM}</em>{+1}$, the function <strong>intermediate_node_weighted_mistakes</strong> should return the lower of the two weights of mistakes, along with the class associated with that weight. We have provided a skeleton for you with <code>YOUR CODE HERE</code> to be filled in several places.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">intermediate_node_weighted_mistakes</span>(labels_in_node, data_weights):
+    <span style="color:#75715e"># Sum the weights of all entries with label +1</span>
+    total_weight_positive <span style="color:#f92672">=</span> sum(data_weights[labels_in_node <span style="color:#f92672">==</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>])
+    
+    <span style="color:#75715e"># Weight of mistakes for predicting all -1&#39;s is equal to the sum above</span>
+    <span style="color:#75715e">### YOUR CODE HERE</span>
+    WM_neg <span style="color:#f92672">=</span> sum(data_weights[labels_in_node <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+    
+    <span style="color:#75715e"># Sum the weights of all entries with label -1</span>
+    <span style="color:#75715e">### YOUR CODE HERE</span>
+    total_weight_negative <span style="color:#f92672">=</span> sum(data_weights[labels_in_node <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+    
+    <span style="color:#75715e"># Weight of mistakes for predicting all +1&#39;s is equal to the sum above</span>
+    <span style="color:#75715e">### YOUR CODE HERE</span>
+    WM_pos <span style="color:#f92672">=</span> sum(data_weights[labels_in_node <span style="color:#f92672">!=</span> <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>])
+    
+    <span style="color:#75715e"># Return the tuple (weight, class_label) representing the lower of the two weights</span>
+    <span style="color:#75715e">#    class_label should be an integer of value +1 or -1.</span>
+    <span style="color:#75715e"># If the two weights are identical, return (weighted_mistakes_all_positive,+1)</span>
+    <span style="color:#75715e">### YOUR CODE HERE</span>
+    <span style="color:#66d9ef">if</span> WM_neg<span style="color:#f92672">&lt;</span>WM_pos:
+        <span style="color:#66d9ef">return</span> (WM_neg,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">return</span> (WM_pos,<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+</code></pre></div><p><strong>Checkpoint:</strong> Test your <strong>intermediate_node_weighted_mistakes</strong> function, run the following cell:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">example_labels <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>Series([<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>])
+example_data_weights <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>Series([<span style="color:#ae81ff">1.</span>, <span style="color:#ae81ff">2.</span>, <span style="color:#f92672">.</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">1.</span>, <span style="color:#ae81ff">1.</span>])
+<span style="color:#66d9ef">if</span> intermediate_node_weighted_mistakes(example_labels, example_data_weights) <span style="color:#f92672">==</span> (<span style="color:#ae81ff">2.5</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Test passed!&#39;</span>)
+<span style="color:#66d9ef">else</span>:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Test failed... try again!&#39;</span>)
+</code></pre></div><pre><code>Test passed!
+</code></pre>
+<p>Recall that the <strong>classification error</strong> is defined as follows:
+$$
+\mbox{classification error} = \frac{\mbox{# mistakes}}{\mbox{# all data points}}
+$$</p>
+<h3 id="function-to-pick-best-feature-to-split-on">Function to pick best feature to split on</h3>
+<p>The next step is to pick the best feature to split on.</p>
+<p>The <strong>best_splitting_feature</strong> function takes the data, the festures, the targetm and the data weights as input and returns the best feature to split on.</p>
+<p>Complete the following function.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># If the data is identical in each feature, this function should return None</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">best_splitting_feature</span>(data, features, target, data_weights):
+    
+    <span style="color:#75715e"># These variables will keep track of the best feature and the corresponding error</span>
+    best_feature <span style="color:#f92672">=</span> None
+    best_error <span style="color:#f92672">=</span> float(<span style="color:#e6db74">&#39;+inf&#39;</span>) 
+    num_points <span style="color:#f92672">=</span> float(len(data))
+
+    <span style="color:#75715e"># Loop through each feature to consider splitting on that feature</span>
+    <span style="color:#66d9ef">for</span> feature <span style="color:#f92672">in</span> features:
+        
+        <span style="color:#75715e"># The left split will have all data points where the feature value is 0</span>
+        <span style="color:#75715e"># The right split will have all data points where the feature value is 1</span>
+        left_split <span style="color:#f92672">=</span> data[data[feature] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>]
+        right_split <span style="color:#f92672">=</span> data[data[feature] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>]
+        
+        <span style="color:#75715e"># Apply the same filtering to data_weights to create left_data_weights, right_data_weights</span>
+        <span style="color:#75715e">## YOUR CODE HERE</span>
+        left_split_weight <span style="color:#f92672">=</span> data_weights[data[feature] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>]
+        right_split_weight <span style="color:#f92672">=</span> data_weights[data[feature] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>]
+                    
+        <span style="color:#75715e"># Calculate the weight of mistakes for left and right sides</span>
+        <span style="color:#75715e">## YOUR CODE HERE</span>
+        left_weighted_mistakes, left_class <span style="color:#f92672">=</span> intermediate_node_weighted_mistakes(left_split[target], data_weights[data[feature] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>])
+        right_weighted_mistakes, right_class <span style="color:#f92672">=</span> intermediate_node_weighted_mistakes(right_split[target], data_weights[data[feature] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>])
+        
+        total_weight_of_all_data_points <span style="color:#f92672">=</span> sum(data_weights)
+        <span style="color:#75715e"># Compute weighted error by computing</span>
+        <span style="color:#75715e">#  ( [weight of mistakes (left)] + [weight of mistakes (right)] ) / [total weight of all data points]</span>
+        <span style="color:#75715e">## YOUR CODE HERE</span>
+        error <span style="color:#f92672">=</span>(left_weighted_mistakes<span style="color:#f92672">+</span>right_weighted_mistakes)<span style="color:#f92672">/</span>float(total_weight_of_all_data_points)
+        <span style="color:#75715e"># If this is the best error we have found so far, store the feature and the error</span>
+        <span style="color:#66d9ef">if</span> error <span style="color:#f92672">&lt;</span> best_error:
+            best_feature <span style="color:#f92672">=</span> feature
+            best_error <span style="color:#f92672">=</span> error
+    
+    <span style="color:#75715e"># Return the best feature we found</span>
+    <span style="color:#66d9ef">return</span> best_feature
+</code></pre></div><p><strong>Checkpoint:</strong> Now, we have another checkpoint to make sure you are on the right track.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">example_data_weights <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(len(train_data)<span style="color:#f92672">*</span> [<span style="color:#ae81ff">1.5</span>])
+<span style="color:#66d9ef">if</span> best_splitting_feature(train_data, features, target, example_data_weights) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;term_ 36 months&#39;</span>:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Test passed!&#39;</span>)
+<span style="color:#66d9ef">else</span>:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Test failed... try again!&#39;</span>)
+</code></pre></div><pre><code>Test passed!
+</code></pre>
+<p><strong>Aside</strong>. Relationship between weighted error and weight of mistakes:</p>
+<p>By definition, the weighted error is the weight of mistakes divided by the weight of all data points, so
+$$
+\mathrm{E}(\mathbf{\alpha}, \mathbf{\hat{y}}) = \frac{\sum_{i=1}^{n} \alpha_i \times 1[y_i \neq \hat{y_i}]}{\sum_{i=1}^{n} \alpha_i} = \frac{\mathrm{WM}(\mathbf{\alpha}, \mathbf{\hat{y}})}{\sum_{i=1}^{n} \alpha_i}.
+$$</p>
+<p>In the code above, we obtain $\mathrm{E}(\mathbf{\alpha}, \mathbf{\hat{y}})$ from the two weights of mistakes from both sides, $\mathrm{WM}(\mathbf{\alpha}<em>{\mathrm{left}}, \mathbf{\hat{y}}</em>{\mathrm{left}})$ and $\mathrm{WM}(\mathbf{\alpha}<em>{\mathrm{right}}, \mathbf{\hat{y}}</em>{\mathrm{right}})$. First, notice that the overall weight of mistakes $\mathrm{WM}(\mathbf{\alpha}, \mathbf{\hat{y}})$ can be broken into two weights of mistakes over either side of the split:
+$$
+\mathrm{WM}(\mathbf{\alpha}, \mathbf{\hat{y}})
+= \sum_{i=1}^{n} \alpha_i \times 1[y_i \neq \hat{y_i}]
+= \sum_{\mathrm{left}} \alpha_i \times 1[y_i \neq \hat{y_i}] + \sum_{\mathrm{right}} \alpha_i \times 1[y_i \neq \hat{y_i}]\<br>
+= \mathrm{WM}(\mathbf{\alpha}_{\mathrm{left}}, \mathbf{\hat{y}}_{\mathrm{left}}) + \mathrm{WM}(\mathbf{\alpha}_{\mathrm{right}}, \mathbf{\hat{y}}_{\mathrm{right}})
+$$
+We then divide through by the total weight of all data points to obtain $\mathrm{E}({\alpha}, \mathbf{\hat{y}})$:
+$$
+\mathrm{E}({\alpha}, \mathbf{\hat{y}})
+= \frac{\mathrm{WM}({\alpha}_{\mathrm{left}}, \mathbf{\hat{y}}_{\mathrm{left}}) + \mathrm{WM}({\alpha}_{\mathrm{right}}, \mathbf{\hat{y}}_{\mathrm{right}})}{\sum_{i=1}^{n} \alpha_i}
+$$</p>
+<h3 id="building-the-tree">Building the tree</h3>
+<p>With the above functions implemented correctly, we are now ready to build our decision tree. A decision tree will be represented as a dictionary which contains the following keys:</p>
+<pre><code>{ 
+   'is_leaf'            : True/False.
+   'prediction'         : Prediction at the leaf node.
+   'left'               : (dictionary corresponding to the left tree).
+   'right'              : (dictionary corresponding to the right tree).
+   'features_remaining' : List of features that are posible splits.
+}
+</code></pre>
+<p>Let us start with a function that creates a leaf node given a set of target values:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_leaf</span>(target_values, data_weights):
+    
+    <span style="color:#75715e"># Create a leaf node</span>
+    leaf <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;splitting_feature&#39;</span> : None,
+            <span style="color:#e6db74">&#39;is_leaf&#39;</span>: True}
+    
+    <span style="color:#75715e"># Computed weight of mistakes.</span>
+    weighted_error, best_class <span style="color:#f92672">=</span> intermediate_node_weighted_mistakes(target_values, data_weights)
+    <span style="color:#75715e"># Store the predicted class (1 or -1) in leaf[&#39;prediction&#39;]</span>
+    <span style="color:#75715e">## YOUR CODE HERE</span>
+    leaf[<span style="color:#e6db74">&#39;prediction&#39;</span>] <span style="color:#f92672">=</span> best_class
+    
+    <span style="color:#66d9ef">return</span> leaf 
+</code></pre></div><p>We provide a function that learns a weighted decision tree recursively and implements 3 stopping conditions:</p>
+<ol>
+<li>All data points in a node are from the same class.</li>
+<li>No more features to split on.</li>
+<li>Stop growing the tree when the tree depth reaches <strong>max_depth</strong>.</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">weighted_decision_tree_create</span>(data, features, target, data_weights, current_depth <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, max_depth <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>):
+    remaining_features <span style="color:#f92672">=</span> features[:] <span style="color:#75715e"># Make a copy of the features.</span>
+    target_values <span style="color:#f92672">=</span> data[target]
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;--------------------------------------------------------------------&#34;</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Subtree, depth = </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> (</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> data points).&#34;</span> <span style="color:#f92672">%</span> (current_depth, len(target_values)))
+    
+    <span style="color:#75715e"># Stopping condition 1. Error is 0.</span>
+    <span style="color:#66d9ef">if</span> intermediate_node_weighted_mistakes(target_values, data_weights)[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1e-15</span>:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Stopping condition 1 reached.&#34;</span>)                
+        <span style="color:#66d9ef">return</span> create_leaf(target_values, data_weights)
+    
+    <span style="color:#75715e"># Stopping condition 2. No more features.</span>
+    <span style="color:#66d9ef">if</span> remaining_features <span style="color:#f92672">==</span> []:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Stopping condition 2 reached.&#34;</span>)                
+        <span style="color:#66d9ef">return</span> create_leaf(target_values, data_weights)    
+    
+    <span style="color:#75715e"># Additional stopping condition (limit tree depth)</span>
+    <span style="color:#66d9ef">if</span> current_depth <span style="color:#f92672">&gt;</span> max_depth:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Reached maximum depth. Stopping for now.&#34;</span>)
+        <span style="color:#66d9ef">return</span> create_leaf(target_values, data_weights)
+    
+    <span style="color:#75715e"># If all the datapoints are the same, splitting_feature will be None. Create a leaf</span>
+    splitting_feature <span style="color:#f92672">=</span> best_splitting_feature(data, features, target, data_weights)
+    remaining_features<span style="color:#f92672">.</span>remove(splitting_feature)
+        
+    left_split <span style="color:#f92672">=</span> data[data[splitting_feature] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>]
+    right_split <span style="color:#f92672">=</span> data[data[splitting_feature] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>]
+    
+    left_data_weights <span style="color:#f92672">=</span> data_weights[data[splitting_feature] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>]
+    right_data_weights <span style="color:#f92672">=</span> data_weights[data[splitting_feature] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>]
+    
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Split on feature </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">. (</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">)&#34;</span> <span style="color:#f92672">%</span> (\
+              splitting_feature, len(left_split), len(right_split)))
+    
+    <span style="color:#75715e"># Create a leaf node if the split is &#34;perfect&#34;</span>
+    <span style="color:#66d9ef">if</span> len(left_split) <span style="color:#f92672">==</span> len(data):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Creating leaf node.&#34;</span>)
+        <span style="color:#66d9ef">return</span> create_leaf(left_split[target], data_weights)
+    <span style="color:#66d9ef">if</span> len(right_split) <span style="color:#f92672">==</span> len(data):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Creating leaf node.&#34;</span>)
+        <span style="color:#66d9ef">return</span> create_leaf(right_split[target], data_weights)
+    
+    <span style="color:#75715e"># Repeat (recurse) on left and right subtrees</span>
+    <span style="color:#75715e">## YOUR CODE HERE</span>
+    left_tree <span style="color:#f92672">=</span> weighted_decision_tree_create(
+        left_split, remaining_features, target, left_data_weights, current_depth <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, max_depth)
+    right_tree <span style="color:#f92672">=</span> weighted_decision_tree_create(
+        right_split, remaining_features, target, right_data_weights, current_depth <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, max_depth)
+    
+    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#39;is_leaf&#39;</span>          : False, 
+            <span style="color:#e6db74">&#39;prediction&#39;</span>       : None,
+            <span style="color:#e6db74">&#39;splitting_feature&#39;</span>: splitting_feature,
+            <span style="color:#e6db74">&#39;left&#39;</span>             : left_tree, 
+            <span style="color:#e6db74">&#39;right&#39;</span>            : right_tree}
+</code></pre></div><p>Here is a recursive function to count the nodes in your tree:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">count_nodes</span>(tree):
+    <span style="color:#66d9ef">if</span> tree[<span style="color:#e6db74">&#39;is_leaf&#39;</span>]:
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> count_nodes(tree[<span style="color:#e6db74">&#39;left&#39;</span>]) <span style="color:#f92672">+</span> count_nodes(tree[<span style="color:#e6db74">&#39;right&#39;</span>])
+</code></pre></div><p>Run the following test code to check your implementation. Make sure you get <strong>&lsquo;Test passed&rsquo;</strong> before proceeding.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">example_data_weights <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1.0</span> <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(train_data))])
+small_data_decision_tree <span style="color:#f92672">=</span> weighted_decision_tree_create(train_data, features, target,
+                                        example_data_weights, max_depth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+<span style="color:#66d9ef">if</span> count_nodes(small_data_decision_tree) <span style="color:#f92672">==</span> <span style="color:#ae81ff">7</span>:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Test passed!&#39;</span>)
+<span style="color:#66d9ef">else</span>:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Test failed... try again!&#39;</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Number of nodes found:&#39;</span>, count_nodes(small_data_decision_tree))
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Number of nodes that should be there: 7&#39;</span>) 
+</code></pre></div><pre><code>--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature term_ 36 months. (8850, 23150)
+--------------------------------------------------------------------
+Subtree, depth = 2 (8850 data points).
+Split on feature grade_A. (8775, 75)
+--------------------------------------------------------------------
+Subtree, depth = 3 (8775 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 3 (75 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (23150 data points).
+Split on feature grade_D. (19331, 3819)
+--------------------------------------------------------------------
+Subtree, depth = 3 (19331 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 3 (3819 data points).
+Reached maximum depth. Stopping for now.
+Test passed!
+</code></pre>
+<p>Let us take a quick look at what the trained tree is like. You should get something that looks like the following</p>
+<pre><code>{'is_leaf': False,
+    'left': {'is_leaf': False,
+        'left': {'is_leaf': True, 'prediction': -1, 'splitting_feature': None},
+        'prediction': None,
+        'right': {'is_leaf': True, 'prediction': 1, 'splitting_feature': None},
+        'splitting_feature': 'grade_A'
+     },
+    'prediction': None,
+    'right': {'is_leaf': False,
+        'left': {'is_leaf': True, 'prediction': 1, 'splitting_feature': None},
+        'prediction': None,
+        'right': {'is_leaf': True, 'prediction': -1, 'splitting_feature': None},
+        'splitting_feature': 'grade_D'
+     },
+     'splitting_feature': 'term. 36 months'
+}```
+
+
+​```python
+small_data_decision_tree
+</code></pre><pre><code>{'is_leaf': False,
+ 'prediction': None,
+ 'splitting_feature': 'term_ 36 months',
+ 'left': {'is_leaf': False,
+  'prediction': None,
+  'splitting_feature': 'grade_A',
+  'left': {'splitting_feature': None, 'is_leaf': True, 'prediction': -1},
+  'right': {'splitting_feature': None, 'is_leaf': True, 'prediction': 1}},
+ 'right': {'is_leaf': False,
+  'prediction': None,
+  'splitting_feature': 'grade_D',
+  'left': {'splitting_feature': None, 'is_leaf': True, 'prediction': 1},
+  'right': {'splitting_feature': None, 'is_leaf': True, 'prediction': -1}}}
+</code></pre>
+<h3 id="making-predictions-with-a-weighted-decision-tree">Making predictions with a weighted decision tree</h3>
+<p>We give you a function that classifies one data point. It can also return the probability if you want to play around with that as well.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">classify</span>(tree, x, annotate <span style="color:#f92672">=</span> False):   
+    <span style="color:#75715e"># If the node is a leaf node.</span>
+    <span style="color:#66d9ef">if</span> tree[<span style="color:#e6db74">&#39;is_leaf&#39;</span>]:
+        <span style="color:#66d9ef">if</span> annotate: 
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;At leaf, predicting </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> tree[<span style="color:#e6db74">&#39;prediction&#39;</span>])
+        <span style="color:#66d9ef">return</span> tree[<span style="color:#e6db74">&#39;prediction&#39;</span>] 
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#75715e"># Split on feature.</span>
+        split_feature_value <span style="color:#f92672">=</span> x[tree[<span style="color:#e6db74">&#39;splitting_feature&#39;</span>]]
+        <span style="color:#66d9ef">if</span> annotate: 
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Split on </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> = </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (tree[<span style="color:#e6db74">&#39;splitting_feature&#39;</span>], split_feature_value))
+        <span style="color:#66d9ef">if</span> split_feature_value <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            <span style="color:#66d9ef">return</span> classify(tree[<span style="color:#e6db74">&#39;left&#39;</span>], x, annotate)
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">return</span> classify(tree[<span style="color:#e6db74">&#39;right&#39;</span>], x, annotate)
+</code></pre></div><h3 id="evaluating-the-tree">Evaluating the tree</h3>
+<p>Now, we will write a function to evaluate a decision tree by computing the classification error of the tree on the given dataset.</p>
+<p>Again, recall that the <strong>classification error</strong> is defined as follows:
+$$
+\mbox{classification error} = \frac{\mbox{# mistakes}}{\mbox{# all data points}}
+$$</p>
+<p>The function called <strong>evaluate_classification_error</strong> takes in as input:</p>
+<ol>
+<li><code>tree</code> (as described above)</li>
+<li><code>data</code> (a dataframe)</li>
+</ol>
+<p>The function does not change because of adding data point weights.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">evaluate_classification_error</span>(tree, data):
+    <span style="color:#75715e"># Apply the classify(tree, x) to each row in your data</span>
+    prediction <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: classify(tree, x), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+    
+    <span style="color:#75715e"># Once you&#39;ve made the predictions, calculate the classification error</span>
+    <span style="color:#66d9ef">return</span> (prediction <span style="color:#f92672">!=</span> data[target])<span style="color:#f92672">.</span>sum() <span style="color:#f92672">/</span> float(len(data))
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">test_data
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">evaluate_classification_error(small_data_decision_tree, test_data)
+</code></pre></div><pre><code>0.390875
+</code></pre>
+<h3 id="example-training-a-weighted-decision-tree">Example: Training a weighted decision tree</h3>
+<p>To build intuition on how weighted data points affect the tree being built, consider the following:</p>
+<p>Suppose we only care about making good predictions for the <strong>first 10 and last 10 items</strong> in <code>train_data</code>, we assign weights:</p>
+<ul>
+<li>1 to the last 10 items</li>
+<li>1 to the first 10 items</li>
+<li>and 0 to the rest.</li>
+</ul>
+<p>Let us fit a weighted decision tree with <code>max_depth = 2</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Assign weights</span>
+example_data_weights <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1.</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> [<span style="color:#ae81ff">0.</span>]<span style="color:#f92672">*</span>(len(train_data) <span style="color:#f92672">-</span> <span style="color:#ae81ff">20</span>) <span style="color:#f92672">+</span> [<span style="color:#ae81ff">1.</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>)
+
+<span style="color:#75715e"># Train a weighted decision tree model.</span>
+small_data_decision_tree_subset_20 <span style="color:#f92672">=</span> weighted_decision_tree_create(train_data, features, target,
+                         example_data_weights, max_depth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</code></pre></div><pre><code>--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature emp_length_10+ years. (22413, 9587)
+--------------------------------------------------------------------
+Subtree, depth = 2 (22413 data points).
+Split on feature grade_A. (19673, 2740)
+--------------------------------------------------------------------
+Subtree, depth = 3 (19673 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 3 (2740 data points).
+Stopping condition 1 reached.
+--------------------------------------------------------------------
+Subtree, depth = 2 (9587 data points).
+Stopping condition 1 reached.
+</code></pre>
+<p>Now, we will compute the classification error on the <code>subset_20</code>, i.e. the subset of data points whose weight is 1 (namely the first and last 10 data points).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">subset_20 <span style="color:#f92672">=</span> train_data<span style="color:#f92672">.</span>head(<span style="color:#ae81ff">10</span>)<span style="color:#f92672">.</span>append(train_data<span style="color:#f92672">.</span>tail(<span style="color:#ae81ff">10</span>))
+evaluate_classification_error(small_data_decision_tree_subset_20, subset_20)
+</code></pre></div><pre><code>0.15
+</code></pre>
+<p>Now, let us compare the classification error of the model <code>small_data_decision_tree_subset_20</code> on the entire test set <code>train_data</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">evaluate_classification_error(small_data_decision_tree_subset_20, train_data)
+</code></pre></div><pre><code>0.445625
+</code></pre>
+<p>The model <code>small_data_decision_tree_subset_20</code> performs <strong>a lot</strong> better on <code>subset_20</code> than on <code>train_data</code>.</p>
+<p>So, what does this mean?</p>
+<ul>
+<li>The points with higher weights are the ones that are more important during the training process of the weighted decision tree.</li>
+<li>The points with zero weights are basically ignored during training.</li>
+</ul>
+<h1 id="implementing-your-own-adaboost-on-decision-stumps">Implementing your own Adaboost (on decision stumps)</h1>
+<p>Now that we have a weighted decision tree working, it takes only a bit of work to implement Adaboost. For the sake of simplicity, let us stick with <strong>decision tree stumps</strong> by training trees with <strong><code>max_depth=1</code></strong>.</p>
+<p>Recall from the lecture notes the procedure for Adaboost:</p>
+<p>1. Start with unweighted data with $\alpha_j = 1$</p>
+<p>2. For t = 1,&hellip;T:</p>
+<ul>
+<li>Learn $f_t(x)$ with data weights $\alpha_j$</li>
+<li>Compute coefficient $\hat{w}_t$:
+$$\hat{w}_t = \frac{1}{2}\ln{\left(\frac{1- \mbox{E}(\mathbf{\alpha}, \mathbf{\hat{y}})}{\mbox{E}(\mathbf{\alpha}, \mathbf{\hat{y}})}\right)}$$</li>
+<li>Re-compute weights $\alpha_j$:
+$$\alpha_j \gets \begin{cases}
+\alpha_j \exp{(-\hat{w}_t)} &amp; \text{ if }f_t(x_j) = y_j\<br>
+\alpha_j \exp{(\hat{w}_t)} &amp; \text{ if }f_t(x_j) \neq y_j
+\end{cases}$$</li>
+<li>Normalize weights $\alpha_j$:
+$$\alpha_j \gets \frac{\alpha_j}{\sum_{i=1}^{N}{\alpha_i}} $$</li>
+</ul>
+<p>Complete the skeleton for the following code to implement <strong>adaboost_with_tree_stumps</strong>. Fill in the places with <code>YOUR CODE HERE</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> math <span style="color:#f92672">import</span> log
+<span style="color:#f92672">from</span> math <span style="color:#f92672">import</span> exp
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">adaboost_with_tree_stumps</span>(data, features, target, num_tree_stumps):
+    <span style="color:#75715e"># start with unweighted data (uniformly weighted)</span>
+    alpha <span style="color:#f92672">=</span>  np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1.</span>]<span style="color:#f92672">*</span>len(data))
+    weights <span style="color:#f92672">=</span> []
+    tree_stumps <span style="color:#f92672">=</span> []
+    target_values <span style="color:#f92672">=</span> data[target]
+    
+    <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> range(num_tree_stumps):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;=====================================================&#39;</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Adaboost Iteration </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> t)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;=====================================================&#39;</span>)        
+        <span style="color:#75715e"># Learn a weighted decision tree stump. Use max_depth=1</span>
+        <span style="color:#75715e"># YOUR CODE HERE</span>
+        tree_stump <span style="color:#f92672">=</span> weighted_decision_tree_create(data, features, target, data_weights<span style="color:#f92672">=</span>alpha, max_depth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+        tree_stumps<span style="color:#f92672">.</span>append(tree_stump)
+        
+        <span style="color:#75715e"># Make predictions</span>
+        <span style="color:#75715e">## YOUR CODE HERE</span>
+        predictions <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: classify(tree_stump, x),axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+        
+        <span style="color:#75715e"># Produce a Boolean array indicating whether</span>
+        <span style="color:#75715e"># each data point was correctly classified</span>
+        is_correct <span style="color:#f92672">=</span> predictions <span style="color:#f92672">==</span> target_values
+        is_wrong   <span style="color:#f92672">=</span> predictions <span style="color:#f92672">!=</span> target_values
+        
+        <span style="color:#75715e"># Compute weighted error</span>
+        <span style="color:#75715e">## YOUR CODE HERE</span>
+        weighted_error <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sum(np<span style="color:#f92672">.</span>array(is_wrong) <span style="color:#f92672">*</span> alpha) <span style="color:#f92672">*</span> <span style="color:#ae81ff">1.</span> <span style="color:#f92672">/</span> np<span style="color:#f92672">.</span>sum(alpha)
+        <span style="color:#66d9ef">print</span>(weighted_error)
+        
+        <span style="color:#75715e"># Compute model coefficient using weighted error</span>
+        <span style="color:#75715e">## YOUR CODE HERE</span>
+        weight <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span><span style="color:#f92672">*</span>log((<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>weighted_error)<span style="color:#f92672">/</span>float(weighted_error))
+        weights<span style="color:#f92672">.</span>append(weight)
+        
+        <span style="color:#75715e"># Adjust weights on data point</span>
+        <span style="color:#75715e">## YOUR CODE HERE</span>
+        adjustment <span style="color:#f92672">=</span> is_correct<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> is_correct : exp(<span style="color:#f92672">-</span>weight) <span style="color:#66d9ef">if</span> is_correct <span style="color:#66d9ef">else</span> exp(weight))
+        
+        <span style="color:#75715e"># Scale alpha by multiplying by adjustment </span>
+        <span style="color:#75715e"># Then normalize data points weights</span>
+        <span style="color:#75715e">## YOUR CODE HERE </span>
+        alpha <span style="color:#f92672">=</span> adjustment<span style="color:#f92672">*</span>alpha
+        alpha <span style="color:#f92672">=</span>alpha<span style="color:#f92672">/</span>float(alpha<span style="color:#f92672">.</span>sum())
+    <span style="color:#66d9ef">return</span> weights, tree_stumps
+</code></pre></div><h3 id="checking-your-adaboost-code">Checking your Adaboost code</h3>
+<p>Train an ensemble of <strong>two</strong> tree stumps and see which features those stumps split on. We will run the algorithm with the following parameters:</p>
+<ul>
+<li><code>train_data</code></li>
+<li><code>features</code></li>
+<li><code>target</code></li>
+<li><code>num_tree_stumps = 2</code></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stump_weights, tree_stumps <span style="color:#f92672">=</span> adaboost_with_tree_stumps(train_data, features, target, num_tree_stumps<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</code></pre></div><pre><code>=====================================================
+Adaboost Iteration 0
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature term_ 36 months. (8850, 23150)
+--------------------------------------------------------------------
+Subtree, depth = 2 (8850 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (23150 data points).
+Reached maximum depth. Stopping for now.
+0.41484375
+=====================================================
+Adaboost Iteration 1
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_A. (28081, 3919)
+--------------------------------------------------------------------
+Subtree, depth = 2 (28081 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (3919 data points).
+Reached maximum depth. Stopping for now.
+0.4122732884272565
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_stump</span>(tree):
+    split_name <span style="color:#f92672">=</span> tree[<span style="color:#e6db74">&#39;splitting_feature&#39;</span>] <span style="color:#75715e"># split_name is something like &#39;term. 36 months&#39;</span>
+    <span style="color:#66d9ef">if</span> split_name <span style="color:#f92672">is</span> None:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;(leaf, label: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">)&#34;</span> <span style="color:#f92672">%</span> tree[<span style="color:#e6db74">&#39;prediction&#39;</span>])
+        <span style="color:#66d9ef">return</span> None
+    split_feature, split_value <span style="color:#f92672">=</span> split_name<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;_&#39;</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;                       root&#39;</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;         |---------------|----------------|&#39;</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;         |                                |&#39;</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;         |                                |&#39;</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;         |                                |&#39;</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;  [{0} == 0]{1}[{0} == 1]    &#39;</span><span style="color:#f92672">.</span>format(split_name, <span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">*</span>(<span style="color:#ae81ff">27</span><span style="color:#f92672">-</span>len(split_name))))
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;         |                                |&#39;</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;         |                                |&#39;</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;         |                                |&#39;</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;    (</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">)                 (</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">)&#39;</span> \
+        <span style="color:#f92672">%</span> ((<span style="color:#e6db74">&#39;leaf, label: &#39;</span> <span style="color:#f92672">+</span> str(tree[<span style="color:#e6db74">&#39;left&#39;</span>][<span style="color:#e6db74">&#39;prediction&#39;</span>]) <span style="color:#66d9ef">if</span> tree[<span style="color:#e6db74">&#39;left&#39;</span>][<span style="color:#e6db74">&#39;is_leaf&#39;</span>] <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#39;subtree&#39;</span>),
+           (<span style="color:#e6db74">&#39;leaf, label: &#39;</span> <span style="color:#f92672">+</span> str(tree[<span style="color:#e6db74">&#39;right&#39;</span>][<span style="color:#e6db74">&#39;prediction&#39;</span>]) <span style="color:#66d9ef">if</span> tree[<span style="color:#e6db74">&#39;right&#39;</span>][<span style="color:#e6db74">&#39;is_leaf&#39;</span>] <span style="color:#66d9ef">else</span> <span style="color:#e6db74">&#39;subtree&#39;</span>)))
+</code></pre></div><p>Here is what the first stump looks like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print_stump(tree_stumps[<span style="color:#ae81ff">0</span>])
+</code></pre></div><pre><code>                       root
+         |---------------|----------------|
+         |                                |
+         |                                |
+         |                                |
+  [term_ 36 months == 0]            [term_ 36 months == 1]    
+         |                                |
+         |                                |
+         |                                |
+    (leaf, label: -1)                 (leaf, label: 1)
+</code></pre>
+<p>Here is what the next stump looks like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print_stump(tree_stumps[<span style="color:#ae81ff">1</span>])
+</code></pre></div><pre><code>                       root
+         |---------------|----------------|
+         |                                |
+         |                                |
+         |                                |
+  [grade_A == 0]                    [grade_A == 1]    
+         |                                |
+         |                                |
+         |                                |
+    (leaf, label: -1)                 (leaf, label: 1)
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(stump_weights)
+</code></pre></div><pre><code>[0.17198848113764034, 0.17728780637267771]
+</code></pre>
+<p>If your Adaboost is correctly implemented, the following things should be true:</p>
+<ul>
+<li><code>tree_stumps[0]</code> should split on <strong>term. 36 months</strong> with the prediction -1 on the left and +1 on the right.</li>
+<li><code>tree_stumps[1]</code> should split on <strong>grade.A</strong> with the prediction -1 on the left and +1 on the right.</li>
+<li>Weights should be approximately <code>[0.17, 0.18]</code></li>
+</ul>
+<p><strong>Reminders</strong></p>
+<ul>
+<li>Stump weights ($\mathbf{\hat{w}}$) and data point weights ($\mathbf{\alpha}$) are two different concepts.</li>
+<li>Stump weights ($\mathbf{\hat{w}}$) tell you how important each stump is while making predictions with the entire boosted ensemble.</li>
+<li>Data point weights ($\mathbf{\alpha}$) tell you how important each data point is while training a decision stump.</li>
+</ul>
+<h3 id="training-a-boosted-ensemble-of-10-stumps">Training a boosted ensemble of 10 stumps</h3>
+<p>Let us train an ensemble of 10 decision tree stumps with Adaboost. We run the <strong>adaboost_with_tree_stumps</strong> function with the following parameters:</p>
+<ul>
+<li><code>train_data</code></li>
+<li><code>features</code></li>
+<li><code>target</code></li>
+<li><code>num_tree_stumps = 10</code></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stump_weights, tree_stumps <span style="color:#f92672">=</span> adaboost_with_tree_stumps(train_data, features, 
+                                target, num_tree_stumps<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+</code></pre></div><pre><code>=====================================================
+Adaboost Iteration 0
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature term_ 36 months. (8850, 23150)
+--------------------------------------------------------------------
+Subtree, depth = 2 (8850 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (23150 data points).
+Reached maximum depth. Stopping for now.
+0.41484375
+=====================================================
+Adaboost Iteration 1
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_A. (28081, 3919)
+--------------------------------------------------------------------
+Subtree, depth = 2 (28081 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (3919 data points).
+Reached maximum depth. Stopping for now.
+0.4122732884272565
+=====================================================
+Adaboost Iteration 2
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_D. (26027, 5973)
+--------------------------------------------------------------------
+Subtree, depth = 2 (26027 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (5973 data points).
+Reached maximum depth. Stopping for now.
+0.44864143840973003
+=====================================================
+Adaboost Iteration 3
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_B. (23457, 8543)
+--------------------------------------------------------------------
+Subtree, depth = 2 (23457 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (8543 data points).
+Reached maximum depth. Stopping for now.
+0.45667540897169545
+=====================================================
+Adaboost Iteration 4
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_E. (28766, 3234)
+--------------------------------------------------------------------
+Subtree, depth = 2 (28766 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (3234 data points).
+Reached maximum depth. Stopping for now.
+0.46396216986387273
+=====================================================
+Adaboost Iteration 5
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature home_ownership_MORTGAGE. (16870, 15130)
+--------------------------------------------------------------------
+Subtree, depth = 2 (16870 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (15130 data points).
+Reached maximum depth. Stopping for now.
+0.46287563258232817
+=====================================================
+Adaboost Iteration 6
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_A. (28081, 3919)
+--------------------------------------------------------------------
+Subtree, depth = 2 (28081 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (3919 data points).
+Reached maximum depth. Stopping for now.
+0.4708602939349161
+=====================================================
+Adaboost Iteration 7
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_F. (30624, 1376)
+--------------------------------------------------------------------
+Subtree, depth = 2 (30624 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (1376 data points).
+Reached maximum depth. Stopping for now.
+0.47728820466937666
+=====================================================
+Adaboost Iteration 8
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_A. (28081, 3919)
+--------------------------------------------------------------------
+Subtree, depth = 2 (28081 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (3919 data points).
+Reached maximum depth. Stopping for now.
+0.4840326889518979
+=====================================================
+Adaboost Iteration 9
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_E. (28766, 3234)
+--------------------------------------------------------------------
+Subtree, depth = 2 (28766 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (3234 data points).
+Reached maximum depth. Stopping for now.
+0.48834946298542403
+</code></pre>
+<h2 id="making-predictions">Making predictions</h2>
+<p>Recall from the lecture that in order to make predictions, we use the following formula:
+$$
+\hat{y} = sign\left(\sum_{t=1}^T \hat{w}_t f_t(x)\right)
+$$</p>
+<p>We need to do the following things:</p>
+<ul>
+<li>Compute the predictions $f_t(x)$ using the $t$-th decision tree</li>
+<li>Compute $\hat{w}_t f_t(x)$ by multiplying the <code>stump_weights</code> with the predictions $f_t(x)$ from the decision trees</li>
+<li>Sum the weighted predictions over each stump in the ensemble.</li>
+</ul>
+<p>Complete the following skeleton for making predictions:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">predict_adaboost</span>(stump_weights, tree_stumps, data):
+    scores <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0.</span>]<span style="color:#f92672">*</span>len(data))
+    
+    <span style="color:#66d9ef">for</span> i, tree_stump <span style="color:#f92672">in</span> enumerate(tree_stumps):
+        predictions <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: classify(tree_stump, x), axis <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+        
+        <span style="color:#75715e"># Accumulate predictions on scaores array</span>
+        <span style="color:#75715e"># YOUR CODE HERE</span>
+        prod <span style="color:#f92672">=</span> predictions<span style="color:#f92672">*</span>stump_weights[i]
+        scores<span style="color:#f92672">+=</span>prod
+        
+    <span style="color:#66d9ef">return</span> scores<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> score : <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">if</span> score <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">predictions <span style="color:#f92672">=</span> predict_adaboost(stump_weights, tree_stumps, test_data)
+
+<span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> accuracy_score
+accuracy <span style="color:#f92672">=</span> accuracy_score(test_data[target], predictions)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Accuracy of 10-component ensemble = </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> accuracy) 
+</code></pre></div><pre><code>Accuracy of 10-component ensemble = 0.62825
+</code></pre>
+<p>Now, let us take a quick look what the <code>stump_weights</code> look like at the end of each iteration of the 10-stump ensemble:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stump_weights
+</code></pre></div><pre><code>[0.17198848113764034,
+ 0.17728780637267771,
+ 0.10308067696993961,
+ 0.08686702058341712,
+ 0.07220085937787603,
+ 0.07438562925255676,
+ 0.05834552873231902,
+ 0.045454870264690556,
+ 0.0319454846000358,
+ 0.02330529243221444]
+</code></pre>
+<p><strong>Question</strong> i: Are the weights monotonically decreasing, monotonically increasing, or neither?</p>
+<p><strong>Reminder</strong>: Stump weights ($\mathbf{\hat{w}}$) tell you how important each stump is while making predictions with the entire boosted ensemble.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+plt<span style="color:#f92672">.</span>plot(stump_weights)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/images/output_74_0.png" alt="png"></p>
+<h4 id="answer-as-you-can-see-the-figure-above-the-weights-are-neither-monotonically-decreasing-or-monotonically-increasing">Answer: As you can see the figure above, the weights are neither monotonically decreasing or monotonically increasing.</h4>
+<h1 id="performance-plots">Performance plots</h1>
+<p>In this section, we will try to reproduce some performance plots.</p>
+<h3 id="how-does-accuracy-change-with-adding-stumps-to-the-ensemble">How does accuracy change with adding stumps to the ensemble?</h3>
+<p>We will now train an ensemble with:</p>
+<ul>
+<li><code>train_data</code></li>
+<li><code>features</code></li>
+<li><code>target</code></li>
+<li><code>num_tree_stumps = 30</code></li>
+</ul>
+<p>Once we are done with this, we will then do the following:</p>
+<ul>
+<li>Compute the classification error at the end of each iteration.</li>
+<li>Plot a curve of classification error vs iteration.</li>
+</ul>
+<p>First, lets train the model.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># this may take a while... </span>
+stump_weights, tree_stumps <span style="color:#f92672">=</span> adaboost_with_tree_stumps(train_data, 
+                                 features, target, num_tree_stumps<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>)
+</code></pre></div><pre><code>=====================================================
+Adaboost Iteration 0
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature term_ 36 months. (8850, 23150)
+--------------------------------------------------------------------
+Subtree, depth = 2 (8850 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (23150 data points).
+Reached maximum depth. Stopping for now.
+0.41484375
+=====================================================
+Adaboost Iteration 1
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_A. (28081, 3919)
+--------------------------------------------------------------------
+Subtree, depth = 2 (28081 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (3919 data points).
+Reached maximum depth. Stopping for now.
+0.4122732884272565
+=====================================================
+Adaboost Iteration 2
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_D. (26027, 5973)
+--------------------------------------------------------------------
+Subtree, depth = 2 (26027 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (5973 data points).
+Reached maximum depth. Stopping for now.
+0.44864143840973003
+=====================================================
+Adaboost Iteration 3
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_B. (23457, 8543)
+--------------------------------------------------------------------
+Subtree, depth = 2 (23457 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (8543 data points).
+Reached maximum depth. Stopping for now.
+0.45667540897169545
+=====================================================
+Adaboost Iteration 4
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_E. (28766, 3234)
+--------------------------------------------------------------------
+Subtree, depth = 2 (28766 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (3234 data points).
+Reached maximum depth. Stopping for now.
+0.46396216986387273
+=====================================================
+Adaboost Iteration 5
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature home_ownership_MORTGAGE. (16870, 15130)
+--------------------------------------------------------------------
+Subtree, depth = 2 (16870 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (15130 data points).
+Reached maximum depth. Stopping for now.
+0.46287563258232817
+=====================================================
+Adaboost Iteration 6
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_A. (28081, 3919)
+--------------------------------------------------------------------
+Subtree, depth = 2 (28081 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (3919 data points).
+Reached maximum depth. Stopping for now.
+0.4708602939349161
+=====================================================
+Adaboost Iteration 7
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_F. (30624, 1376)
+--------------------------------------------------------------------
+Subtree, depth = 2 (30624 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (1376 data points).
+Reached maximum depth. Stopping for now.
+0.47728820466937666
+=====================================================
+Adaboost Iteration 8
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_A. (28081, 3919)
+--------------------------------------------------------------------
+Subtree, depth = 2 (28081 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (3919 data points).
+Reached maximum depth. Stopping for now.
+0.4840326889518979
+=====================================================
+Adaboost Iteration 9
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_E. (28766, 3234)
+--------------------------------------------------------------------
+Subtree, depth = 2 (28766 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (3234 data points).
+Reached maximum depth. Stopping for now.
+0.48834946298542403
+=====================================================
+Adaboost Iteration 10
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature term_ 36 months. (8850, 23150)
+--------------------------------------------------------------------
+Subtree, depth = 2 (8850 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (23150 data points).
+Reached maximum depth. Stopping for now.
+0.48527413936169533
+=====================================================
+Adaboost Iteration 11
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_F. (30624, 1376)
+--------------------------------------------------------------------
+Subtree, depth = 2 (30624 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (1376 data points).
+Reached maximum depth. Stopping for now.
+0.4897918494769427
+=====================================================
+Adaboost Iteration 12
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature emp_length_10+ years. (22413, 9587)
+--------------------------------------------------------------------
+Subtree, depth = 2 (22413 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (9587 data points).
+Reached maximum depth. Stopping for now.
+0.48757521153657674
+=====================================================
+Adaboost Iteration 13
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_B. (23457, 8543)
+--------------------------------------------------------------------
+Subtree, depth = 2 (23457 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (8543 data points).
+Reached maximum depth. Stopping for now.
+0.48972276527562664
+=====================================================
+Adaboost Iteration 14
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_F. (30624, 1376)
+--------------------------------------------------------------------
+Subtree, depth = 2 (30624 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (1376 data points).
+Reached maximum depth. Stopping for now.
+0.49153533139272265
+=====================================================
+Adaboost Iteration 15
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_D. (26027, 5973)
+--------------------------------------------------------------------
+Subtree, depth = 2 (26027 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (5973 data points).
+Reached maximum depth. Stopping for now.
+0.4884045647232755
+=====================================================
+Adaboost Iteration 16
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_F. (30624, 1376)
+--------------------------------------------------------------------
+Subtree, depth = 2 (30624 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (1376 data points).
+Reached maximum depth. Stopping for now.
+0.49372612645851516
+=====================================================
+Adaboost Iteration 17
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_A. (28081, 3919)
+--------------------------------------------------------------------
+Subtree, depth = 2 (28081 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (3919 data points).
+Reached maximum depth. Stopping for now.
+0.4902707962614934
+=====================================================
+Adaboost Iteration 18
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_E. (28766, 3234)
+--------------------------------------------------------------------
+Subtree, depth = 2 (28766 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (3234 data points).
+Reached maximum depth. Stopping for now.
+0.4930745424519849
+=====================================================
+Adaboost Iteration 19
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_C. (23388, 8612)
+--------------------------------------------------------------------
+Subtree, depth = 2 (23388 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (8612 data points).
+Reached maximum depth. Stopping for now.
+0.49199663520803616
+=====================================================
+Adaboost Iteration 20
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature home_ownership_MORTGAGE. (16870, 15130)
+--------------------------------------------------------------------
+Subtree, depth = 2 (16870 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (15130 data points).
+Reached maximum depth. Stopping for now.
+0.49444635923342256
+=====================================================
+Adaboost Iteration 21
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature term_ 36 months. (8850, 23150)
+--------------------------------------------------------------------
+Subtree, depth = 2 (8850 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (23150 data points).
+Reached maximum depth. Stopping for now.
+0.4943566634602121
+=====================================================
+Adaboost Iteration 22
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_F. (30624, 1376)
+--------------------------------------------------------------------
+Subtree, depth = 2 (30624 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (1376 data points).
+Reached maximum depth. Stopping for now.
+0.49273476480982215
+=====================================================
+Adaboost Iteration 23
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_B. (23457, 8543)
+--------------------------------------------------------------------
+Subtree, depth = 2 (23457 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (8543 data points).
+Reached maximum depth. Stopping for now.
+0.492186974826776
+=====================================================
+Adaboost Iteration 24
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature emp_length_2 years. (29104, 2896)
+--------------------------------------------------------------------
+Subtree, depth = 2 (29104 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (2896 data points).
+Reached maximum depth. Stopping for now.
+0.4952308870991985
+=====================================================
+Adaboost Iteration 25
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_G. (31657, 343)
+--------------------------------------------------------------------
+Subtree, depth = 2 (31657 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (343 data points).
+Reached maximum depth. Stopping for now.
+0.49267013126105014
+=====================================================
+Adaboost Iteration 26
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_A. (28081, 3919)
+--------------------------------------------------------------------
+Subtree, depth = 2 (28081 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (3919 data points).
+Reached maximum depth. Stopping for now.
+0.4928870748413357
+=====================================================
+Adaboost Iteration 27
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_G. (31657, 343)
+--------------------------------------------------------------------
+Subtree, depth = 2 (31657 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (343 data points).
+Reached maximum depth. Stopping for now.
+0.4945659166359569
+=====================================================
+Adaboost Iteration 28
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature home_ownership_OWN. (29204, 2796)
+--------------------------------------------------------------------
+Subtree, depth = 2 (29204 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (2796 data points).
+Reached maximum depth. Stopping for now.
+0.49387453306582174
+=====================================================
+Adaboost Iteration 29
+=====================================================
+--------------------------------------------------------------------
+Subtree, depth = 1 (32000 data points).
+Split on feature grade_G. (31657, 343)
+--------------------------------------------------------------------
+Subtree, depth = 2 (31657 data points).
+Reached maximum depth. Stopping for now.
+--------------------------------------------------------------------
+Subtree, depth = 2 (343 data points).
+Reached maximum depth. Stopping for now.
+0.49505570188675935
+</code></pre>
+<h3 id="computing-training-error-at-the-end-of-each-iteration">Computing training error at the end of each iteration</h3>
+<p>Now, we will compute the classification error on the <strong>train_data</strong> and see how it is reduced as trees are added.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">error_all <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> n <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">31</span>):
+    predictions <span style="color:#f92672">=</span> predict_adaboost(stump_weights[:n], tree_stumps[:n], train_data)
+    error <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> accuracy_score(train_data[target], predictions)
+    error_all<span style="color:#f92672">.</span>append(error)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Iteration </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, training error = </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (n, error_all[n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]))
+</code></pre></div><pre><code>Iteration 1, training error = 0.41484374999999996
+Iteration 2, training error = 0.43281250000000004
+Iteration 3, training error = 0.39059374999999996
+Iteration 4, training error = 0.39059374999999996
+Iteration 5, training error = 0.37931250000000005
+Iteration 6, training error = 0.38228125
+Iteration 7, training error = 0.37253125
+Iteration 8, training error = 0.37549999999999994
+Iteration 9, training error = 0.37253125
+Iteration 10, training error = 0.37253125
+Iteration 11, training error = 0.37253125
+Iteration 12, training error = 0.37150000000000005
+Iteration 13, training error = 0.37253125
+Iteration 14, training error = 0.37150000000000005
+Iteration 15, training error = 0.37150000000000005
+Iteration 16, training error = 0.37150000000000005
+Iteration 17, training error = 0.37150000000000005
+Iteration 18, training error = 0.37146875
+Iteration 19, training error = 0.37150000000000005
+Iteration 20, training error = 0.37146875
+Iteration 21, training error = 0.37209375
+Iteration 22, training error = 0.37146875
+Iteration 23, training error = 0.37212500000000004
+Iteration 24, training error = 0.37150000000000005
+Iteration 25, training error = 0.37150000000000005
+Iteration 26, training error = 0.37212500000000004
+Iteration 27, training error = 0.37150000000000005
+Iteration 28, training error = 0.37131250000000005
+Iteration 29, training error = 0.37121875000000004
+Iteration 30, training error = 0.37124999999999997
+</code></pre>
+<h3 id="visualizing-training-error-vs-number-of-iterations">Visualizing training error vs number of iterations</h3>
+<p>We have provided you with a simple code snippet that plots classification error with the number of iterations.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#39;figure.figsize&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">5</span>
+plt<span style="color:#f92672">.</span>plot(list(range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">31</span>)), error_all, <span style="color:#e6db74">&#39;-&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">4.0</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Training error&#39;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Performance of Adaboost ensemble&#39;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;# of iterations&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Classification error&#39;</span>)
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;best&#39;</span>, prop<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;size&#39;</span>:<span style="color:#ae81ff">15</span>})
+
+plt<span style="color:#f92672">.</span>rcParams<span style="color:#f92672">.</span>update({<span style="color:#e6db74">&#39;font.size&#39;</span>: <span style="color:#ae81ff">16</span>})
+</code></pre></div><p><img src="/images/output_81_0.png" alt="png"></p>
+<h3 id="evaluation-on-the-test-data">Evaluation on the test data</h3>
+<p>Performing well on the training data is cheating, so lets make sure it works on the <code>test_data</code> as well. Here, we will compute the classification error on the <code>test_data</code> at the end of each iteration.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">test_error_all <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> n <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">31</span>):
+    predictions <span style="color:#f92672">=</span> predict_adaboost(stump_weights[:n], tree_stumps[:n], test_data)
+    error <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> accuracy_score(test_data[target], predictions)
+    test_error_all<span style="color:#f92672">.</span>append(error)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Iteration </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, test error = </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (n, test_error_all[n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]))
+</code></pre></div><pre><code>Iteration 1, test error = 0.41037500000000005
+Iteration 2, test error = 0.43174999999999997
+Iteration 3, test error = 0.390875
+Iteration 4, test error = 0.390875
+Iteration 5, test error = 0.37825
+Iteration 6, test error = 0.382625
+Iteration 7, test error = 0.37175
+Iteration 8, test error = 0.37612500000000004
+Iteration 9, test error = 0.37175
+Iteration 10, test error = 0.37175
+Iteration 11, test error = 0.37175
+Iteration 12, test error = 0.369375
+Iteration 13, test error = 0.369375
+Iteration 14, test error = 0.369375
+Iteration 15, test error = 0.369375
+Iteration 16, test error = 0.369375
+Iteration 17, test error = 0.369375
+Iteration 18, test error = 0.371
+Iteration 19, test error = 0.369375
+Iteration 20, test error = 0.371
+Iteration 21, test error = 0.36924999999999997
+Iteration 22, test error = 0.371
+Iteration 23, test error = 0.367625
+Iteration 24, test error = 0.369375
+Iteration 25, test error = 0.369375
+Iteration 26, test error = 0.367625
+Iteration 27, test error = 0.369375
+Iteration 28, test error = 0.36950000000000005
+Iteration 29, test error = 0.369
+Iteration 30, test error = 0.369
+</code></pre>
+<h3 id="visualize-both-the-training-and-test-errors">Visualize both the training and test errors</h3>
+<p>Now, let us plot the training &amp; test error with the number of iterations.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#39;figure.figsize&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">5</span>
+plt<span style="color:#f92672">.</span>plot(list(range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">31</span>)), error_all, <span style="color:#e6db74">&#39;-&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">4.0</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Training error&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(list(range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">31</span>)), test_error_all, <span style="color:#e6db74">&#39;-&#39;</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">4.0</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Test error&#39;</span>)
+
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Performance of Adaboost ensemble&#39;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;# of iterations&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Classification error&#39;</span>)
+plt<span style="color:#f92672">.</span>rcParams<span style="color:#f92672">.</span>update({<span style="color:#e6db74">&#39;font.size&#39;</span>: <span style="color:#ae81ff">16</span>})
+plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;best&#39;</span>, prop<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;size&#39;</span>:<span style="color:#ae81ff">15</span>})
+plt<span style="color:#f92672">.</span>tight_layout()
+</code></pre></div><p><img src="/images/output_85_0.png" alt="png"></p>
+<p><strong>Question</strong> ii: From this plot (with 30 trees), is there massive overfitting as the # of iterations increases?</p>
+<h4 id="answer-as-you-can-see-the-figure-above-no-massive-overfitting-and-adaboost-ensemble-has-a-pretty-good-performance-on-the-test-data-as-the--of-iterations-increases">Answer: As you can see the figure above, no massive overfitting and Adaboost ensemble has a pretty good performance on the test data as the # of iterations increases.</h4>
+
+
+
+
+
+
+
+
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+        <a class="img" href="https://yc392.github.io" style="background-image: url(/images/logo.png)"><span class="hidden">Yuhua Cai's Picture</span></a>
+    </figure>
+    
+
+    
+
+
+
+
+
+
+
+
+<figure class="author-image">
+    <a class="img" href="https://yc392.github.io" style="background-image: url(/images/logo.png)"><span class="hidden">Yuhua Cai's Picture</span></a>
+</figure>
+
+
+<section class="author">
+  <h4><a href="https://yc392.github.io">Yuhua Cai</a></h4>
+  
+  <p>Read <a href="https://yc392.github.io">more posts</a> by this author.</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Durham, NC, USA</span>
+    
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this page</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Adaboost%20Ensembling&nbsp;-&nbsp;Yuhua%20Cai&amp;url=https%3a%2f%2fyc392.github.io%2fadaboost%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyc392.github.io%2fadaboost%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fyc392.github.io%2fadaboost%2f&amp;description=Adaboost%20Ensembling"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=https%3a%2f%2fyc392.github.io%2fadaboost%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+<aside class="read-next">
+  
+      <a class="read-next-story" style="no-cover" href="/timeseries/">
+          <section class="post">
+              <h2></h2>
+              
+          </section>
+      </a>
+  
+  
+      <a class="read-next-story prev" style="no-cover" href="/trees/">
+          <section class="post">
+              <h2>CART4.5, ID3 and Random Forest</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">Yuhua Cai</a> © Yuhua Cai Duke 2021</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    
+</body>
+</html>
+

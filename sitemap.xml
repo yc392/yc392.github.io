@@ -23,7 +23,24 @@
   </url>
   
   <url>
+    <loc>https://yc392.github.io/timeseries/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://yc392.github.io/adaboost/</loc>
+  </url>
+  
+  <url>
+    <loc>https://yc392.github.io/trees/</loc>
+  </url>
+  
+  <url>
     <loc>https://yc392.github.io/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://yc392.github.io/linear_svm/</loc>
   </url>
   
   <url>

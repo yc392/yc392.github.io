@@ -59,5 +59,56 @@ Malaria Dataset Malaria Dataset includes 3 informative datasets.
 In this brief post I’ll walk you through how I created this website in 5 simple steps using Hugo and GitHub Pages. Step 1: Install Hugo and get a GitHub account As I’m a mac user, I’ll provide instructions here for installing Hugo on macOS.</description>
     </item>
     
+    <item>
+      <title></title>
+      <link>https://yc392.github.io/timeseries/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yc392.github.io/timeseries/</guid>
+      <description>Introduction of Time Series Model
+keep updating
+ACF and PACF
+Stationarity
+White noise
+AR model
+MA model &amp;amp; ACF
+ARMA
+ARIMA
+Seasonality
+SARIMA
+ARCH(P)
+VAR (Vector Auto Regression)
+GARCH</description>
+    </item>
+    
+    <item>
+      <title>Adaboost Ensembling</title>
+      <link>https://yc392.github.io/adaboost/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yc392.github.io/adaboost/</guid>
+      <description>Boosting a decision stump The goal of this notebook is to implement your own boosting module.
+ Go through an implementation of decision trees. Implement Adaboost ensembling. Use your implementation of Adaboost to train a boosted decision stump ensemble. Evaluate the effect of boosting (adding more decision stumps) on performance of the model. Explore the robustness of Adaboost to overfitting.  This file is adapted from course material by Carlos Guestrin and Emily Fox.</description>
+    </item>
+    
+    <item>
+      <title>CART4.5, ID3 and Random Forest</title>
+      <link>https://yc392.github.io/trees/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yc392.github.io/trees/</guid>
+      <description>Instructions  If there is a conflict bewteen the problem description in the ipython notebook and the question in the pdf, follow the question in the pdf file. The part you need to fill in is commented as &amp;ldquo;Code Clip&amp;rdquo;. You can search &amp;ldquo;Code Clip&amp;rdquo; in this notebook to find the part you need to complete. After you finish the required part, you may need to run other related code blocks for evaluation or visualization.</description>
+    </item>
+    
+    <item>
+      <title>Support Vector Machine</title>
+      <link>https://yc392.github.io/linear_svm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yc392.github.io/linear_svm/</guid>
+      <description>LINEAR SVM Due Date : 9/28 Monday 10:15 PM EST import numpy as np import matplotlib.pyplot as plt import scipy.io as io import libsvm from libsvm.svmutil import * import pandas as pd %matplotlib inline 3.1 Linear Support Vector Machine on toy data 3.1.1 Generate a training set of size $100$ with 2D features (X) drawn at random as follows:
+ X_{neg} $\sim$ $\mathcal{N}$($[-5, -5]$, 5*$I_2$) and correspond to negative labels (-1) X_{pos} $\sim$ $\mathcal{N}$($[5, 5]$, 5*$I_2$) and correspond to positive labels (+1) Accordingly, $X = [X_{neg}, X_{pos}]$ is a $100\times2$ array, Y is a $100\times1$ array of values $\in {-1, 1}$.</description>
+    </item>
+    
   </channel>
 </rss>
