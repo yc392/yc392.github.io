@@ -7,16 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Yuhua Cai Duke 2021</copyright>
+    <lastBuildDate>Wed, 09 Sep 2020 16:57:33 -0400</lastBuildDate>
     
 	<atom:link href="https://yc392.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About Me</title>
-      <link>https://yc392.github.io/aboutme/</link>
+      <link>https://yc392.github.io/about-me/</link>
       <pubDate>Wed, 09 Sep 2020 16:57:33 -0400</pubDate>
       
-      <guid>https://yc392.github.io/aboutme/</guid>
+      <guid>https://yc392.github.io/about-me/</guid>
       <description>This is Yuhua Cai.
 Education Duke University
 Master of Engineering in Electrical and Computer Engineering
@@ -26,22 +27,11 @@ Contact Me Email: yuhua.cai@duke.edu</description>
     </item>
     
     <item>
-      <title>Euler Project</title>
-      <link>https://yc392.github.io/euler/</link>
-      <pubDate>Tue, 08 Sep 2020 20:14:38 +0530</pubDate>
-      
-      <guid>https://yc392.github.io/euler/</guid>
-      <description>Project Euler is a series of challenging mathematical/computer programming problems that will require more than just mathematical insights to solve. In this post, three problems solved from the Euler Project using Python. Every function was annotated with nuympy-styple docstrings.
-1001st prime Problem 7	(420680 Solved) By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
-What is the 10, 001st prime number?</description>
-    </item>
-    
-    <item>
       <title>Malaria Data Visualization</title>
-      <link>https://yc392.github.io/malaria/</link>
+      <link>https://yc392.github.io/malaria-data-visualization/</link>
       <pubDate>Tue, 08 Sep 2020 20:14:38 +0530</pubDate>
       
-      <guid>https://yc392.github.io/malaria/</guid>
+      <guid>https://yc392.github.io/malaria-data-visualization/</guid>
       <description>Three informative visualizations about malaria are created using Python, starting with the data sets at https://github.com/rfordatascience/tidytuesday/tree/master/data/2018/2018-11-13.
 Malaria Dataset Malaria Dataset includes 3 informative datasets.
 3 Datasets   malaria_inc.csv - Malaria incidence by country for all ages across the world across time.
@@ -51,40 +41,18 @@ Malaria Dataset Malaria Dataset includes 3 informative datasets.
     
     <item>
       <title>Build My Personal Blog with Hugo and Github Pages</title>
-      <link>https://yc392.github.io/blogs/</link>
+      <link>https://yc392.github.io/build-my-personal-blog-with-hugo-and-github-pages/</link>
       <pubDate>Sun, 23 Aug 2020 20:14:38 +0530</pubDate>
       
-      <guid>https://yc392.github.io/blogs/</guid>
+      <guid>https://yc392.github.io/build-my-personal-blog-with-hugo-and-github-pages/</guid>
       <description>Introduction Hugo is one of the most popular open-source static generator and is written in GO. It is simple and easy to deploy. And Github Pages is a static web hosting service provided by Github which provides convenient deployment directly through Github repository.
 In this brief post I’ll walk you through how I created this website in 5 simple steps using Hugo and GitHub Pages. Step 1: Install Hugo and get a GitHub account As I’m a mac user, I’ll provide instructions here for installing Hugo on macOS.</description>
     </item>
     
     <item>
-      <title></title>
-      <link>https://yc392.github.io/timeseries/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://yc392.github.io/timeseries/</guid>
-      <description>Introduction of Time Series Model
-keep updating
-ACF and PACF
-Stationarity
-White noise
-AR model
-MA model &amp;amp; ACF
-ARMA
-ARIMA
-Seasonality
-SARIMA
-ARCH(P)
-VAR (Vector Auto Regression)
-GARCH</description>
-    </item>
-    
-    <item>
-      <title>Adaboost Ensembling</title>
+      <title>Adaboost</title>
       <link>https://yc392.github.io/adaboost/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 14 Jul 2007 22:28:00 +0200</pubDate>
       
       <guid>https://yc392.github.io/adaboost/</guid>
       <description>Boosting a decision stump The goal of this notebook is to implement your own boosting module.
@@ -92,20 +60,31 @@ GARCH</description>
     </item>
     
     <item>
+      <title>Euler</title>
+      <link>https://yc392.github.io/euler/</link>
+      <pubDate>Sat, 14 Jul 2007 22:28:00 +0200</pubDate>
+      
+      <guid>https://yc392.github.io/euler/</guid>
+      <description>Project Euler is a series of challenging mathematical/computer programming problems that will require more than just mathematical insights to solve. In this post, three problems solved from the Euler Project using Python. Every function was annotated with nuympy-styple docstrings.
+1001st prime Problem 7	(420680 Solved) By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+What is the 10, 001st prime number?</description>
+    </item>
+    
+    <item>
       <title>CART4.5, ID3 and Random Forest</title>
-      <link>https://yc392.github.io/trees/</link>
+      <link>https://yc392.github.io/cart4.5-id3-and-random-forest/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://yc392.github.io/trees/</guid>
+      <guid>https://yc392.github.io/cart4.5-id3-and-random-forest/</guid>
       <description>Instructions  If there is a conflict bewteen the problem description in the ipython notebook and the question in the pdf, follow the question in the pdf file. The part you need to fill in is commented as &amp;ldquo;Code Clip&amp;rdquo;. You can search &amp;ldquo;Code Clip&amp;rdquo; in this notebook to find the part you need to complete. After you finish the required part, you may need to run other related code blocks for evaluation or visualization.</description>
     </item>
     
     <item>
       <title>Support Vector Machine</title>
-      <link>https://yc392.github.io/linear_svm/</link>
+      <link>https://yc392.github.io/support-vector-machine/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://yc392.github.io/linear_svm/</guid>
+      <guid>https://yc392.github.io/support-vector-machine/</guid>
       <description>LINEAR SVM Due Date : 9/28 Monday 10:15 PM EST import numpy as np import matplotlib.pyplot as plt import scipy.io as io import libsvm from libsvm.svmutil import * import pandas as pd %matplotlib inline 3.1 Linear Support Vector Machine on toy data 3.1.1 Generate a training set of size $100$ with 2D features (X) drawn at random as follows:
  X_{neg} $\sim$ $\mathcal{N}$($[-5, -5]$, 5*$I_2$) and correspond to negative labels (-1) X_{pos} $\sim$ $\mathcal{N}$($[5, 5]$, 5*$I_2$) and correspond to positive labels (+1) Accordingly, $X = [X_{neg}, X_{pos}]$ is a $100\times2$ array, Y is a $100\times1$ array of values $\in {-1, 1}$.</description>
     </item>

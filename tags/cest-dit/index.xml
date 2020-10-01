@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>c&#39;est dit on Yuhua Cai</title>
+    <link>https://yc392.github.io/tags/cest-dit/</link>
+    <description>Recent content in c&#39;est dit on Yuhua Cai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© Yuhua Cai Duke 2021</copyright>
+    <lastBuildDate>Sat, 14 Jul 2007 22:28:00 +0200</lastBuildDate>
+    
+	<atom:link href="https://yc392.github.io/tags/cest-dit/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Adaboost</title>
+      <link>https://yc392.github.io/adaboost/</link>
+      <pubDate>Sat, 14 Jul 2007 22:28:00 +0200</pubDate>
+      
+      <guid>https://yc392.github.io/adaboost/</guid>
+      <description>Boosting a decision stump The goal of this notebook is to implement your own boosting module.
+ Go through an implementation of decision trees. Implement Adaboost ensembling. Use your implementation of Adaboost to train a boosted decision stump ensemble. Evaluate the effect of boosting (adding more decision stumps) on performance of the model. Explore the robustness of Adaboost to overfitting.  This file is adapted from course material by Carlos Guestrin and Emily Fox.</description>
+    </item>
+    
+    <item>
+      <title>Euler</title>
+      <link>https://yc392.github.io/euler/</link>
+      <pubDate>Sat, 14 Jul 2007 22:28:00 +0200</pubDate>
+      
+      <guid>https://yc392.github.io/euler/</guid>
+      <description>Project Euler is a series of challenging mathematical/computer programming problems that will require more than just mathematical insights to solve. In this post, three problems solved from the Euler Project using Python. Every function was annotated with nuympy-styple docstrings.
+1001st prime Problem 7	(420680 Solved) By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+What is the 10, 001st prime number?</description>
+    </item>
+    
+  </channel>
+</rss>

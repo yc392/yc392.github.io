@@ -7,9 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Yuhua Cai Duke 2021</copyright>
+    <lastBuildDate>Sat, 14 Jul 2007 22:28:00 +0200</lastBuildDate>
     
 	<atom:link href="https://yc392.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>c&#39;est dit</title>
+      <link>https://yc392.github.io/tags/cest-dit/</link>
+      <pubDate>Sat, 14 Jul 2007 22:28:00 +0200</pubDate>
+      
+      <guid>https://yc392.github.io/tags/cest-dit/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

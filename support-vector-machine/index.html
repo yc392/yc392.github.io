@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="Support Vector Machine"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@"/>
+
+
+
+  	<meta property="og:title" content="Support Vector Machine &middot; Yuhua Cai" />
+  	<meta property="og:site_name" content="Yuhua Cai" />
+  	<meta property="og:url" content="https://yc392.github.io/support-vector-machine/" />
+        <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+    </script>
+
+    
+        
+            <meta property="og:image" content="/images/cover1.png"/>
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="0001-01-01T00:00:00Z" />
+
+    
+    
+
+    <title>Support Vector Machine &middot; Yuhua Cai</title>
+
+    
+    <meta name="description" content="LINEAR SVM Due Date : 9/28 Monday 10:15 PM EST import numpy as np import matplotlib.pyplot as plt import scipy.io as io import libsvm from libsvm.svmutil import" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/css/nav.css" />
+
+    
+
+    
+
+    
+      
+          <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Yuhua Cai" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.74.3" />
+
+    <link rel="canonical" href="https://yc392.github.io/support-vector-machine/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name":  null ,
+        "logo": "https://yc392.github.ioimages/logo1.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name":  null ,
+        
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://yc392.github.ioimages/logo1.png",
+            "width": 250,
+            "height": 250
+        }, 
+        
+        "url": "https://yc392.github.io",
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ],
+        "description": "Data Scientist from Duke"
+        
+    },
+    "headline": "Support Vector Machine",
+    "name": "Support Vector Machine",
+    "wordCount":  1590 ,
+    "timeRequired": "PT8M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": "en"
+    },
+    "url": "https://yc392.github.io/support-vector-machine/",
+    "datePublished": "0001-01-01T00:00Z",
+    "dateModified": "0001-01-01T00:00Z",
+    
+    
+    "description": "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://yc392.github.io/support-vector-machine/"
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            <h3>Content</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="/post">Post</a>
+            </li>
+        
+            <h3>Contact me</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="/about-me">About me</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="https://www.linkedin.com/in/yuhua-cai-195080194/">Linkedin</a>
+            </li>
+        
+            <h3>Follow me</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="https://github.com/yc392">Github</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="/">Blog Site</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+      <a class="blog-logo" href="https://yc392.github.io"><img src="/images/logo1.png" alt="Home" /></a>
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Support Vector Machine</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="0001-01-01T00:00:00Z">
+            Jan 1, 0001
+          </time>
+        
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <h1 id="linear-svm">LINEAR SVM</h1>
+<h3 id="due-date--928-monday-1015-pm-est">Due Date : 9/28 Monday 10:15 PM EST</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> scipy.io <span style="color:#f92672">as</span> io
+<span style="color:#f92672">import</span> libsvm
+<span style="color:#f92672">from</span> libsvm.svmutil <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+
+<span style="color:#f92672">%</span>matplotlib inline
+</code></pre></div><h2 id="31-linear-support-vector-machine-on-toy-data">3.1 Linear Support Vector Machine on toy data</h2>
+<h3 id="311">3.1.1</h3>
+<p>Generate a training set of size $100$ with 2D features (X) drawn at random as follows:</p>
+<ul>
+<li>X_{neg} $\sim$ $\mathcal{N}$($[-5, -5]$, 5*$I_2$) and correspond to negative labels (-1)</li>
+<li>X_{pos} $\sim$ $\mathcal{N}$($[5, 5]$, 5*$I_2$) and correspond to positive labels (+1)
+<!-- raw HTML omitted -->
+Accordingly, $X = [X_{neg}, X_{pos}]$ is a $100\times2$ array, Y is a $100\times1$ array of values $\in {-1, 1}$.</li>
+</ul>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Generate binary class dataset</span>
+np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>seed(<span style="color:#ae81ff">0</span>)
+
+n_samples <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+center_1 <span style="color:#f92672">=</span> [<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>]
+center_2 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>]
+cov <span style="color:#f92672">=</span> [[<span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">25</span>]]
+
+<span style="color:#75715e"># Generate Data:</span>
+
+Xneg <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>multivariate_normal(center_1, cov, (<span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">1</span>))
+Xpos <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>multivariate_normal(center_2, cov, (<span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">1</span>))
+X <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>concatenate((Xneg, Xpos), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+X_x <span style="color:#f92672">=</span> [each[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">for</span> each <span style="color:#f92672">in</span> X<span style="color:#f92672">.</span>tolist()]
+X_y <span style="color:#f92672">=</span> [each[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">for</span> each <span style="color:#f92672">in</span> X<span style="color:#f92672">.</span>tolist()]
+Y <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span><span style="color:#f92672">*</span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span> <span style="color:#ae81ff">50</span><span style="color:#f92672">*</span>[<span style="color:#ae81ff">1</span>]
+
+<span style="color:#75715e"># Scatter plot:</span>
+fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots()
+scatter <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>scatter(X_x, X_y, c<span style="color:#f92672">=</span>Y, label <span style="color:#f92672">=</span> Y)
+legend1 <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>legend(<span style="color:#f92672">*</span>scatter<span style="color:#f92672">.</span>legend_elements(),
+                    loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;upper left&#34;</span>, title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Classes&#34;</span>)
+ax<span style="color:#f92672">.</span>add_artist(legend1)
+
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="/images/output_5_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> svmutil <span style="color:#f92672">as</span> svm
+train <span style="color:#f92672">=</span> [each[<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">for</span> each <span style="color:#f92672">in</span> X<span style="color:#f92672">.</span>tolist()]
+labels <span style="color:#f92672">=</span> Y
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">options <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;-s 0 -t 0 -c 1&#39;</span>  <span style="color:#75715e"># linear model</span>
+<span style="color:#75715e"># Training Model</span>
+model <span style="color:#f92672">=</span> svm<span style="color:#f92672">.</span>svm_train(labels, train, options)
+
+
+<span style="color:#75715e"># Line Parameters</span>
+w <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matmul(np<span style="color:#f92672">.</span>array(train)[np<span style="color:#f92672">.</span>array(model<span style="color:#f92672">.</span>get_sv_indices()) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>T, model<span style="color:#f92672">.</span>get_sv_coef())
+b <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>model<span style="color:#f92672">.</span>rho<span style="color:#f92672">.</span>contents<span style="color:#f92672">.</span>value
+<span style="color:#66d9ef">if</span> model<span style="color:#f92672">.</span>get_labels()[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:  <span style="color:#75715e"># No idea here but it should be done :|</span>
+    w <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>w
+    b <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>b
+
+<span style="color:#66d9ef">print</span>(w)
+<span style="color:#66d9ef">print</span>(b)
+
+<span style="color:#75715e"># Plotting</span>
+plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">6</span>))
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>get_sv_indices():
+    plt<span style="color:#f92672">.</span>scatter(train[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>], train[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;red&#39;</span>, s<span style="color:#f92672">=</span><span style="color:#ae81ff">200</span>)
+train_ <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(train)<span style="color:#f92672">.</span>T
+plt<span style="color:#f92672">.</span>scatter(train_[<span style="color:#ae81ff">0</span>], train_[<span style="color:#ae81ff">1</span>], c<span style="color:#f92672">=</span>labels)
+plt<span style="color:#f92672">.</span>plot([<span style="color:#f92672">-</span><span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">20</span>], [<span style="color:#f92672">-</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">20</span> <span style="color:#f92672">*</span> w[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> b) <span style="color:#f92672">/</span> w[<span style="color:#ae81ff">1</span>], <span style="color:#f92672">-</span>(<span style="color:#ae81ff">20</span> <span style="color:#f92672">*</span> w[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> b) <span style="color:#f92672">/</span> w[<span style="color:#ae81ff">1</span>]])
+plt<span style="color:#f92672">.</span>xlim([<span style="color:#f92672">-</span><span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">23</span>])
+plt<span style="color:#f92672">.</span>ylim([<span style="color:#f92672">-</span><span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">23</span>])
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><pre><code>[[-0.25088143]
+ [-0.21305077]]
+-0.017897352332105494
+</code></pre>
+<p><img src="/images/output_7_1.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">len(model<span style="color:#f92672">.</span>get_sv_indices())
+</code></pre></div><pre><code>19
+</code></pre>
+<h3 id="312">3.1.2</h3>
+<p>Train a linear support vector machine on the data with $C=1$ and draw the decision boundary line that separates o and x. Mark the support vectors separately (ex.circle around the point).</p>
+<p>Note: You can use the libsvm.svmutil functions with the kernel_type set to 0, indiciating a linear kernel and svm_type set to 0 indicating C-SVC.
+Also note that the support_vector coefficients returned by the LIBSVM model are the dual coefficients.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Define the SVM problem</span>
+
+<span style="color:#75715e"># Define the hyperparameters</span>
+
+<span style="color:#75715e"># Train the model</span>
+
+<span style="color:#75715e"># Compute the slope and intercept of the separating line/hyperplanee with the use of the support vectors</span>
+<span style="color:#75715e"># and other information from the LIBSVM model.</span>
+
+<span style="color:#75715e"># Draw the scatter plot, the decision boundary line, and mark the support vectors.</span>
+</code></pre></div><h3 id="313">3.1.3</h3>
+<p>Draw a line that separates the data for 8 different $C$ ($10^{-5}$~$10^7$).
+Plot the number of support vectors vs. $C$ (plot x-axis on a log scale).
+How does the number of support vectors change as $C$ increases and why does it change like that?</p>
+<p>Note: You might prefer to use the command-line style of svm_parameter initialization such as: svm_parameter('-s 0 -t 0&rsquo;) to indicate a linear kernel and C-SVC as the SVM type.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+C_range <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0.00001</span>, <span style="color:#ae81ff">0.001</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">100000</span>, <span style="color:#ae81ff">10000000</span>]
+num_sv <span style="color:#f92672">=</span> []
+
+<span style="color:#75715e"># Loop over a similar setup to that in the previous code block.</span>
+
+
+<span style="color:#75715e"># Draw the scatter plot with multiple decision lines on top (one for each value of C)</span>
+
+<span style="color:#75715e"># Draw the num_sv vs. C plot.</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">2</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>),constrained_layout<span style="color:#f92672">=</span>True)
+x,y <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(C_range)):
+    
+    options <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;-s 0 -t 0 -c {}&#39;</span><span style="color:#f92672">.</span>format(str(C_range[i]))
+    <span style="color:#75715e"># Training Model</span>
+    model <span style="color:#f92672">=</span> svm<span style="color:#f92672">.</span>svm_train(labels, train, options)
+
+
+    <span style="color:#75715e"># Line Parameters</span>
+    w <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matmul(np<span style="color:#f92672">.</span>array(train)[np<span style="color:#f92672">.</span>array(model<span style="color:#f92672">.</span>get_sv_indices()) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>T, model<span style="color:#f92672">.</span>get_sv_coef())
+    b <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>model<span style="color:#f92672">.</span>rho<span style="color:#f92672">.</span>contents<span style="color:#f92672">.</span>value
+    <span style="color:#66d9ef">if</span> model<span style="color:#f92672">.</span>get_labels()[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:  <span style="color:#75715e"># No idea here but it should be done :|</span>
+        w <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>w
+        b <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>b
+
+    <span style="color:#66d9ef">print</span>(w)
+    <span style="color:#66d9ef">print</span>(b)
+
+    <span style="color:#75715e"># Plotting</span>
+
+    <span style="color:#66d9ef">if</span> i<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span><span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>:
+        y<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+        x<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">else</span>:
+        y<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>get_sv_indices():
+        ax[x,y]<span style="color:#f92672">.</span>scatter(train[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>], train[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;red&#39;</span>, s<span style="color:#f92672">=</span><span style="color:#ae81ff">150</span>)
+    train_ <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(train)<span style="color:#f92672">.</span>T
+    ax[x,y]<span style="color:#f92672">.</span>scatter(train_[<span style="color:#ae81ff">0</span>], train_[<span style="color:#ae81ff">1</span>], c<span style="color:#f92672">=</span>labels)
+    ax[x,y]<span style="color:#f92672">.</span>plot([<span style="color:#f92672">-</span><span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">20</span>], [<span style="color:#f92672">-</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">20</span> <span style="color:#f92672">*</span> w[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> b) <span style="color:#f92672">/</span> w[<span style="color:#ae81ff">1</span>], <span style="color:#f92672">-</span>(<span style="color:#ae81ff">20</span> <span style="color:#f92672">*</span> w[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> b) <span style="color:#f92672">/</span> w[<span style="color:#ae81ff">1</span>]])
+    num_sv<span style="color:#f92672">.</span>append(len(model<span style="color:#f92672">.</span>get_sv_indices()))
+    
+plt<span style="color:#f92672">.</span>xlim([<span style="color:#f92672">-</span><span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">23</span>])
+plt<span style="color:#f92672">.</span>ylim([<span style="color:#f92672">-</span><span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">23</span>])
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><pre><code>[[-0.00491118]
+ [-0.00519984]]
+0.007284677090644842
+[[-0.09364763]
+ [-0.10929941]]
+0.0601523754299799
+[[-0.25088143]
+ [-0.21305077]]
+-0.017897352332105494
+[[-0.25097506]
+ [-0.21306215]]
+-0.01793960641056622
+[[-0.25093309]
+ [-0.21310541]]
+-0.017922034263428473
+[[-0.25119112]
+ [-0.21342248]]
+-0.01785023293529991
+[[-0.27970303]
+ [-0.21088177]]
+0.2891490144541231
+[[-0.5855392 ]
+ [ 2.03500762]]
+-11.101604764472537
+</code></pre>
+<p><img src="/images/output_13_1.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">xlabel <span style="color:#f92672">=</span> [str(each) <span style="color:#66d9ef">for</span> each <span style="color:#f92672">in</span> C_range]
+fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">5</span>))
+ax<span style="color:#f92672">.</span>plot(xlabel,num_sv)
+ax<span style="color:#f92672">.</span>set_xlabel(<span style="color:#e6db74">&#39;C&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+ax<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;Number of support vectors&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;number of support vectors vs. C&#39;</span>)
+</code></pre></div><pre><code>Text(0.5, 1.0, 'number of support vectors vs. C')
+</code></pre>
+<p><img src="/images/output_14_1.png" alt="png"></p>
+<h3 id="314">3.1.4</h3>
+<p>Now try rescaling the data to the [0,1] range and repeat the steps of the previous question (3.1.3) and over the same range of $C$ values. Are the decision boundaries different from those in the previous question? What does this imply about (a) the geometric margin and (b) the relative effect of each feature on the predictions of the trained model ?</p>
+<h4 id="solution-below">Solution below:</h4>
+<p>SVM tries to maximize the distance between the separating plane and the support vectors.
+If one feature (i.e. one dimension in this space) has very large values,
+it will dominate the other features when calculating the distance. If you rescale all
+features (e.g. to [0, 1]), they all have the same influence on the distance metric.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sklearn
+<span style="color:#f92672">from</span> sklearn <span style="color:#f92672">import</span> preprocessing
+min_max_scaler <span style="color:#f92672">=</span> preprocessing<span style="color:#f92672">.</span>MinMaxScaler()
+
+<span style="color:#75715e"># Single line below:</span>
+X_train_minmax <span style="color:#f92672">=</span> min_max_scaler<span style="color:#f92672">.</span>fit_transform(train)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+C_range <span style="color:#f92672">=</span> [<span style="color:#ae81ff">10</span><span style="color:#f92672">**-</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">10</span><span style="color:#f92672">**-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">7</span>]
+num_sv <span style="color:#f92672">=</span> []
+
+<span style="color:#75715e"># Repeat the loop from 3.1.3</span>
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">2</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>),constrained_layout<span style="color:#f92672">=</span>True)
+x,y <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(C_range)):
+    
+    options <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;-s 0 -t 0 -c {}&#39;</span><span style="color:#f92672">.</span>format(str(C_range[i]))
+    <span style="color:#75715e"># Training Model</span>
+    model <span style="color:#f92672">=</span> svm<span style="color:#f92672">.</span>svm_train(labels, X_train_minmax, options)
+
+
+    <span style="color:#75715e"># Line Parameters</span>
+    w <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>matmul(np<span style="color:#f92672">.</span>array(X_train_minmax)[np<span style="color:#f92672">.</span>array(model<span style="color:#f92672">.</span>get_sv_indices()) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>T, model<span style="color:#f92672">.</span>get_sv_coef())
+    b <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>model<span style="color:#f92672">.</span>rho<span style="color:#f92672">.</span>contents<span style="color:#f92672">.</span>value
+    <span style="color:#66d9ef">if</span> model<span style="color:#f92672">.</span>get_labels()[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:  <span style="color:#75715e"># No idea here but it should be done :|</span>
+        w <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>w
+        b <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>b
+
+    <span style="color:#66d9ef">print</span>(w)
+    <span style="color:#66d9ef">print</span>(b)
+
+    <span style="color:#75715e"># Plotting</span>
+
+    <span style="color:#66d9ef">if</span> i<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span><span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>:
+        y<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+        x<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">else</span>:
+        y<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> model<span style="color:#f92672">.</span>get_sv_indices():
+        ax[x,y]<span style="color:#f92672">.</span>scatter(X_train_minmax[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>], X_train_minmax[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;red&#39;</span>, s<span style="color:#f92672">=</span><span style="color:#ae81ff">150</span>)
+    X_train_minmax_ <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(X_train_minmax)<span style="color:#f92672">.</span>T
+    ax[x,y]<span style="color:#f92672">.</span>scatter(X_train_minmax_[<span style="color:#ae81ff">0</span>], X_train_minmax_[<span style="color:#ae81ff">1</span>], c<span style="color:#f92672">=</span>labels)
+    ax[x,y]<span style="color:#f92672">.</span>plot([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#f92672">-</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> w[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> b) <span style="color:#f92672">/</span> w[<span style="color:#ae81ff">1</span>], <span style="color:#f92672">-</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> w[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> b) <span style="color:#f92672">/</span> w[<span style="color:#ae81ff">1</span>]])
+    num_sv<span style="color:#f92672">.</span>append(len(model<span style="color:#f92672">.</span>get_sv_indices()))
+    
+plt<span style="color:#f92672">.</span>xlim([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1.2</span>])
+plt<span style="color:#f92672">.</span>ylim([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1.2</span>])
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><pre><code>[[-0.00014161]
+ [-0.00017554]]
+0.00016433532983978205
+[[-0.01416115]
+ [-0.01755394]]
+0.016433532983996413
+[[-3.18780107]
+ [-3.62545683]]
+3.5383995678022244
+[[-6.34642227]
+ [-5.59748787]]
+5.996391448017262
+[[-8.40559713]
+ [-6.22605762]]
+7.414720805000787
+[[-8.69764281]
+ [-6.30836861]]
+7.611512568994826
+[[-8.73492171]
+ [-6.32123925]]
+7.6371129348525
+[[-10.88641763]
+ [ -9.1388299 ]]
+10.302644583268657
+</code></pre>
+<p><img src="/images/output_19_1_2.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">xlabel <span style="color:#f92672">=</span> [str(each) <span style="color:#66d9ef">for</span> each <span style="color:#f92672">in</span> C_range]
+fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">5</span>))
+ax<span style="color:#f92672">.</span>plot(xlabel,num_sv)
+ax<span style="color:#f92672">.</span>set_xlabel(<span style="color:#e6db74">&#39;C&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+ax<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;Number of support vectors&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Number of support vectors vs. C on rescaled features&#39;</span>)
+<span style="color:#66d9ef">pass</span>
+</code></pre></div><p><img src="/images/output_20_0.png" alt="png"></p>
+<h2 id="32-mnist">3.2 MNIST</h2>
+<p>Multiclass kernel SVM. In this problem, we’ll use support vector machines to classify the MNIST data
+set of handwritten digits.</p>
+<h3 id="321">3.2.1</h3>
+<p>Load in the MNIST data using from the provided mnist-original.mat file on sakai.
+First split the data into training and testing by simply taking the first 60k points as training and the rest as testing.
+Then sample 500 data points for each of the 10 categories (for a total of 5000 training points) from the 60k training photos. These 5k points are now our training set.
+Finally, sample 500 data points for each of the 10 categories from the 10k testing photos. These 5k points are now our testing set.</p>
+<p>Note: For data loading, you might want to use scipy.io.loadmat.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> scipy
+<span style="color:#f92672">import</span> scipy.io <span style="color:#f92672">as</span> sio
+<span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+
+MNIST <span style="color:#f92672">=</span> sio<span style="color:#f92672">.</span>loadmat(<span style="color:#e6db74">&#39;mnist-original.mat&#39;</span>)
+np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>seed(<span style="color:#ae81ff">0</span>)
+
+X <span style="color:#f92672">=</span> MNIST[<span style="color:#e6db74">&#39;data&#39;</span>]<span style="color:#f92672">.</span>T
+y <span style="color:#f92672">=</span> MNIST[<span style="color:#e6db74">&#39;label&#39;</span>][<span style="color:#ae81ff">0</span>]
+<span style="color:#75715e">#pd.Series(MNIST[&#39;label&#39;][0]).unique()</span>
+X_train, X_test, y_train, y_test <span style="color:#f92672">=</span> train_test_split(X, y, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">7</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+X_train<span style="color:#f92672">.</span>shape, X_test<span style="color:#f92672">.</span>shape, y_train<span style="color:#f92672">.</span>shape, y_test<span style="color:#f92672">.</span>shape
+</code></pre></div><pre><code>((60000, 784), (10000, 784), (60000,), (10000,))
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">y_train <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>reshape(y_train, (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>))
+y_test <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>reshape(y_test, (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>))
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">train_con <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>concatenate((X_train, y_train), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</code></pre></div><pre><code>array([[0., 0., 0., ..., 0., 0., 3.],
+       [0., 0., 0., ..., 0., 0., 5.],
+       [0., 0., 0., ..., 0., 0., 3.],
+       ...,
+       [0., 0., 0., ..., 0., 0., 9.],
+       [0., 0., 0., ..., 0., 0., 0.],
+       [0., 0., 0., ..., 0., 0., 2.]])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">test_con <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>concatenate((X_test, y_test), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> sample 
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">X_train_all <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
+    X_one <span style="color:#f92672">=</span> [each<span style="color:#f92672">.</span>tolist() <span style="color:#66d9ef">for</span> each <span style="color:#f92672">in</span> train_con <span style="color:#66d9ef">if</span> each[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">==</span>i]
+    X_sample <span style="color:#f92672">=</span> sample(X_one,<span style="color:#ae81ff">500</span>)
+    <span style="color:#66d9ef">for</span> each <span style="color:#f92672">in</span> X_sample:
+        X_train_all<span style="color:#f92672">.</span>append(each)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">X_test_all <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>):
+    X_one <span style="color:#f92672">=</span> [each<span style="color:#f92672">.</span>tolist() <span style="color:#66d9ef">for</span> each <span style="color:#f92672">in</span> test_con <span style="color:#66d9ef">if</span> each[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">==</span>i]
+    X_sample <span style="color:#f92672">=</span> sample(X_one,<span style="color:#ae81ff">500</span>)
+    <span style="color:#66d9ef">for</span> each <span style="color:#f92672">in</span> X_sample:
+        X_test_all<span style="color:#f92672">.</span>append(each)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">len(X_train_all),len(X_test_all)
+</code></pre></div><pre><code>(5000, 5000)
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">y_train <span style="color:#f92672">=</span> [i[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> X_train_all] 
+x_train <span style="color:#f92672">=</span> [i[:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> X_train_all]
+y_test <span style="color:#f92672">=</span> [i[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> X_test_all] 
+x_test <span style="color:#f92672">=</span> [i[:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> X_test_all]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">np<span style="color:#f92672">.</span>unique(y_train, return_counts<span style="color:#f92672">=</span>True) <span style="color:#75715e">#ensure each label has 500 examples.</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>),constrained_layout<span style="color:#f92672">=</span>True)
+ax[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>imshow(X_train[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">28</span>))
+ax[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>imshow(X_train[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">28</span>))
+ax[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>imshow(X_train[<span style="color:#ae81ff">4</span>]<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">28</span>,<span style="color:#ae81ff">28</span>))
+</code></pre></div><pre><code>&lt;matplotlib.image.AxesImage at 0x7f9b3b2ebb90&gt;
+</code></pre>
+<p><img src="/images/output_34_1.png" alt="png"></p>
+<h3 id="323">3.2.3</h3>
+<p>For each value $C=10^{-12}$~$10^{12}$ train a support vector machine with a linear kernel and compute its accuracy on the test set subsampled previously.
+Plot test accuracy and the number of support vectors (two separate plots) vs. $C$ for $C=10^{-12}$~$10^{12}$ (plot 7 points or more with the x-axis on a log scale).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">C_range <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1e-12</span>, <span style="color:#ae81ff">1e-8</span>, <span style="color:#ae81ff">1e-4</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1e4</span>, <span style="color:#ae81ff">1e8</span>, <span style="color:#ae81ff">1e12</span>]
+
+<span style="color:#75715e">#options = &#39;-s 0 -t 0 -c {}&#39;.format(str(C_range[i]))</span>
+    <span style="color:#75715e"># Training Model</span>
+options <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;-s 0 -t 0 -c 1&#39;</span>
+model <span style="color:#f92672">=</span> svm<span style="color:#f92672">.</span>svm_train(y_train, x_train, options)
+p_label, p_acc, p_val <span style="color:#f92672">=</span> svm<span style="color:#f92672">.</span>svm_predict(y_test, x_test, model)
+</code></pre></div><pre><code>Accuracy = 90.76% (4538/5000) (classification)
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">list(p_acc)[<span style="color:#ae81ff">0</span>]
+</code></pre></div><pre><code>90.75999999999999
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">num_sv <span style="color:#f92672">=</span> []
+p_acc_list <span style="color:#f92672">=</span> []
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(C_range)):
+    
+    options <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;-s 0 -t 0 -c {}&#39;</span><span style="color:#f92672">.</span>format(str(C_range[i]))
+    <span style="color:#75715e"># Training Model</span>
+    <span style="color:#75715e">#options = &#39;-s 0 -t 0 -c 1&#39;</span>
+    model <span style="color:#f92672">=</span> svm<span style="color:#f92672">.</span>svm_train(y_train, x_train, options)
+
+    p_label, p_acc, p_val <span style="color:#f92672">=</span> svm<span style="color:#f92672">.</span>svm_predict(y_test, x_test, model)
+    num_sv<span style="color:#f92672">.</span>append(len(model<span style="color:#f92672">.</span>get_sv_indices()))
+    p_acc_list<span style="color:#f92672">.</span>append(list(p_acc)[<span style="color:#ae81ff">0</span>])
+</code></pre></div><pre><code>Accuracy = 68.56% (3428/5000) (classification)
+Accuracy = 86.92% (4346/5000) (classification)
+Accuracy = 90.76% (4538/5000) (classification)
+Accuracy = 90.76% (4538/5000) (classification)
+Accuracy = 90.76% (4538/5000) (classification)
+Accuracy = 90.76% (4538/5000) (classification)
+Accuracy = 90.76% (4538/5000) (classification)
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"> p_acc_list
+</code></pre></div><pre><code>[68.56,
+ 86.92,
+ 90.75999999999999,
+ 90.75999999999999,
+ 90.75999999999999,
+ 90.75999999999999,
+ 90.75999999999999]
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">num_sv
+</code></pre></div><pre><code>[5000, 4232, 1734, 1734, 1734, 1734, 1734]
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">xlabel <span style="color:#f92672">=</span> C_range
+fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">5</span>))
+ax[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>plot(xlabel,num_sv)
+ax[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>plot(xlabel,p_acc_list)
+ax[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>set_xlabel(<span style="color:#e6db74">&#39;C&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+ax[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;Number of support vectors&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+ax[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>set_xscale(<span style="color:#e6db74">&#39;log&#39;</span>)
+ax[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;Number of support vectors vs. C&#39;</span>)
+ax[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>set_xlabel(<span style="color:#e6db74">&#39;C&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+ax[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>set_ylabel(<span style="color:#e6db74">&#39;Accuracy&#39;</span>, fontsize<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+ax[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>set_xscale(<span style="color:#e6db74">&#39;log&#39;</span>)
+ax[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>set_title(<span style="color:#e6db74">&#39;Accuracy vs. C&#39;</span>)
+<span style="color:#66d9ef">pass</span>
+</code></pre></div><p><img src="/images/output_42_0.png" alt="png"></p>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+<figure class="author-image">
+    <a class="img" href="https://yc392.github.io" style="background-image: url(/images/logo1.png)"><span class="hidden">Yuhua Cai's Picture</span></a>
+</figure>
+
+
+<section class="author">
+  <h4><a href="https://yc392.github.io">Yuhua Cai</a></h4>
+  
+  <p>Data Scientist from Duke</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Durham, NC, USA</span>
+    <span class="author-link icon-link"><a href="https://yc392.github.io">https://yc392.github.io</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Support%20Vector%20Machine&nbsp;-&nbsp;Yuhua%20Cai&amp;url=https%3a%2f%2fyc392.github.io%2fsupport-vector-machine%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyc392.github.io%2fsupport-vector-machine%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fyc392.github.io%2fsupport-vector-machine%2f&amp;description=Support%20Vector%20Machine"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=https%3a%2f%2fyc392.github.io%2fsupport-vector-machine%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "https:\/\/yc392.github.io\/support-vector-machine\/";  
+this.page.identifier = "https:\/\/yc392.github.io\/support-vector-machine\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://Yuhua.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+      <a class="read-next-story" style="no-cover" href="/cart4.5-id3-and-random-forest/">
+          <section class="post">
+              <h2>CART4.5, ID3 and Random Forest</h2>
+              
+          </section>
+      </a>
+  
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">Yuhua Cai</a> © Yuhua Cai Duke 2021</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+    
+</body>
+</html>
+

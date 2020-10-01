@@ -3,36 +3,52 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://yc392.github.io/aboutme/</loc>
+    <loc>https://yc392.github.io/about-me/</loc>
     <lastmod>2020-09-09T16:57:33-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://yc392.github.io/euler/</loc>
+    <loc>https://yc392.github.io/post/</loc>
+    <lastmod>2020-09-09T16:57:33-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yc392.github.io/</loc>
+    <lastmod>2020-09-09T16:57:33-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yc392.github.io/malaria-data-visualization/</loc>
     <lastmod>2020-09-08T20:14:38+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://yc392.github.io/malaria/</loc>
-    <lastmod>2020-09-08T20:14:38+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://yc392.github.io/blogs/</loc>
+    <loc>https://yc392.github.io/build-my-personal-blog-with-hugo-and-github-pages/</loc>
     <lastmod>2020-08-23T20:14:38+05:30</lastmod>
   </url>
   
   <url>
-    <loc>https://yc392.github.io/timeseries/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://yc392.github.io/adaboost/</loc>
+    <lastmod>2007-07-14T22:28:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://yc392.github.io/trees/</loc>
+    <loc>https://yc392.github.io/tags/cest-dit/</loc>
+    <lastmod>2007-07-14T22:28:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yc392.github.io/euler/</loc>
+    <lastmod>2007-07-14T22:28:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yc392.github.io/tags/</loc>
+    <lastmod>2007-07-14T22:28:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yc392.github.io/cart4.5-id3-and-random-forest/</loc>
   </url>
   
   <url>
@@ -40,15 +56,7 @@
   </url>
   
   <url>
-    <loc>https://yc392.github.io/linear_svm/</loc>
-  </url>
-  
-  <url>
-    <loc>https://yc392.github.io/tags/</loc>
-  </url>
-  
-  <url>
-    <loc>https://yc392.github.io/</loc>
+    <loc>https://yc392.github.io/support-vector-machine/</loc>
   </url>
   
 </urlset>
