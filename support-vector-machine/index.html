@@ -47,7 +47,7 @@
     
     <meta property="og:description" content="" />
   	<meta property="og:type" content="article" />
-    <meta property="article:published_time" content="0001-01-01T00:00:00Z" />
+    <meta property="article:published_time" content="2020-09-15T16:57:33-04:00" />
 
     
     
@@ -127,8 +127,8 @@
       "alternateName": "en"
     },
     "url": "https://yc392.github.io/support-vector-machine/",
-    "datePublished": "0001-01-01T00:00Z",
-    "dateModified": "0001-01-01T00:00Z",
+    "datePublished": "2020-09-15T16:57Z",
+    "dateModified": "2020-09-15T16:57Z",
     
     
     "description": "",
@@ -225,8 +225,8 @@
 
         <section class="post-meta">
         
-          <time class="post-date" datetime="0001-01-01T00:00:00Z">
-            Jan 1, 0001
+          <time class="post-date" datetime="2020-09-15T16:57:33-04:00">
+            Sep 15, 2020
           </time>
         
          
@@ -280,7 +280,22 @@ ax<span style="color:#f92672">.</span>add_artist(legend1)
 
 plt<span style="color:#f92672">.</span>show()
 </code></pre></div><p><img src="/images/output_5_0.png" alt="png"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> svmutil <span style="color:#f92672">as</span> svm
+<h3 id="312">3.1.2</h3>
+<p>Train a linear support vector machine on the data with $C=1$ and draw the decision boundary line that separates o and x. Mark the support vectors separately (ex.circle around the point).</p>
+<p>Note: You can use the libsvm.svmutil functions with the kernel_type set to 0, indiciating a linear kernel and svm_type set to 0 indicating C-SVC.
+Also note that the support_vector coefficients returned by the LIBSVM model are the dual coefficients.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Define the SVM problem</span>
+
+<span style="color:#75715e"># Define the hyperparameters</span>
+
+<span style="color:#75715e"># Train the model</span>
+
+<span style="color:#75715e"># Compute the slope and intercept of the separating line/hyperplanee with the use of the support vectors</span>
+<span style="color:#75715e"># and other information from the LIBSVM model.</span>
+
+<span style="color:#75715e"># Draw the scatter plot, the decision boundary line, and mark the support vectors.</span>
+
+<span style="color:#f92672">import</span> svmutil <span style="color:#f92672">as</span> svm
 train <span style="color:#f92672">=</span> [each[<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">for</span> each <span style="color:#f92672">in</span> X<span style="color:#f92672">.</span>tolist()]
 labels <span style="color:#f92672">=</span> Y
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">options <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;-s 0 -t 0 -c 1&#39;</span>  <span style="color:#75715e"># linear model</span>
@@ -316,21 +331,7 @@ plt<span style="color:#f92672">.</span>show()
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">len(model<span style="color:#f92672">.</span>get_sv_indices())
 </code></pre></div><pre><code>19
 </code></pre>
-<h3 id="312">3.1.2</h3>
-<p>Train a linear support vector machine on the data with $C=1$ and draw the decision boundary line that separates o and x. Mark the support vectors separately (ex.circle around the point).</p>
-<p>Note: You can use the libsvm.svmutil functions with the kernel_type set to 0, indiciating a linear kernel and svm_type set to 0 indicating C-SVC.
-Also note that the support_vector coefficients returned by the LIBSVM model are the dual coefficients.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Define the SVM problem</span>
-
-<span style="color:#75715e"># Define the hyperparameters</span>
-
-<span style="color:#75715e"># Train the model</span>
-
-<span style="color:#75715e"># Compute the slope and intercept of the separating line/hyperplanee with the use of the support vectors</span>
-<span style="color:#75715e"># and other information from the LIBSVM model.</span>
-
-<span style="color:#75715e"># Draw the scatter plot, the decision boundary line, and mark the support vectors.</span>
-</code></pre></div><h3 id="313">3.1.3</h3>
+<h3 id="313">3.1.3</h3>
 <p>Draw a line that separates the data for 8 different $C$ ($10^{-5}$~$10^7$).
 Plot the number of support vectors vs. $C$ (plot x-axis on a log scale).
 How does the number of support vectors change as $C$ increases and why does it change like that?</p>
@@ -417,12 +418,12 @@ plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;nu
 </code></pre>
 <p><img src="/images/output_14_1.png" alt="png"></p>
 <h3 id="314">3.1.4</h3>
-<p>Now try rescaling the data to the [0,1] range and repeat the steps of the previous question (3.1.3) and over the same range of $C$ values. Are the decision boundaries different from those in the previous question? What does this imply about (a) the geometric margin and (b) the relative effect of each feature on the predictions of the trained model ?</p>
+<p>Now try rescaling the data to the $[0,1]$ range and repeat the steps of the previous question (3.1.3) and over the same range of $C$ values. Are the decision boundaries different from those in the previous question? What does this imply about (a) the geometric margin and (b) the relative effect of each feature on the predictions of the trained model ?</p>
 <h4 id="solution-below">Solution below:</h4>
 <p>SVM tries to maximize the distance between the separating plane and the support vectors.
 If one feature (i.e. one dimension in this space) has very large values,
 it will dominate the other features when calculating the distance. If you rescale all
-features (e.g. to [0, 1]), they all have the same influence on the distance metric.</p>
+features (e.g. to $[0, 1]$), they all have the same influence on the distance metric.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sklearn
 <span style="color:#f92672">from</span> sklearn <span style="color:#f92672">import</span> preprocessing
 min_max_scaler <span style="color:#f92672">=</span> preprocessing<span style="color:#f92672">.</span>MinMaxScaler()
@@ -724,9 +725,9 @@ s.setAttribute('data-timestamp', +new Date());
 
   <aside class="read-next">
   
-      <a class="read-next-story" style="no-cover" href="/cart4.5-id3-and-random-forest/">
+      <a class="read-next-story" style="no-cover" href="/adaboost/">
           <section class="post">
-              <h2>CART4.5, ID3 and Random Forest</h2>
+              <h2>Adaboost</h2>
               
           </section>
       </a>

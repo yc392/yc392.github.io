@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Yuhua Cai Duke 2021</copyright>
-    <lastBuildDate>Wed, 09 Sep 2020 16:57:33 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 06 Oct 2020 22:28:00 +0200</lastBuildDate>
     
 	<atom:link href="https://yc392.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>About Me</title>
       <link>https://yc392.github.io/about-me/</link>
-      <pubDate>Wed, 09 Sep 2020 16:57:33 -0400</pubDate>
+      <pubDate>Thu, 09 Jul 2020 16:57:33 -0400</pubDate>
       
       <guid>https://yc392.github.io/about-me/</guid>
       <description>This is Yuhua Cai.
@@ -24,6 +24,27 @@ Master of Engineering in Electrical and Computer Engineering
 Data Analyst and Machine Learning Engineer
 Hobby Basketball
 Contact Me Email: yuhua.cai@duke.edu</description>
+    </item>
+    
+    <item>
+      <title>Build My Personal Blog with Hugo and Github Pages</title>
+      <link>https://yc392.github.io/build-my-personal-blog-with-hugo-and-github-pages/</link>
+      <pubDate>Sun, 23 Aug 2020 20:14:38 +0530</pubDate>
+      
+      <guid>https://yc392.github.io/build-my-personal-blog-with-hugo-and-github-pages/</guid>
+      <description>Introduction Hugo is one of the most popular open-source static generator and is written in GO. It is simple and easy to deploy. And Github Pages is a static web hosting service provided by Github which provides convenient deployment directly through Github repository.
+In this brief post I’ll walk you through how I created this website in 5 simple steps using Hugo and GitHub Pages. Step 1: Install Hugo and get a GitHub account As I’m a mac user, I’ll provide instructions here for installing Hugo on macOS.</description>
+    </item>
+    
+    <item>
+      <title>Three Euler Project Problems</title>
+      <link>https://yc392.github.io/euler/</link>
+      <pubDate>Tue, 01 Sep 2020 22:28:00 +0200</pubDate>
+      
+      <guid>https://yc392.github.io/euler/</guid>
+      <description>Project Euler is a series of challenging mathematical/computer programming problems that will require more than just mathematical insights to solve. In this post, three problems solved from the Euler Project using Python. Every function was annotated with nuympy-styple docstrings.
+1001st prime Problem 7	(420680 Solved) By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+What is the 10, 001st prime number?</description>
     </item>
     
     <item>
@@ -40,19 +61,29 @@ Malaria Dataset Malaria Dataset includes 3 informative datasets.
     </item>
     
     <item>
-      <title>Build My Personal Blog with Hugo and Github Pages</title>
-      <link>https://yc392.github.io/build-my-personal-blog-with-hugo-and-github-pages/</link>
-      <pubDate>Sun, 23 Aug 2020 20:14:38 +0530</pubDate>
+      <title>SQLite3 schema for Spotify dataset in 3NF</title>
+      <link>https://yc392.github.io/spotify/</link>
+      <pubDate>Tue, 06 Oct 2020 22:28:00 +0200</pubDate>
       
-      <guid>https://yc392.github.io/build-my-personal-blog-with-hugo-and-github-pages/</guid>
-      <description>Introduction Hugo is one of the most popular open-source static generator and is written in GO. It is simple and easy to deploy. And Github Pages is a static web hosting service provided by Github which provides convenient deployment directly through Github repository.
-In this brief post I’ll walk you through how I created this website in 5 simple steps using Hugo and GitHub Pages. Step 1: Install Hugo and get a GitHub account As I’m a mac user, I’ll provide instructions here for installing Hugo on macOS.</description>
+      <guid>https://yc392.github.io/spotify/</guid>
+      <description>Description: Download the Spotify songs data set. Create a SQLite3 schema to store this data in at least 3rd normal form (3NF), and populate the tables. Use an SQL query to find the names of all playlists that contain instrumentals.
+Spotify Songs Dataset First, let&amp;rsquo;s download and see the dataset we gonna use. It is a dataset of Spotify songs.
+df = pd.read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-01-21/spotify_songs.csv&#39;)` df    track_id track_name track_artist track_popularity track_album_id track_album_name track_album_release_date playlist_name playlist_id playlist_genre &amp;hellip; key loudness mode speechiness acousticness instrumentalness liveness valence tempo duration_ms      0 6f807x0ima9a1j3VPbc7VN I Don&amp;rsquo;t Care (with Justin Bieber) - Loud Luxur&amp;hellip; Ed Sheeran 66 2oCs0DGTsRO98Gh5ZSl2Cx I Don&amp;rsquo;t Care (with Justin Bieber) [Loud Luxury&amp;hellip; 2019-06-14 Pop Remix 37i9dQZF1DXcZDD7cfEKhW pop &amp;hellip; 6 -2.</description>
+    </item>
+    
+    <item>
+      <title>CART4.5, ID3 and Random Forest</title>
+      <link>https://yc392.github.io/cart4.5-id3-and-random-forest/</link>
+      <pubDate>Sun, 13 Sep 2020 16:57:33 -0400</pubDate>
+      
+      <guid>https://yc392.github.io/cart4.5-id3-and-random-forest/</guid>
+      <description>Instructions  If there is a conflict bewteen the problem description in the ipython notebook and the question in the pdf, follow the question in the pdf file. The part you need to fill in is commented as &amp;ldquo;Code Clip&amp;rdquo;. You can search &amp;ldquo;Code Clip&amp;rdquo; in this notebook to find the part you need to complete. After you finish the required part, you may need to run other related code blocks for evaluation or visualization.</description>
     </item>
     
     <item>
       <title>Adaboost</title>
       <link>https://yc392.github.io/adaboost/</link>
-      <pubDate>Sat, 14 Jul 2007 22:28:00 +0200</pubDate>
+      <pubDate>Mon, 14 Sep 2020 22:28:00 +0200</pubDate>
       
       <guid>https://yc392.github.io/adaboost/</guid>
       <description>Boosting a decision stump The goal of this notebook is to implement your own boosting module.
@@ -60,29 +91,9 @@ In this brief post I’ll walk you through how I created this website in 5 simpl
     </item>
     
     <item>
-      <title>Euler</title>
-      <link>https://yc392.github.io/euler/</link>
-      <pubDate>Sat, 14 Jul 2007 22:28:00 +0200</pubDate>
-      
-      <guid>https://yc392.github.io/euler/</guid>
-      <description>Project Euler is a series of challenging mathematical/computer programming problems that will require more than just mathematical insights to solve. In this post, three problems solved from the Euler Project using Python. Every function was annotated with nuympy-styple docstrings.
-1001st prime Problem 7	(420680 Solved) By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
-What is the 10, 001st prime number?</description>
-    </item>
-    
-    <item>
-      <title>CART4.5, ID3 and Random Forest</title>
-      <link>https://yc392.github.io/cart4.5-id3-and-random-forest/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://yc392.github.io/cart4.5-id3-and-random-forest/</guid>
-      <description>Instructions  If there is a conflict bewteen the problem description in the ipython notebook and the question in the pdf, follow the question in the pdf file. The part you need to fill in is commented as &amp;ldquo;Code Clip&amp;rdquo;. You can search &amp;ldquo;Code Clip&amp;rdquo; in this notebook to find the part you need to complete. After you finish the required part, you may need to run other related code blocks for evaluation or visualization.</description>
-    </item>
-    
-    <item>
       <title>Support Vector Machine</title>
       <link>https://yc392.github.io/support-vector-machine/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 15 Sep 2020 16:57:33 -0400</pubDate>
       
       <guid>https://yc392.github.io/support-vector-machine/</guid>
       <description>LINEAR SVM Due Date : 9/28 Monday 10:15 PM EST import numpy as np import matplotlib.pyplot as plt import scipy.io as io import libsvm from libsvm.svmutil import * import pandas as pd %matplotlib inline 3.1 Linear Support Vector Machine on toy data 3.1.1 Generate a training set of size $100$ with 2D features (X) drawn at random as follows:

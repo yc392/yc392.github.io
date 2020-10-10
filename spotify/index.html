@@ -1,0 +1,2089 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="SQLite3 schema for Spotify dataset in 3NF"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@"/>
+
+
+
+  	<meta property="og:title" content="SQLite3 schema for Spotify dataset in 3NF &middot; Yuhua Cai" />
+  	<meta property="og:site_name" content="Yuhua Cai" />
+  	<meta property="og:url" content="https://yc392.github.io/spotify/" />
+        <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+    </script>
+
+    
+        
+            <meta property="og:image" content="/images/cover1.png"/>
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2020-10-06T22:28:00&#43;02:00" />
+
+    
+    
+
+    <title>SQLite3 schema for Spotify dataset in 3NF &middot; Yuhua Cai</title>
+
+    
+    <meta name="description" content="Description: Download the Spotify songs data set. Create a SQLite3 schema to store this data in at least 3rd normal form (3NF), and populate the tables. Use an " />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/css/nav.css" />
+
+    
+
+    
+
+    
+      
+          <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Yuhua Cai" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.74.3" />
+
+    <link rel="canonical" href="https://yc392.github.io/spotify/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name":  null ,
+        "logo": "https://yc392.github.ioimages/logo1.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name":  null ,
+        
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://yc392.github.ioimages/logo1.png",
+            "width": 250,
+            "height": 250
+        }, 
+        
+        "url": "https://yc392.github.io",
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ],
+        "description": "Data Scientist from Duke"
+        
+    },
+    "headline": "SQLite3 schema for Spotify dataset in 3NF",
+    "name": "SQLite3 schema for Spotify dataset in 3NF",
+    "wordCount":  2763 ,
+    "timeRequired": "PT13M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": "en"
+    },
+    "url": "https://yc392.github.io/spotify/",
+    "datePublished": "2020-10-06T22:28Z",
+    "dateModified": "2020-10-06T22:28Z",
+    
+    
+    "description": "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://yc392.github.io/spotify/"
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            <h3>Content</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="/post">Post</a>
+            </li>
+        
+            <h3>Contact me</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="/about-me">About me</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="https://www.linkedin.com/in/yuhua-cai-195080194/">Linkedin</a>
+            </li>
+        
+            <h3>Follow me</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="https://github.com/yc392">Github</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="/">Blog Site</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+      <a class="blog-logo" href="https://yc392.github.io"><img src="/images/logo1.png" alt="Home" /></a>
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">SQLite3 schema for Spotify dataset in 3NF</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2020-10-06T22:28:00&#43;02:00">
+            Oct 6, 2020
+          </time>
+        
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p><strong>Description:</strong> Download the <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-01-21/readme.md">Spotify songs</a> data set. Create a SQLite3 schema to store this data in at least 3rd normal form (3NF), and populate the tables. Use an SQL query to find the names of all playlists that contain instrumentals.</p>
+<h2 id="spotify-songs-dataset">Spotify Songs Dataset</h2>
+<p>First, let&rsquo;s download and see the dataset we gonna use. It is a dataset of Spotify songs.</p>
+<pre><code>df = pd.read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-01-21/spotify_songs.csv')`
+df
+</code></pre><table>
+<thead>
+<tr>
+<th align="right">track_id</th>
+<th align="right">track_name</th>
+<th align="right">track_artist</th>
+<th align="right">track_popularity</th>
+<th align="right">track_album_id</th>
+<th align="right">track_album_name</th>
+<th align="right">track_album_release_date</th>
+<th align="right">playlist_name</th>
+<th align="right">playlist_id</th>
+<th align="right">playlist_genre</th>
+<th align="right">&hellip;</th>
+<th align="right">key</th>
+<th align="right">loudness</th>
+<th align="right">mode</th>
+<th align="right">speechiness</th>
+<th align="right">acousticness</th>
+<th align="right">instrumentalness</th>
+<th align="right">liveness</th>
+<th align="right">valence</th>
+<th align="right">tempo</th>
+<th align="right">duration_ms</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">6f807x0ima9a1j3VPbc7VN</td>
+<td align="right">I Don&rsquo;t Care (with Justin Bieber) - Loud Luxur&hellip;</td>
+<td align="right">Ed Sheeran</td>
+<td align="right">66</td>
+<td align="right">2oCs0DGTsRO98Gh5ZSl2Cx</td>
+<td align="right">I Don&rsquo;t Care (with Justin Bieber) [Loud Luxury&hellip;</td>
+<td align="right">2019-06-14</td>
+<td align="right">Pop Remix</td>
+<td align="right">37i9dQZF1DXcZDD7cfEKhW</td>
+<td align="right">pop</td>
+<td align="right">&hellip;</td>
+<td align="right">6</td>
+<td align="right">-2.634</td>
+<td align="right">1</td>
+<td align="right">0.0583</td>
+<td align="right">0.102000</td>
+<td align="right">0.000000</td>
+<td align="right">0.0653</td>
+<td align="right">0.5180</td>
+<td align="right">122.036</td>
+<td>194754</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">0r7CVbZTWZgbTCYdfa2P31</td>
+<td align="right">Memories - Dillon Francis Remix</td>
+<td align="right">Maroon 5</td>
+<td align="right">67</td>
+<td align="right">63rPSO264uRjW1X5E6cWv6</td>
+<td align="right">Memories (Dillon Francis Remix)</td>
+<td align="right">2019-12-13</td>
+<td align="right">Pop Remix</td>
+<td align="right">37i9dQZF1DXcZDD7cfEKhW</td>
+<td align="right">pop</td>
+<td align="right">&hellip;</td>
+<td align="right">11</td>
+<td align="right">-4.969</td>
+<td align="right">1</td>
+<td align="right">0.0373</td>
+<td align="right">0.072400</td>
+<td align="right">0.004210</td>
+<td align="right">0.3570</td>
+<td align="right">0.6930</td>
+<td align="right">99.972</td>
+<td>162600</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="right">1z1Hg7Vb0AhHDiEmnDE79l</td>
+<td align="right">All the Time - Don Diablo Remix</td>
+<td align="right">Zara Larsson</td>
+<td align="right">70</td>
+<td align="right">1HoSmj2eLcsrR0vE9gThr4</td>
+<td align="right">All the Time (Don Diablo Remix)</td>
+<td align="right">2019-07-05</td>
+<td align="right">Pop Remix</td>
+<td align="right">37i9dQZF1DXcZDD7cfEKhW</td>
+<td align="right">pop</td>
+<td align="right">&hellip;</td>
+<td align="right">1</td>
+<td align="right">-3.432</td>
+<td align="right">0</td>
+<td align="right">0.0742</td>
+<td align="right">0.079400</td>
+<td align="right">0.000023</td>
+<td align="right">0.1100</td>
+<td align="right">0.6130</td>
+<td align="right">124.008</td>
+<td>176616</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="right">75FpbthrwQmzHlBJLuGdC7</td>
+<td align="right">Call You Mine - Keanu Silva Remix</td>
+<td align="right">The Chainsmokers</td>
+<td align="right">60</td>
+<td align="right">1nqYsOef1yKKuGOVchbsk6</td>
+<td align="right">Call You Mine - The Remixes</td>
+<td align="right">2019-07-19</td>
+<td align="right">Pop Remix</td>
+<td align="right">37i9dQZF1DXcZDD7cfEKhW</td>
+<td align="right">pop</td>
+<td align="right">&hellip;</td>
+<td align="right">7</td>
+<td align="right">-3.778</td>
+<td align="right">1</td>
+<td align="right">0.1020</td>
+<td align="right">0.028700</td>
+<td align="right">0.000009</td>
+<td align="right">0.2040</td>
+<td align="right">0.2770</td>
+<td align="right">121.956</td>
+<td>169093</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">1e8PAfcKUYoKkxPhrHqw4x</td>
+<td align="right">Someone You Loved - Future Humans Remix</td>
+<td align="right">Lewis Capaldi</td>
+<td align="right">69</td>
+<td align="right">7m7vv9wlQ4i0LFuJiE2zsQ</td>
+<td align="right">Someone You Loved (Future Humans Remix)</td>
+<td align="right">2019-03-05</td>
+<td align="right">Pop Remix</td>
+<td align="right">37i9dQZF1DXcZDD7cfEKhW</td>
+<td align="right">pop</td>
+<td align="right">&hellip;</td>
+<td align="right">1</td>
+<td align="right">-4.672</td>
+<td align="right">1</td>
+<td align="right">0.0359</td>
+<td align="right">0.080300</td>
+<td align="right">0.000000</td>
+<td align="right">0.0833</td>
+<td align="right">0.7250</td>
+<td align="right">123.976</td>
+<td>189052</td>
+</tr>
+<tr>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td>&hellip;</td>
+</tr>
+<tr>
+<td align="right">32828</td>
+<td align="right">7bxnKAamR3snQ1VGLuVfC1</td>
+<td align="right">City Of Lights - Official Radio Edit</td>
+<td align="right">Lush &amp; Simon</td>
+<td align="right">42</td>
+<td align="right">2azRoBBWEEEYhqV6sb7JrT</td>
+<td align="right">City Of Lights (Vocal Mix)</td>
+<td align="right">2014-04-28</td>
+<td align="right">♥ EDM LOVE 2020</td>
+<td align="right">6jI1gFr6ANFtT8MmTvA2Ux</td>
+<td align="right">edm</td>
+<td align="right">&hellip;</td>
+<td align="right">2</td>
+<td align="right">-1.814</td>
+<td align="right">1</td>
+<td align="right">0.0936</td>
+<td align="right">0.076600</td>
+<td align="right">0.000000</td>
+<td align="right">0.0668</td>
+<td align="right">0.2100</td>
+<td align="right">128.170</td>
+<td>204375</td>
+</tr>
+<tr>
+<td align="right">32829</td>
+<td align="right">5Aevni09Em4575077nkWHz</td>
+<td align="right">Closer - Sultan &amp; Ned Shepard Remix</td>
+<td align="right">Tegan and Sara</td>
+<td align="right">20</td>
+<td align="right">6kD6KLxj7s8eCE3ABvAyf5</td>
+<td align="right">Closer Remixed</td>
+<td align="right">2013-03-08</td>
+<td align="right">♥ EDM LOVE 2020</td>
+<td align="right">6jI1gFr6ANFtT8MmTvA2Ux</td>
+<td align="right">edm</td>
+<td align="right">&hellip;</td>
+<td align="right">0</td>
+<td align="right">-4.462</td>
+<td align="right">1</td>
+<td align="right">0.0420</td>
+<td align="right">0.001710</td>
+<td align="right">0.004270</td>
+<td align="right">0.3750</td>
+<td align="right">0.4000</td>
+<td align="right">128.041</td>
+<td>353120</td>
+</tr>
+<tr>
+<td align="right">32830</td>
+<td align="right">7ImMqPP3Q1yfUHvsdn7wEo</td>
+<td align="right">Sweet Surrender - Radio Edit</td>
+<td align="right">Starkillers</td>
+<td align="right">14</td>
+<td align="right">0ltWNSY9JgxoIZO4VzuCa6</td>
+<td align="right">Sweet Surrender (Radio Edit)</td>
+<td align="right">2014-04-21</td>
+<td align="right">♥ EDM LOVE 2020</td>
+<td align="right">6jI1gFr6ANFtT8MmTvA2Ux</td>
+<td align="right">edm</td>
+<td align="right">&hellip;</td>
+<td align="right">6</td>
+<td align="right">-4.899</td>
+<td align="right">0</td>
+<td align="right">0.0481</td>
+<td align="right">0.108000</td>
+<td align="right">0.000001</td>
+<td align="right">0.1500</td>
+<td align="right">0.4360</td>
+<td align="right">127.989</td>
+<td>210112</td>
+</tr>
+<tr>
+<td align="right">32831</td>
+<td align="right">2m69mhnfQ1Oq6lGtXuYhgX</td>
+<td align="right">Only For You - Maor Levi Remix</td>
+<td align="right">Mat Zo</td>
+<td align="right">15</td>
+<td align="right">1fGrOkHnHJcStl14zNx8Jy</td>
+<td align="right">Only For You (Remixes)</td>
+<td align="right">2014-01-01</td>
+<td align="right">♥ EDM LOVE 2020</td>
+<td align="right">6jI1gFr6ANFtT8MmTvA2Ux</td>
+<td align="right">edm</td>
+<td align="right">&hellip;</td>
+<td align="right">2</td>
+<td align="right">-3.361</td>
+<td align="right">1</td>
+<td align="right">0.1090</td>
+<td align="right">0.007920</td>
+<td align="right">0.127000</td>
+<td align="right">0.3430</td>
+<td align="right">0.3080</td>
+<td align="right">128.008</td>
+<td>367432</td>
+</tr>
+<tr>
+<td align="right">32832</td>
+<td align="right">29zWqhca3zt5NsckZqDf6c</td>
+<td align="right">Typhoon - Original Mix</td>
+<td align="right">Julian Calor</td>
+<td align="right">27</td>
+<td align="right">0X3mUOm6MhxR7PzxG95rAo</td>
+<td align="right">Typhoon/Storm</td>
+<td align="right">2014-03-03</td>
+<td align="right">♥ EDM LOVE 2020</td>
+<td align="right">6jI1gFr6ANFtT8MmTvA2Ux</td>
+<td align="right">edm</td>
+<td align="right">&hellip;</td>
+<td align="right">5</td>
+<td align="right">-4.571</td>
+<td align="right">0</td>
+<td align="right">0.0385</td>
+<td align="right">0.000133</td>
+<td align="right">0.341000</td>
+<td align="right">0.7420</td>
+<td align="right">0.0894</td>
+<td align="right">127.984</td>
+<td>337500</td>
+</tr>
+</tbody>
+</table>
+<p>32833 rows × 23 columns</p>
+<pre><code>df.info()
+</code></pre><pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 32833 entries, 0 to 32832
+Data columns (total 23 columns):
+track_id                    32833 non-null object
+track_name                  32828 non-null object
+track_artist                32828 non-null object
+track_popularity            32833 non-null int64
+track_album_id              32833 non-null object
+track_album_name            32828 non-null object
+track_album_release_date    32833 non-null object
+playlist_name               32833 non-null object
+playlist_id                 32833 non-null object
+playlist_genre              32833 non-null object
+playlist_subgenre           32833 non-null object
+danceability                32833 non-null float64
+energy                      32833 non-null float64
+key                         32833 non-null int64
+loudness                    32833 non-null float64
+mode                        32833 non-null int64
+speechiness                 32833 non-null float64
+acousticness                32833 non-null float64
+instrumentalness            32833 non-null float64
+liveness                    32833 non-null float64
+valence                     32833 non-null float64
+tempo                       32833 non-null float64
+duration_ms                 32833 non-null int64
+dtypes: float64(9), int64(4), object(10)
+memory usage: 5.8+ MB
+</code></pre><h2 id="database-normalization-concepts">Database normalization Concepts</h2>
+<p>Now, let&rsquo;s quick go through some concepts about database normalization.</p>
+<p>Database normalization is performed for two main reasons - <strong>reduce redundancy</strong> and <strong>prevent inconsistencies on insert/update/delete</strong>.</p>
+<p>Note: A fully normalized database is in domain-key normal form (DK/NF) if every constraint is a logical consequence of the definition of the candidate key and domains. However, most practical normalization procedures go through a series of steps known as first, second and third normal forms, and ignore potential modification anomalies that may remain.</p>
+<h4 id="first-normal-form-1nf">First Normal Form (1NF)</h4>
+<ol>
+<li>Table has a primary key (unique, non-null column that identifies each row)</li>
+<li>No repeating groups of columns</li>
+<li>Each cell contains a single value</li>
+</ol>
+<h4 id="second-normal-form-2nf">Second Normal Form (2NF)</h4>
+<p>All columns in each row depend fully on candidate keys. This can be quite tricky to understand.</p>
+<ol>
+<li>Look for candidate composite keys that can uniquely identify a row.</li>
+<li>See if the other columns depend on ALL columns of the composite key.</li>
+</ol>
+<p>In the sample example below, suppose we have a table for academic books. Note that (publisher, title) is a candidate key. However, headquarters depends only on publisher and not on title, so this violates 2NF.</p>
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">publisher</th>
+<th align="right">headquarter</th>
+<th align="left">title</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">Springer</td>
+<td align="right">Germany</td>
+<td align="left">Linear Algebra Done Wrong</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">Springer</td>
+<td align="right">Gernamy</td>
+<td align="left">Undergraduate Algebra</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="right">CUB</td>
+<td align="right">England</td>
+<td align="left">Stochastic Modelling of Reaction–Diffusion Pro&hellip;</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="right">CUP</td>
+<td align="right">England</td>
+<td align="left">An Introduction to Stochastic Dynamics</td>
+</tr>
+</tbody>
+</table>
+<h4 id="third-normal-form-3nf">Third Normal Form (3NF)</h4>
+<p>No transitive dependencies between non-candidate columns. In the table below, both major and major_description depend on the name (or row number), but major_description only depends on name via the major. This is a transitive dependency and violates 3NF.</p>
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">name</th>
+<th align="right">age</th>
+<th align="right">major</th>
+<th align="left">major_dscription</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">ann</td>
+<td align="right">21</td>
+<td align="right">math</td>
+<td align="left">Mathematics</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">bob</td>
+<td align="right">22</td>
+<td align="right">stats</td>
+<td align="left">Statisitcs</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="right">charles</td>
+<td align="right">21</td>
+<td align="right">bio</td>
+<td align="left">Biohazards in the University</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="right">david</td>
+<td align="right">23</td>
+<td align="right">math</td>
+<td align="left">Mathematics</td>
+</tr>
+</tbody>
+</table>
+<h2 id="normalizing-the-spotify-dataset">Normalizing the Spotify dataset</h2>
+<p>Is our Spotify dataset normalized? Yes, but only in first normal form (1NF). It is obvious that there are no repeating columns in the dataset and each column contains only single value. For converting the dataset into third normal form, we need to have a closer look at each columns.</p>
+<pre><code>for col in df.columns:
+    print(col)
+</code></pre><pre><code>track_id
+track_name
+track_artist
+track_popularity
+track_album_id
+track_album_name
+track_album_release_date
+playlist_name
+playlist_id
+playlist_genre
+playlist_subgenre
+danceability
+energy
+key
+loudness
+mode
+speechiness
+acousticness
+instrumentalness
+liveness
+valence
+tempo
+duration_ms
+</code></pre><p>Besed on these columns, we can break the dataset into three parts:</p>
+<ul>
+<li>
+<p>Track</p>
+</li>
+<li>
+<p>Album</p>
+</li>
+<li>
+<p>Playlist</p>
+</li>
+</ul>
+<p><strong>track_id, track_name, track_artist, track_popularity</strong>. These are columns that should be in the track table. In addition, variables such as <strong>danceability</strong> are features of the track, even though they don’t start with <strong>“track”</strong>. This is the case for all columns following <strong>danceability</strong>, including <strong>energy</strong>, <strong>key</strong>, and all the way up to <strong>duration_ms</strong>.</p>
+<p>Finally, we need to check  the conditions for the dataset to be in the third normal form. Take <strong>track_name</strong>, for instance. Knowing <strong>track_name</strong> allows me to identify other characteristics of the track without having to know its primary key - <strong>track_id</strong>, which is kind of transitive dependencies. Therefor, we have to take <strong>track_name</strong> out of the table and store it in a table of its own.</p>
+<pre><code>df_track = pd.concat([df.iloc[:,[0,2,3]],df.iloc[:,11:]],axis=1).drop_duplicates()
+df_track
+</code></pre><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">track_id</th>
+<th align="right">track_artist</th>
+<th align="right">track_popularity</th>
+<th align="right">danceability</th>
+<th align="right">energy</th>
+<th align="right">key</th>
+<th align="right">loudness</th>
+<th align="right">mode</th>
+<th align="right">speechiness</th>
+<th align="right">acousticness</th>
+<th align="right">instrumentalness</th>
+<th align="right">liveness</th>
+<th align="right">valence</th>
+<th align="right">tempo</th>
+<th>duration_ms</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">6f807x0ima9a1j3VPbc7VN</td>
+<td align="right">Ed Sheeran</td>
+<td align="right">66</td>
+<td align="right">0.748</td>
+<td align="right">0.916</td>
+<td align="right">6</td>
+<td align="right">-2.634</td>
+<td align="right">1</td>
+<td align="right">0.0583</td>
+<td align="right">0.102000</td>
+<td align="right">0.000000</td>
+<td align="right">0.0653</td>
+<td align="right">0.5180</td>
+<td align="right">122.036</td>
+<td>194754</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">0r7CVbZTWZgbTCYdfa2P31</td>
+<td align="right">Maroon 5</td>
+<td align="right">67</td>
+<td align="right">0.726</td>
+<td align="right">0.815</td>
+<td align="right">11</td>
+<td align="right">-4.969</td>
+<td align="right">1</td>
+<td align="right">0.0373</td>
+<td align="right">0.072400</td>
+<td align="right">0.004210</td>
+<td align="right">0.3570</td>
+<td align="right">0.6930</td>
+<td align="right">99.972</td>
+<td>162600</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="right">1z1Hg7Vb0AhHDiEmnDE79l</td>
+<td align="right">Zara Larsson</td>
+<td align="right">70</td>
+<td align="right">0.675</td>
+<td align="right">0.931</td>
+<td align="right">1</td>
+<td align="right">-3.432</td>
+<td align="right">0</td>
+<td align="right">0.0742</td>
+<td align="right">0.079400</td>
+<td align="right">0.000023</td>
+<td align="right">0.1100</td>
+<td align="right">0.6130</td>
+<td align="right">124.008</td>
+<td>176616</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="right">75FpbthrwQmzHlBJLuGdC7</td>
+<td align="right">The Chainsmokers</td>
+<td align="right">60</td>
+<td align="right">0.718</td>
+<td align="right">0.930</td>
+<td align="right">7</td>
+<td align="right">-3.778</td>
+<td align="right">1</td>
+<td align="right">0.1020</td>
+<td align="right">0.028700</td>
+<td align="right">0.000009</td>
+<td align="right">0.2040</td>
+<td align="right">0.2770</td>
+<td align="right">121.956</td>
+<td>169093</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">1e8PAfcKUYoKkxPhrHqw4x</td>
+<td align="right">Lewis Capaldi</td>
+<td align="right">69</td>
+<td align="right">0.650</td>
+<td align="right">0.833</td>
+<td align="right">1</td>
+<td align="right">-4.672</td>
+<td align="right">1</td>
+<td align="right">0.0359</td>
+<td align="right">0.080300</td>
+<td align="right">0.000000</td>
+<td align="right">0.0833</td>
+<td align="right">0.7250</td>
+<td align="right">123.976</td>
+<td>189052</td>
+</tr>
+<tr>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td>&hellip;</td>
+</tr>
+<tr>
+<td align="right">32828</td>
+<td align="right">7bxnKAamR3snQ1VGLuVfC1</td>
+<td align="right">Lush &amp; Simon</td>
+<td align="right">42</td>
+<td align="right">0.428</td>
+<td align="right">0.922</td>
+<td align="right">2</td>
+<td align="right">-1.814</td>
+<td align="right">1</td>
+<td align="right">0.0936</td>
+<td align="right">0.076600</td>
+<td align="right">0.000000</td>
+<td align="right">0.0668</td>
+<td align="right">0.2100</td>
+<td align="right">128.170</td>
+<td>204375</td>
+</tr>
+<tr>
+<td align="right">32829</td>
+<td align="right">5Aevni09Em4575077nkWHz</td>
+<td align="right">Tegan and Sara</td>
+<td align="right">20</td>
+<td align="right">0.522</td>
+<td align="right">0.786</td>
+<td align="right">0</td>
+<td align="right">-4.462</td>
+<td align="right">1</td>
+<td align="right">0.0420</td>
+<td align="right">0.001710</td>
+<td align="right">0.004270</td>
+<td align="right">0.3750</td>
+<td align="right">0.4000</td>
+<td align="right">128.041</td>
+<td>353120</td>
+</tr>
+<tr>
+<td align="right">32830</td>
+<td align="right">7ImMqPP3Q1yfUHvsdn7wEo</td>
+<td align="right">Starkillers</td>
+<td align="right">14</td>
+<td align="right">0.529</td>
+<td align="right">0.821</td>
+<td align="right">6</td>
+<td align="right">-4.899</td>
+<td align="right">0</td>
+<td align="right">0.0481</td>
+<td align="right">0.108000</td>
+<td align="right">0.000001</td>
+<td align="right">0.1500</td>
+<td align="right">0.4360</td>
+<td align="right">127.989</td>
+<td>210112</td>
+</tr>
+<tr>
+<td align="right">32831</td>
+<td align="right">2m69mhnfQ1Oq6lGtXuYhgX</td>
+<td align="right">Mat Zo</td>
+<td align="right">15</td>
+<td align="right">0.626</td>
+<td align="right">0.888</td>
+<td align="right">2</td>
+<td align="right">-3.361</td>
+<td align="right">1</td>
+<td align="right">0.1090</td>
+<td align="right">0.007920</td>
+<td align="right">0.127000</td>
+<td align="right">0.3430</td>
+<td align="right">0.3080</td>
+<td align="right">128.008</td>
+<td>367432</td>
+</tr>
+<tr>
+<td align="right">32832</td>
+<td align="right">29zWqhca3zt5NsckZqDf6c</td>
+<td align="right">Julian Calor</td>
+<td align="right">27</td>
+<td align="right">0.603</td>
+<td align="right">0.884</td>
+<td align="right">5</td>
+<td align="right">-4.571</td>
+<td align="right">0</td>
+<td align="right">0.0385</td>
+<td align="right">0.000133</td>
+<td align="right">0.341000</td>
+<td align="right">0.7420</td>
+<td align="right">0.0894</td>
+<td align="right">127.984</td>
+<td>337500</td>
+</tr>
+</tbody>
+</table>
+<p>28356 rows × 15 columns</p>
+<pre><code>df_track_name = df.iloc[:,[0,1]].drop_duplicates()
+df_track_name
+</code></pre><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">track_id</th>
+<th>track_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">0</td>
+<td align="left">6f807x0ima9a1j3VPbc7VN</td>
+<td>I Don&rsquo;t Care (with Justin Bieber) - Loud Luxur&hellip;</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">0r7CVbZTWZgbTCYdfa2P31</td>
+<td>Memories - Dillon Francis Remix</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">1z1Hg7Vb0AhHDiEmnDE79l</td>
+<td>All the Time - Don Diablo Remix</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">75FpbthrwQmzHlBJLuGdC7</td>
+<td>Call You Mine - Keanu Silva Remix</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">1e8PAfcKUYoKkxPhrHqw4x</td>
+<td>Someone You Loved - Future Humans Remix</td>
+</tr>
+<tr>
+<td align="left">&hellip;</td>
+<td align="left">&hellip;</td>
+<td>&hellip;</td>
+</tr>
+<tr>
+<td align="left">32828</td>
+<td align="left">7bxnKAamR3snQ1VGLuVfC1</td>
+<td>City Of Lights - Official Radio Edit</td>
+</tr>
+<tr>
+<td align="left">32829</td>
+<td align="left">5Aevni09Em4575077nkWHz</td>
+<td>Closer - Sultan &amp; Ned Shepard Remix</td>
+</tr>
+<tr>
+<td align="left">32830</td>
+<td align="left">7ImMqPP3Q1yfUHvsdn7wEo</td>
+<td>Sweet Surrender - Radio Edit</td>
+</tr>
+<tr>
+<td align="left">32831</td>
+<td align="left">2m69mhnfQ1Oq6lGtXuYhgX</td>
+<td>Only For You - Maor Levi Remix</td>
+</tr>
+<tr>
+<td align="left">32832</td>
+<td align="left">29zWqhca3zt5NsckZqDf6c</td>
+<td>Typhoon - Original Mix</td>
+</tr>
+</tbody>
+</table>
+<p>28356 rows × 2 columns</p>
+<p>There are three columns that are related to the Album attributes - <strong>track_album_id</strong>,<strong>track_album_name</strong> and <strong>track_album_release_date</strong>.</p>
+<p>The third normal form constraint is also applied in this entity. While the id is the most natural primary key, note that if you know the album’s name, you may be able to identify its release date without knowing its id. So we’ll have to split these columns into different tables.</p>
+<pre><code>df_album_name = df.iloc[:,[4,5]].drop_duplicates()
+df_album_name
+</code></pre><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="left">track_album_id</th>
+<th align="left">track_album_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="left">2oCs0DGTsRO98Gh5ZSl2Cx</td>
+<td align="left">I Don&rsquo;t Care (with Justin Bieber) [Loud Luxury&hellip;</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="left">63rPSO264uRjW1X5E6cWv6</td>
+<td align="left">Memories (Dillon Francis Remix)</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="left">1HoSmj2eLcsrR0vE9gThr4</td>
+<td align="left">All the Time (Don Diablo Remix)</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="left">1nqYsOef1yKKuGOVchbsk6</td>
+<td align="left">Call You Mine - The Remixes</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="left">7m7vv9wlQ4i0LFuJiE2zsQ</td>
+<td align="left">Someone You Loved (Future Humans Remix)</td>
+</tr>
+<tr>
+<td align="right">&hellip;</td>
+<td align="left">&hellip;</td>
+<td align="left">&hellip;</td>
+</tr>
+<tr>
+<td align="right">32828</td>
+<td align="left">2azRoBBWEEEYhqV6sb7JrT</td>
+<td align="left">City Of Lights (Vocal Mix)</td>
+</tr>
+<tr>
+<td align="right">32829</td>
+<td align="left">6kD6KLxj7s8eCE3ABvAyf5</td>
+<td align="left">Closer Remixed</td>
+</tr>
+<tr>
+<td align="right">32830</td>
+<td align="left">0ltWNSY9JgxoIZO4VzuCa6</td>
+<td align="left">Sweet Surrender (Radio Edit)</td>
+</tr>
+<tr>
+<td align="right">32831</td>
+<td align="left">1fGrOkHnHJcStl14zNx8Jy</td>
+<td align="left">Only For You (Remixes)</td>
+</tr>
+<tr>
+<td align="right">32832</td>
+<td align="left">0X3mUOm6MhxR7PzxG95rAo</td>
+<td align="left">Typhoon/Storm</td>
+</tr>
+</tbody>
+</table>
+<p>22545 rows × 2 columns</p>
+<pre><code>df_album_release = df.loc[:,['track_album_id','track_album_release_date']].drop_duplicates()
+df_album_release
+</code></pre><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">track_album_id</th>
+<th align="left">track_album_release_date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">0</td>
+<td align="left">2oCs0DGTsRO98Gh5ZSl2Cx</td>
+<td align="left">2019-06-14</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">63rPSO264uRjW1X5E6cWv6</td>
+<td align="left">2019-12-13</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">1HoSmj2eLcsrR0vE9gThr4</td>
+<td align="left">2019-07-05</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">1nqYsOef1yKKuGOVchbsk6</td>
+<td align="left">2019-07-19</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">7m7vv9wlQ4i0LFuJiE2zsQ</td>
+<td align="left">2019-03-05</td>
+</tr>
+<tr>
+<td align="left">&hellip;</td>
+<td align="left">&hellip;</td>
+<td align="left">&hellip;</td>
+</tr>
+<tr>
+<td align="left">32828</td>
+<td align="left">2azRoBBWEEEYhqV6sb7JrT</td>
+<td align="left">2014-04-28</td>
+</tr>
+<tr>
+<td align="left">32829</td>
+<td align="left">6kD6KLxj7s8eCE3ABvAyf5</td>
+<td align="left">2013-03-08</td>
+</tr>
+<tr>
+<td align="left">32830</td>
+<td align="left">0ltWNSY9JgxoIZO4VzuCa6</td>
+<td align="left">2014-04-21</td>
+</tr>
+<tr>
+<td align="left">32831</td>
+<td align="left">1fGrOkHnHJcStl14zNx8Jy</td>
+<td align="left">2014-01-01</td>
+</tr>
+<tr>
+<td align="left">32832</td>
+<td align="left">0X3mUOm6MhxR7PzxG95rAo</td>
+<td align="left">2014-03-03</td>
+</tr>
+</tbody>
+</table>
+<p>22545 rows × 2 columns</p>
+<p>There are four columns that are related to the Playlist - <strong>playlist_name</strong>, <strong>playlist_id</strong>, <strong>playlist_genre</strong> and <strong>playlist_subgenre</strong>.</p>
+<p>Since if we know the name of the playlist, we may be able to guess its genre as well as its subgenere. So there exists some dependencies between these columns to some extent. In addition, we find that if we know a playlist’s subgenre, we automatically know its genre. But the opposite isn&rsquo;t true , the  playlist_genre cannot be used to identify the playlist_subgenre. So playlist_genre and playlist_subgenre should be put into a seperate table that its primary key is the column playlist_subgenre.</p>
+<pre><code>df_playlist_name = df_playlist.loc[:,['playlist_id','playlist_name']].drop_duplicates()
+df_playlist_name
+</code></pre><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">playlist_id</th>
+<th align="left">playlist_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">0</td>
+<td align="left">37i9dQZF1DXcZDD7cfEKhW</td>
+<td align="left">Pop Remix</td>
+</tr>
+<tr>
+<td align="left">70</td>
+<td align="left">37i9dQZF1DWZQaaqNMbbXa</td>
+<td align="left">Dance Pop</td>
+</tr>
+<tr>
+<td align="left">167</td>
+<td align="left">37i9dQZF1DX2ENAPP1Tyed</td>
+<td align="left">Dance Room</td>
+</tr>
+<tr>
+<td align="left">223</td>
+<td align="left">37i9dQZF1DWSJHnPb1f0X3</td>
+<td align="left">Cardio</td>
+</tr>
+<tr>
+<td align="left">272</td>
+<td align="left">37i9dQZF1DX6pH08wMhkaI</td>
+<td align="left">Dance Pop Hits</td>
+</tr>
+<tr>
+<td align="left">&hellip;</td>
+<td align="left">&hellip;</td>
+<td align="left">&hellip;</td>
+</tr>
+<tr>
+<td align="left">32409</td>
+<td align="left">0FCHg9zJMNNiOokh3hVcxd</td>
+<td align="left">Fresh EDM | Progressive House | Electro House &hellip;</td>
+</tr>
+<tr>
+<td align="left">32504</td>
+<td align="left">73uj4YmsC7SJ6SbUMTvf07</td>
+<td align="left">Festival Music 2019 - Warm Up Music (EDM, Big &hellip;</td>
+</tr>
+<tr>
+<td align="left">32582</td>
+<td align="left">29jj7pQlDqnWclbHQk21Rq</td>
+<td align="left">Underground Party | Hypnotic | Minimal | Acid &hellip;</td>
+</tr>
+<tr>
+<td align="left">32674</td>
+<td align="left">4N1ipiKR3xla8UXtE12XBm</td>
+<td align="left">Trending EDM by Nik Cooper</td>
+</tr>
+<tr>
+<td align="left">32753</td>
+<td align="left">6jI1gFr6ANFtT8MmTvA2Ux</td>
+<td align="left">♥ EDM LOVE 2020</td>
+</tr>
+</tbody>
+</table>
+<p>471 rows × 2 columns</p>
+<pre><code>df_playlist_subgenre = df_playlist.loc[:,['playlist_id','playlist_subgenre']].drop_duplicates()
+df_playlist_subgenre
+</code></pre><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">playlist_id</th>
+<th align="left">playlist_subgenre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">0</td>
+<td align="left">37i9dQZF1DXcZDD7cfEKhW</td>
+<td align="left">dance pop</td>
+</tr>
+<tr>
+<td align="left">70</td>
+<td align="left">37i9dQZF1DWZQaaqNMbbXa</td>
+<td align="left">dance pop</td>
+</tr>
+<tr>
+<td align="left">167</td>
+<td align="left">37i9dQZF1DX2ENAPP1Tyed</td>
+<td align="left">dance pop</td>
+</tr>
+<tr>
+<td align="left">223</td>
+<td align="left">37i9dQZF1DWSJHnPb1f0X3</td>
+<td align="left">dance pop</td>
+</tr>
+<tr>
+<td align="left">272</td>
+<td align="left">37i9dQZF1DX6pH08wMhkaI</td>
+<td align="left">dance pop</td>
+</tr>
+<tr>
+<td align="left">&hellip;</td>
+<td align="left">&hellip;</td>
+<td align="left">&hellip;</td>
+</tr>
+<tr>
+<td align="left">32409</td>
+<td align="left">0FCHg9zJMNNiOokh3hVcxd</td>
+<td align="left">progressive electro house</td>
+</tr>
+<tr>
+<td align="left">32504</td>
+<td align="left">73uj4YmsC7SJ6SbUMTvf07</td>
+<td align="left">progressive electro house</td>
+</tr>
+<tr>
+<td align="left">32582</td>
+<td align="left">29jj7pQlDqnWclbHQk21Rq</td>
+<td align="left">progressive electro house</td>
+</tr>
+<tr>
+<td align="left">32674</td>
+<td align="left">4N1ipiKR3xla8UXtE12XBm</td>
+<td align="left">progressive electro house</td>
+</tr>
+<tr>
+<td align="left">32753</td>
+<td align="left">6jI1gFr6ANFtT8MmTvA2Ux</td>
+<td align="left">progressive electro house</td>
+</tr>
+</tbody>
+</table>
+<p>480 rows × 2 columns</p>
+<pre><code>df_subgenre_genre = df_playlist.iloc[:,[3,2]].drop_duplicates()
+df_subgenre_genre
+</code></pre><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">playlist_subgenre</th>
+<th align="left">playlist_genre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">0</td>
+<td align="left">dance pop</td>
+<td align="left">pop</td>
+</tr>
+<tr>
+<td align="left">1298</td>
+<td align="left">post-teen pop</td>
+<td align="left">pop</td>
+</tr>
+<tr>
+<td align="left">2427</td>
+<td align="left">electropop</td>
+<td align="left">pop</td>
+</tr>
+<tr>
+<td align="left">3835</td>
+<td align="left">indie poptimism</td>
+<td align="left">pop</td>
+</tr>
+<tr>
+<td align="left">5507</td>
+<td align="left">hip hop</td>
+<td align="left">rap</td>
+</tr>
+<tr>
+<td align="left">6829</td>
+<td align="left">southern hip hop</td>
+<td align="left">rap</td>
+</tr>
+<tr>
+<td align="left">8504</td>
+<td align="left">gangster rap</td>
+<td align="left">rap</td>
+</tr>
+<tr>
+<td align="left">9962</td>
+<td align="left">trap</td>
+<td align="left">rap</td>
+</tr>
+<tr>
+<td align="left">11253</td>
+<td align="left">album rock</td>
+<td align="left">rock</td>
+</tr>
+<tr>
+<td align="left">12318</td>
+<td align="left">classic rock</td>
+<td align="left">rock</td>
+</tr>
+<tr>
+<td align="left">13614</td>
+<td align="left">permanent wave</td>
+<td align="left">rock</td>
+</tr>
+<tr>
+<td align="left">14719</td>
+<td align="left">hard rock</td>
+<td align="left">rock</td>
+</tr>
+<tr>
+<td align="left">16204</td>
+<td align="left">tropical</td>
+<td align="left">latin</td>
+</tr>
+<tr>
+<td align="left">17492</td>
+<td align="left">latin pop</td>
+<td align="left">latin</td>
+</tr>
+<tr>
+<td align="left">18754</td>
+<td align="left">reggaeton</td>
+<td align="left">latin</td>
+</tr>
+<tr>
+<td align="left">19703</td>
+<td align="left">latin hip hop</td>
+<td align="left">latin</td>
+</tr>
+<tr>
+<td align="left">21359</td>
+<td align="left">urban contemporary</td>
+<td align="left">r&amp;b</td>
+</tr>
+<tr>
+<td align="left">22764</td>
+<td align="left">hip pop</td>
+<td align="left">r&amp;b</td>
+</tr>
+<tr>
+<td align="left">24020</td>
+<td align="left">new jack swing</td>
+<td align="left">r&amp;b</td>
+</tr>
+<tr>
+<td align="left">25153</td>
+<td align="left">neo soul</td>
+<td align="left">r&amp;b</td>
+</tr>
+<tr>
+<td align="left">26790</td>
+<td align="left">electro house</td>
+<td align="left">edm</td>
+</tr>
+<tr>
+<td align="left">28301</td>
+<td align="left">big room</td>
+<td align="left">edm</td>
+</tr>
+<tr>
+<td align="left">29507</td>
+<td align="left">pop edm</td>
+<td align="left">edm</td>
+</tr>
+<tr>
+<td align="left">31024</td>
+<td align="left">progressive electro house</td>
+<td align="left">edm</td>
+</tr>
+</tbody>
+</table>
+<p>Finally, we have a series of tables for each entity.</p>
+<p>We have to create tables to connect tracks with albums as well as playlists.</p>
+<pre><code>df_track_album = df.iloc[:,[0,4]].drop_duplicates()
+df_track_album
+</code></pre><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">track_id</th>
+<th align="left">track_album_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">0</td>
+<td align="left">6f807x0ima9a1j3VPbc7VN</td>
+<td align="left">2oCs0DGTsRO98Gh5ZSl2Cx</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">0r7CVbZTWZgbTCYdfa2P31</td>
+<td align="left">63rPSO264uRjW1X5E6cWv6</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">1z1Hg7Vb0AhHDiEmnDE79l</td>
+<td align="left">1HoSmj2eLcsrR0vE9gThr4</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">75FpbthrwQmzHlBJLuGdC7</td>
+<td align="left">1nqYsOef1yKKuGOVchbsk6</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">1e8PAfcKUYoKkxPhrHqw4x</td>
+<td align="left">7m7vv9wlQ4i0LFuJiE2zsQ</td>
+</tr>
+<tr>
+<td align="left">&hellip;</td>
+<td align="left">&hellip;</td>
+<td align="left">&hellip;</td>
+</tr>
+<tr>
+<td align="left">32828</td>
+<td align="left">7bxnKAamR3snQ1VGLuVfC1</td>
+<td align="left">2azRoBBWEEEYhqV6sb7JrT</td>
+</tr>
+<tr>
+<td align="left">32829</td>
+<td align="left">5Aevni09Em4575077nkWHz</td>
+<td align="left">6kD6KLxj7s8eCE3ABvAyf5</td>
+</tr>
+<tr>
+<td align="left">32830</td>
+<td align="left">7ImMqPP3Q1yfUHvsdn7wEo</td>
+<td align="left">0ltWNSY9JgxoIZO4VzuCa6</td>
+</tr>
+<tr>
+<td align="left">32831</td>
+<td align="left">2m69mhnfQ1Oq6lGtXuYhgX</td>
+<td align="left">1fGrOkHnHJcStl14zNx8Jy</td>
+</tr>
+<tr>
+<td align="left">32832</td>
+<td align="left">29zWqhca3zt5NsckZqDf6c</td>
+<td align="left">0X3mUOm6MhxR7PzxG95rAo</td>
+</tr>
+</tbody>
+</table>
+<p>28356 rows × 2 columns</p>
+<pre><code>df_track_playlist = df.loc[:,['track_id','playlist_id']].drop_duplicates()
+df_track_playlist
+</code></pre><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">track_id</th>
+<th>playlist_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">0</td>
+<td align="left">6f807x0ima9a1j3VPbc7VN</td>
+<td>37i9dQZF1DXcZDD7cfEKhW</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">0r7CVbZTWZgbTCYdfa2P31</td>
+<td>37i9dQZF1DXcZDD7cfEKhW</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">1z1Hg7Vb0AhHDiEmnDE79l</td>
+<td>37i9dQZF1DXcZDD7cfEKhW</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">75FpbthrwQmzHlBJLuGdC7</td>
+<td>37i9dQZF1DXcZDD7cfEKhW</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">1e8PAfcKUYoKkxPhrHqw4x</td>
+<td>37i9dQZF1DXcZDD7cfEKhW</td>
+</tr>
+<tr>
+<td align="left">&hellip;</td>
+<td align="left">&hellip;</td>
+<td>&hellip;</td>
+</tr>
+<tr>
+<td align="left">32828</td>
+<td align="left">7bxnKAamR3snQ1VGLuVfC1</td>
+<td>6jI1gFr6ANFtT8MmTvA2Ux</td>
+</tr>
+<tr>
+<td align="left">32829</td>
+<td align="left">5Aevni09Em4575077nkWHz</td>
+<td>6jI1gFr6ANFtT8MmTvA2Ux</td>
+</tr>
+<tr>
+<td align="left">32830</td>
+<td align="left">7ImMqPP3Q1yfUHvsdn7wEo</td>
+<td>6jI1gFr6ANFtT8MmTvA2Ux</td>
+</tr>
+<tr>
+<td align="left">32831</td>
+<td align="left">2m69mhnfQ1Oq6lGtXuYhgX</td>
+<td>6jI1gFr6ANFtT8MmTvA2Ux</td>
+</tr>
+<tr>
+<td align="left">32832</td>
+<td align="left">29zWqhca3zt5NsckZqDf6c</td>
+<td>6jI1gFr6ANFtT8MmTvA2Ux</td>
+</tr>
+</tbody>
+</table>
+<p>32251 rows × 2 columns</p>
+<p>The structure of normalization is pretty clear. It looks like this:</p>
+<p><img src="/images/spotify5.png" alt="spotify5"></p>
+<h3 id="data-denormalization">Data Denormalization</h3>
+<p>After doing data denormalization, we can get a dataset nearly same as the original one.</p>
+<pre><code>(
+    df_track.
+    merge(df_track_name).
+    merge(df_track_album).
+    merge(df_album_name).
+    merge(df_album_release).
+    merge(df_track_playlist).
+    merge(df_playlist_name).
+    merge(df_playlist_subgenre).
+    merge(df_subgenre_genre)
+)
+</code></pre><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">track_id</th>
+<th align="right">track_artist</th>
+<th align="right">track_popularity</th>
+<th align="right">danceability</th>
+<th align="right">energy</th>
+<th align="right">key</th>
+<th align="right">loudness</th>
+<th align="right">mode</th>
+<th align="right">speechiness</th>
+<th align="right">acousticness</th>
+<th align="right">&hellip;</th>
+<th align="right">tempo</th>
+<th align="right">duration_ms</th>
+<th align="right">track_name</th>
+<th align="right">track_album_id</th>
+<th align="right">track_album_name</th>
+<th align="right">track_album_release_date</th>
+<th align="right">playlist_id</th>
+<th align="right">playlist_name</th>
+<th align="right">playlist_subgenre</th>
+<th>playlist_genre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">6f807x0ima9a1j3VPbc7VN</td>
+<td align="right">Ed Sheeran</td>
+<td align="right">66</td>
+<td align="right">0.748</td>
+<td align="right">0.916</td>
+<td align="right">6</td>
+<td align="right">-2.634</td>
+<td align="right">1</td>
+<td align="right">0.0583</td>
+<td align="right">0.1020</td>
+<td align="right">&hellip;</td>
+<td align="right">122.036</td>
+<td align="right">194754</td>
+<td align="right">I Don&rsquo;t Care (with Justin Bieber) - Loud Luxur&hellip;</td>
+<td align="right">2oCs0DGTsRO98Gh5ZSl2Cx</td>
+<td align="right">I Don&rsquo;t Care (with Justin Bieber) [Loud Luxury&hellip;</td>
+<td align="right">2019-06-14</td>
+<td align="right">37i9dQZF1DXcZDD7cfEKhW</td>
+<td align="right">Pop Remix</td>
+<td align="right">dance pop</td>
+<td>pop</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">0r7CVbZTWZgbTCYdfa2P31</td>
+<td align="right">Maroon 5</td>
+<td align="right">67</td>
+<td align="right">0.726</td>
+<td align="right">0.815</td>
+<td align="right">11</td>
+<td align="right">-4.969</td>
+<td align="right">1</td>
+<td align="right">0.0373</td>
+<td align="right">0.0724</td>
+<td align="right">&hellip;</td>
+<td align="right">99.972</td>
+<td align="right">162600</td>
+<td align="right">Memories - Dillon Francis Remix</td>
+<td align="right">63rPSO264uRjW1X5E6cWv6</td>
+<td align="right">Memories (Dillon Francis Remix)</td>
+<td align="right">2019-12-13</td>
+<td align="right">37i9dQZF1DXcZDD7cfEKhW</td>
+<td align="right">Pop Remix</td>
+<td align="right">dance pop</td>
+<td>pop</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="right">1z1Hg7Vb0AhHDiEmnDE79l</td>
+<td align="right">Zara Larsson</td>
+<td align="right">70</td>
+<td align="right">0.675</td>
+<td align="right">0.931</td>
+<td align="right">1</td>
+<td align="right">-3.432</td>
+<td align="right">0</td>
+<td align="right">0.0742</td>
+<td align="right">0.0794</td>
+<td align="right">&hellip;</td>
+<td align="right">124.008</td>
+<td align="right">176616</td>
+<td align="right">All the Time - Don Diablo Remix</td>
+<td align="right">1HoSmj2eLcsrR0vE9gThr4</td>
+<td align="right">All the Time (Don Diablo Remix)</td>
+<td align="right">2019-07-05</td>
+<td align="right">37i9dQZF1DXcZDD7cfEKhW</td>
+<td align="right">Pop Remix</td>
+<td align="right">dance pop</td>
+<td>pop</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="right">75FpbthrwQmzHlBJLuGdC7</td>
+<td align="right">The Chainsmokers</td>
+<td align="right">60</td>
+<td align="right">0.718</td>
+<td align="right">0.930</td>
+<td align="right">7</td>
+<td align="right">-3.778</td>
+<td align="right">1</td>
+<td align="right">0.1020</td>
+<td align="right">0.0287</td>
+<td align="right">&hellip;</td>
+<td align="right">121.956</td>
+<td align="right">169093</td>
+<td align="right">Call You Mine - Keanu Silva Remix</td>
+<td align="right">1nqYsOef1yKKuGOVchbsk6</td>
+<td align="right">Call You Mine - The Remixes</td>
+<td align="right">2019-07-19</td>
+<td align="right">37i9dQZF1DXcZDD7cfEKhW</td>
+<td align="right">Pop Remix</td>
+<td align="right">dance pop</td>
+<td>pop</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">1e8PAfcKUYoKkxPhrHqw4x</td>
+<td align="right">Lewis Capaldi</td>
+<td align="right">69</td>
+<td align="right">0.650</td>
+<td align="right">0.833</td>
+<td align="right">1</td>
+<td align="right">-4.672</td>
+<td align="right">1</td>
+<td align="right">0.0359</td>
+<td align="right">0.0803</td>
+<td align="right">&hellip;</td>
+<td align="right">123.976</td>
+<td align="right">189052</td>
+<td align="right">Someone You Loved - Future Humans Remix</td>
+<td align="right">7m7vv9wlQ4i0LFuJiE2zsQ</td>
+<td align="right">Someone You Loved (Future Humans Remix)</td>
+<td align="right">2019-03-05</td>
+<td align="right">37i9dQZF1DXcZDD7cfEKhW</td>
+<td align="right">Pop Remix</td>
+<td align="right">dance pop</td>
+<td>pop</td>
+</tr>
+<tr>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td>&hellip;</td>
+</tr>
+<tr>
+<td align="right">32943</td>
+<td align="right">4XEQqy7GlKVKKoC34yE0RU</td>
+<td align="right">Malian Musicians</td>
+<td align="right">37</td>
+<td align="right">0.285</td>
+<td align="right">0.419</td>
+<td align="right">9</td>
+<td align="right">-13.454</td>
+<td align="right">0</td>
+<td align="right">0.0427</td>
+<td align="right">0.6970</td>
+<td align="right">&hellip;</td>
+<td align="right">120.026</td>
+<td align="right">319293</td>
+<td align="right">Spoons</td>
+<td align="right">40ncJvz2FvF1Z4EvpE3vU9</td>
+<td align="right">Mali Music</td>
+<td align="right">2002-04-15</td>
+<td align="right">37i9dQZF1DWVyizF9BJ61m</td>
+<td align="right">Afro Psychedelica</td>
+<td align="right">classic rock</td>
+<td>rock</td>
+</tr>
+<tr>
+<td align="right">32944</td>
+<td align="right">1D3NaA8JL6QrKoYNj4BKN0</td>
+<td align="right">Jamshied Sharifi</td>
+<td align="right">0</td>
+<td align="right">0.679</td>
+<td align="right">0.474</td>
+<td align="right">2</td>
+<td align="right">-15.384</td>
+<td align="right">0</td>
+<td align="right">0.0311</td>
+<td align="right">0.4700</td>
+<td align="right">&hellip;</td>
+<td align="right">130.019</td>
+<td align="right">173000</td>
+<td align="right">Hyena</td>
+<td align="right">63Llqn2jgqa0yKscAVGsuK</td>
+<td align="right">Footsteps In Africa - The Soundtrack</td>
+<td align="right">2009-09-18</td>
+<td align="right">37i9dQZF1DWVyizF9BJ61m</td>
+<td align="right">Afro Psychedelica</td>
+<td align="right">classic rock</td>
+<td>rock</td>
+</tr>
+<tr>
+<td align="right">32945</td>
+<td align="right">4ttKTDA9f5i2dAPSOqTRtB</td>
+<td align="right">Vieux Farka Touré</td>
+<td align="right">0</td>
+<td align="right">0.441</td>
+<td align="right">0.611</td>
+<td align="right">10</td>
+<td align="right">-5.610</td>
+<td align="right">1</td>
+<td align="right">0.0314</td>
+<td align="right">0.7440</td>
+<td align="right">&hellip;</td>
+<td align="right">92.581</td>
+<td align="right">303227</td>
+<td align="right">Fafa</td>
+<td align="right">6ulGA7Fh0lxzmlG1r6OOwR</td>
+<td align="right">Fondo</td>
+<td align="right">2009-05-26</td>
+<td align="right">37i9dQZF1DWVyizF9BJ61m</td>
+<td align="right">Afro Psychedelica</td>
+<td align="right">classic rock</td>
+<td>rock</td>
+</tr>
+<tr>
+<td align="right">32946</td>
+<td align="right">2vbRZMSsenMBhpF6am4uRc</td>
+<td align="right">Itadi</td>
+<td align="right">31</td>
+<td align="right">0.629</td>
+<td align="right">0.734</td>
+<td align="right">0</td>
+<td align="right">-10.326</td>
+<td align="right">1</td>
+<td align="right">0.0467</td>
+<td align="right">0.2130</td>
+<td align="right">&hellip;</td>
+<td align="right">88.093</td>
+<td align="right">370469</td>
+<td align="right">Watch Your Life</td>
+<td align="right">0FPxNka2LFpFgHTT5zCtRj</td>
+<td align="right">Itadi</td>
+<td align="right">2013-05-03</td>
+<td align="right">37i9dQZF1DWVyizF9BJ61m</td>
+<td align="right">Afro Psychedelica</td>
+<td align="right">classic rock</td>
+<td>rock</td>
+</tr>
+<tr>
+<td align="right">32947</td>
+<td align="right">0Etl0p4Z6doS0xFxqdhrOn</td>
+<td align="right">Tinariwen</td>
+<td align="right">46</td>
+<td align="right">0.494</td>
+<td align="right">0.661</td>
+<td align="right">10</td>
+<td align="right">-7.540</td>
+<td align="right">0</td>
+<td align="right">0.0470</td>
+<td align="right">0.4860</td>
+<td align="right">&hellip;</td>
+<td align="right">89.659</td>
+<td align="right">260253</td>
+<td align="right">Toumast Tincha</td>
+<td align="right">3mBVW4xMIksTDGtYbjrpee</td>
+<td align="right">Emmaar</td>
+<td align="right">2014-02-10</td>
+<td align="right">37i9dQZF1DWVyizF9BJ61m</td>
+<td align="right">Afro Psychedelica</td>
+<td align="right">classic rock</td>
+<td>rock</td>
+</tr>
+</tbody>
+</table>
+<p>32948 rows × 23 columns</p>
+<h3 id="create-sqlite-schema-and-store-tables">Create SQLite Schema and Store tables</h3>
+<pre><code>import sqlite3
+conn = sqlite3.connect('hw4.db')
+</code></pre><pre><code>import pandas as pd
+</code></pre><pre><code>df = pd.read_csv('spotify_songs.csv')
+df.to_sql('spotify_songs', conn, if_exists = 'replace', index=False)
+</code></pre><pre><code>df_track.to_sql('df_track', 
+             conn, 
+             if_exists='replace', 
+             index = False)
+</code></pre><pre><code>df_track_name.to_sql('df_track_name', conn, if_exists='replace', index = False)
+df_track_album.to_sql('df_track_album', conn, if_exists='replace', index = False)
+df_album_name.to_sql('df_album_name', conn, if_exists='replace', index = False)
+df_album_release.to_sql('df_album_release', conn, if_exists='replace', index = False)
+df_track_playlist.to_sql('df_track_playlist', conn, if_exists='replace', index = False)
+df_playlist_name.to_sql('df_playlist_name', conn, if_exists='replace', index = False)
+df_playlist_subgenre.to_sql('df_playlist_subgenre', conn, if_exists='replace', index = False)
+df_subgenre_genre.to_sql('df_subgenre_genre', conn, if_exists='replace', index = False)
+</code></pre><pre><code>c = conn.cursor()
+c.execute(&quot;SELECT * FROM sqlite_master WHERE type='table'&quot;)
+c.fetchall()
+</code></pre><p>These are all the tables we have in the database &ldquo;hw4.db&rdquo;:</p>
+<pre><code>[('table',
+  'spotify_songs',
+  'spotify_songs',
+  2,
+  'CREATE TABLE &quot;spotify_songs&quot; (\n&quot;track_id&quot; TEXT,\n  &quot;track_name&quot; TEXT,\n  &quot;track_artist&quot; TEXT,\n  &quot;track_popularity&quot; INTEGER,\n  &quot;track_album_id&quot; TEXT,\n  &quot;track_album_name&quot; TEXT,\n  &quot;track_album_release_date&quot; TEXT,\n  &quot;playlist_name&quot; TEXT,\n  &quot;playlist_id&quot; TEXT,\n  &quot;playlist_genre&quot; TEXT,\n  &quot;playlist_subgenre&quot; TEXT,\n  &quot;danceability&quot; REAL,\n  &quot;energy&quot; REAL,\n  &quot;key&quot; INTEGER,\n  &quot;loudness&quot; REAL,\n  &quot;mode&quot; INTEGER,\n  &quot;speechiness&quot; REAL,\n  &quot;acousticness&quot; REAL,\n  &quot;instrumentalness&quot; REAL,\n  &quot;liveness&quot; REAL,\n  &quot;valence&quot; REAL,\n  &quot;tempo&quot; REAL,\n  &quot;duration_ms&quot; INTEGER\n)'),
+ ('table',
+  'df_track',
+  'df_track',
+  2214,
+  'CREATE TABLE &quot;df_track&quot; (\n&quot;track_id&quot; TEXT,\n  &quot;track_artist&quot; TEXT,\n  &quot;track_popularity&quot; INTEGER,\n  &quot;danceability&quot; REAL,\n  &quot;energy&quot; REAL,\n  &quot;key&quot; INTEGER,\n  &quot;loudness&quot; REAL,\n  &quot;mode&quot; INTEGER,\n  &quot;speechiness&quot; REAL,\n  &quot;acousticness&quot; REAL,\n  &quot;instrumentalness&quot; REAL,\n  &quot;liveness&quot; REAL,\n  &quot;valence&quot; REAL,\n  &quot;tempo&quot; REAL,\n  &quot;duration_ms&quot; INTEGER\n)'),
+ ('table',
+  'df_track_name',
+  'df_track_name',
+  3116,
+  'CREATE TABLE &quot;df_track_name&quot; (\n&quot;track_id&quot; TEXT,\n  &quot;track_name&quot; TEXT\n)'),
+ ('table',
+  'df_track_album',
+  'df_track_album',
+  3450,
+  'CREATE TABLE &quot;df_track_album&quot; (\n&quot;track_id&quot; TEXT,\n  &quot;track_album_id&quot; TEXT\n)'),
+ ('table',
+  'df_album_name',
+  'df_album_name',
+  3817,
+  'CREATE TABLE &quot;df_album_name&quot; (\n&quot;track_album_id&quot; TEXT,\n  &quot;track_album_name&quot; TEXT\n)'),
+ ('table',
+  'df_album_release',
+  'df_album_release',
+  4083,
+  'CREATE TABLE &quot;df_album_release&quot; (\n&quot;track_album_id&quot; TEXT,\n  &quot;track_album_release_date&quot; TEXT\n)'),
+ ('table',
+  'df_track_playlist',
+  'df_track_playlist',
+  4306,
+  'CREATE TABLE &quot;df_track_playlist&quot; (\n&quot;track_id&quot; TEXT,\n  &quot;playlist_id&quot; TEXT\n)'),
+ ('table',
+  'df_playlist_name',
+  'df_playlist_name',
+  4724,
+  'CREATE TABLE &quot;df_playlist_name&quot; (\n&quot;playlist_id&quot; TEXT,\n  &quot;playlist_name&quot; TEXT\n)'),
+ ('table',
+  'df_playlist_subgenre',
+  'df_playlist_subgenre',
+  4732,
+  'CREATE TABLE &quot;df_playlist_subgenre&quot; (\n&quot;playlist_id&quot; TEXT,\n  &quot;playlist_subgenre&quot; TEXT\n)'),
+ ('table',
+  'df_subgenre_genre',
+  'df_subgenre_genre',
+  4738,
+  'CREATE TABLE &quot;df_subgenre_genre&quot; (\n&quot;playlist_subgenre&quot; TEXT,\n  &quot;playlist_genre&quot; TEXT\n)')]
+</code></pre><h4 id="sql-query-for-playlists-that-contain-instrumentals">SQL query for playlists that contain instrumentals</h4>
+<pre><code>query = '''
+SELECT playlist_name, df_track_name.track_name, df_track.track_artist, df_track.instrumentalness
+FROM df_track
+LEFT JOIN
+df_track_name
+ON df_track.track_id = df_track_name.track_id
+LEFT JOIN
+df_track_playlist
+ON df_track.track_id = df_track_playlist.track_id
+LEFT JOIN
+df_playlist_name
+ON df_playlist_name.playlist_id = df_track_playlist.playlist_id
+WHERE df_track.instrumentalness &gt; 0 -- a query contains instrumentals when its instrumentalness is greater than zero
+ORDER BY df_track.instrumentalness DESC
+'''
+</code></pre><pre><code>pd.read_sql(query, conn)
+</code></pre><p><img src="/images/spotify4.png" alt="spotify4"></p>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+<figure class="author-image">
+    <a class="img" href="https://yc392.github.io" style="background-image: url(/images/logo1.png)"><span class="hidden">Yuhua Cai's Picture</span></a>
+</figure>
+
+
+<section class="author">
+  <h4><a href="https://yc392.github.io">Yuhua Cai</a></h4>
+  
+  <p>Data Scientist from Duke</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Durham, NC, USA</span>
+    <span class="author-link icon-link"><a href="https://yc392.github.io">https://yc392.github.io</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=SQLite3%20schema%20for%20Spotify%20dataset%20in%203NF&nbsp;-&nbsp;Yuhua%20Cai&amp;url=https%3a%2f%2fyc392.github.io%2fspotify%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyc392.github.io%2fspotify%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fyc392.github.io%2fspotify%2f&amp;description=SQLite3%20schema%20for%20Spotify%20dataset%20in%203NF"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=https%3a%2f%2fyc392.github.io%2fspotify%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "https:\/\/yc392.github.io\/spotify\/";  
+this.page.identifier = "https:\/\/yc392.github.io\/spotify\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://Yuhua.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+      <a class="read-next-story" style="no-cover" href="/malaria-data-visualization/">
+          <section class="post">
+              <h2>Malaria Data Visualization</h2>
+              
+          </section>
+      </a>
+  
+  
+      <a class="read-next-story prev" style="no-cover" href="/cart4.5-id3-and-random-forest/">
+          <section class="post">
+              <h2>CART4.5, ID3 and Random Forest</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">Yuhua Cai</a> © Yuhua Cai Duke 2021</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+    
+</body>
+</html>
+
