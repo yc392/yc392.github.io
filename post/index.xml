@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Yuhua Cai Duke 2021</copyright>
-    <lastBuildDate>Tue, 06 Oct 2020 22:28:00 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2020 22:28:00 +0200</lastBuildDate>
     
 	<atom:link href="https://yc392.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -72,6 +72,27 @@ df = pd.read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytues
     </item>
     
     <item>
+      <title>Data Request and Extract From Star Wars ApI</title>
+      <link>https://yc392.github.io/starwar/</link>
+      <pubDate>Wed, 21 Oct 2020 22:28:00 +0200</pubDate>
+      
+      <guid>https://yc392.github.io/starwar/</guid>
+      <description>Description: Using the requests library, download all the people in the Star Wars universe using the Star Wars API (https://swapi.dev/documentation). Show the name of the oldest person (or robot or alien) and list the titles of all the films they appeared in.
+The Requests Package The requests module allows us to send HTTP requests using Python.
+The HTTP request returns a Response Object with all the response data (content, encoding, status, etc).</description>
+    </item>
+    
+    <item>
+      <title>Support Vector Machine</title>
+      <link>https://yc392.github.io/support-vector-machine/</link>
+      <pubDate>Tue, 15 Sep 2020 16:57:33 -0400</pubDate>
+      
+      <guid>https://yc392.github.io/support-vector-machine/</guid>
+      <description>LINEAR SVM Due Date : 9/28 Monday 10:15 PM EST import numpy as np import matplotlib.pyplot as plt import scipy.io as io import libsvm from libsvm.svmutil import * import pandas as pd %matplotlib inline 3.1 Linear Support Vector Machine on toy data 3.1.1 Generate a training set of size $100$ with 2D features (X) drawn at random as follows:
+ X_{neg} $\sim$ $\mathcal{N}$($[-5, -5]$, 5*$I_2$) and correspond to negative labels (-1) X_{pos} $\sim$ $\mathcal{N}$($[5, 5]$, 5*$I_2$) and correspond to positive labels (+1) Accordingly, $X = [X_{neg}, X_{pos}]$ is a $100\times2$ array, Y is a $100\times1$ array of values $\in {-1, 1}$.</description>
+    </item>
+    
+    <item>
       <title>CART4.5, ID3 and Random Forest</title>
       <link>https://yc392.github.io/cart4.5-id3-and-random-forest/</link>
       <pubDate>Sun, 13 Sep 2020 16:57:33 -0400</pubDate>
@@ -88,16 +109,6 @@ df = pd.read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytues
       <guid>https://yc392.github.io/adaboost/</guid>
       <description>Boosting a decision stump The goal of this notebook is to implement your own boosting module.
  Go through an implementation of decision trees. Implement Adaboost ensembling. Use your implementation of Adaboost to train a boosted decision stump ensemble. Evaluate the effect of boosting (adding more decision stumps) on performance of the model. Explore the robustness of Adaboost to overfitting.  This file is adapted from course material by Carlos Guestrin and Emily Fox.</description>
-    </item>
-    
-    <item>
-      <title>Support Vector Machine</title>
-      <link>https://yc392.github.io/support-vector-machine/</link>
-      <pubDate>Tue, 15 Sep 2020 16:57:33 -0400</pubDate>
-      
-      <guid>https://yc392.github.io/support-vector-machine/</guid>
-      <description>LINEAR SVM Due Date : 9/28 Monday 10:15 PM EST import numpy as np import matplotlib.pyplot as plt import scipy.io as io import libsvm from libsvm.svmutil import * import pandas as pd %matplotlib inline 3.1 Linear Support Vector Machine on toy data 3.1.1 Generate a training set of size $100$ with 2D features (X) drawn at random as follows:
- X_{neg} $\sim$ $\mathcal{N}$($[-5, -5]$, 5*$I_2$) and correspond to negative labels (-1) X_{pos} $\sim$ $\mathcal{N}$($[5, 5]$, 5*$I_2$) and correspond to positive labels (+1) Accordingly, $X = [X_{neg}, X_{pos}]$ is a $100\times2$ array, Y is a $100\times1$ array of values $\in {-1, 1}$.</description>
     </item>
     
   </channel>

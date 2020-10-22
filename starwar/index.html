@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="Data Request and Extract From Star Wars ApI"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@"/>
+
+
+
+  	<meta property="og:title" content="Data Request and Extract From Star Wars ApI &middot; Yuhua Cai" />
+  	<meta property="og:site_name" content="Yuhua Cai" />
+  	<meta property="og:url" content="https://yc392.github.io/starwar/" />
+        <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+    </script>
+
+    
+        
+            <meta property="og:image" content="/images/cover1.png"/>
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2020-10-21T22:28:00&#43;02:00" />
+
+    
+    
+
+    <title>Data Request and Extract From Star Wars ApI &middot; Yuhua Cai</title>
+
+    
+    <meta name="description" content="Description: Using the requests library, download all the people in the Star Wars universe using the Star Wars API (https://swapi.dev/documentation). Show the n" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/css/nav.css" />
+
+    
+
+    
+
+    
+      
+          <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Yuhua Cai" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.74.3" />
+
+    <link rel="canonical" href="https://yc392.github.io/starwar/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name":  null ,
+        "logo": "https://yc392.github.ioimages/logo1.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name":  null ,
+        
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://yc392.github.ioimages/logo1.png",
+            "width": 250,
+            "height": 250
+        }, 
+        
+        "url": "https://yc392.github.io",
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ],
+        "description": "Data Scientist from Duke"
+        
+    },
+    "headline": "Data Request and Extract From Star Wars ApI",
+    "name": "Data Request and Extract From Star Wars ApI",
+    "wordCount":  806 ,
+    "timeRequired": "PT4M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": "en"
+    },
+    "url": "https://yc392.github.io/starwar/",
+    "datePublished": "2020-10-21T22:28Z",
+    "dateModified": "2020-10-21T22:28Z",
+    
+    
+    "description": "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://yc392.github.io/starwar/"
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            <h3>Content</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="/post">Post</a>
+            </li>
+        
+            <h3>Contact me</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="/about-me">About me</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="https://www.linkedin.com/in/yuhua-cai-195080194/">Linkedin</a>
+            </li>
+        
+            <h3>Follow me</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="https://github.com/yc392">Github</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="/">Blog Site</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+      <a class="blog-logo" href="https://yc392.github.io"><img src="/images/logo1.png" alt="Home" /></a>
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Data Request and Extract From Star Wars ApI</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2020-10-21T22:28:00&#43;02:00">
+            Oct 21, 2020
+          </time>
+        
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p><strong>Description:</strong> Using the <code>requests</code> library, download all the people in the Star Wars universe using the Star Wars API (<a href="https://swapi.dev/documentation)">https://swapi.dev/documentation)</a>. Show the name of the oldest person (or robot or alien) and list the titles of all the films they appeared in.</p>
+<h2 id="the-requests-package">The Requests Package</h2>
+<p>The <code>requests</code> module allows us to send HTTP requests using Python.</p>
+<p>The HTTP request returns a <a href="https://www.w3schools.com/python/ref_requests_response.asp">Response Object</a> with all the response data (content, encoding, status, etc).</p>
+<p>In this blog, we use it to fetch characters from StarWars from the the <a href="https://swapi.dev/">Star Wars API</a>.</p>
+<h2 id="a-quick-look-at-our-1st-character----luke-skywalker">A Quick Look at Our 1st Character &ndash; Luke Skywalker</h2>
+<p>It&rsquo;s quite easy to featch content from web API using <strong>request</strong>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+
+<span style="color:#75715e">#Fetch</span>
+resp <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;https://swapi.dev/api/people/1&#39;</span>)
+
+<span style="color:#75715e">#Show Request</span>
+resp
+</code></pre></div><pre><code>&lt;Response [200]&gt;
+</code></pre><p>Let&rsquo;s look at our first character!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Transform to json</span>
+character_json <span style="color:#f92672">=</span> resp<span style="color:#f92672">.</span>json()
+character_json
+</code></pre></div><pre><code>{'name': 'Luke Skywalker',
+ 'height': '172',
+ 'mass': '77',
+ 'hair_color': 'blond',
+ 'skin_color': 'fair',
+ 'eye_color': 'blue',
+ 'birth_year': '19BBY',
+ 'gender': 'male',
+ 'homeworld': 'http://swapi.dev/api/planets/1/',
+ 'films': ['http://swapi.dev/api/films/1/',
+  'http://swapi.dev/api/films/2/',
+  'http://swapi.dev/api/films/3/',
+  'http://swapi.dev/api/films/6/'],
+ 'species': [],
+ 'vehicles': ['http://swapi.dev/api/vehicles/14/',
+  'http://swapi.dev/api/vehicles/30/'],
+ 'starships': ['http://swapi.dev/api/starships/12/',
+  'http://swapi.dev/api/starships/22/'],
+ 'created': '2014-12-09T13:50:51.644000Z',
+ 'edited': '2014-12-20T21:17:56.891000Z',
+ 'url': 'http://swapi.dev/api/people/1/'}
+</code></pre><p>Much clear when transforming JASON into pandas dataframe.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+
+<span style="color:#75715e">#Transform to DataFrame</span>
+character_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>json_normalize(data)
+character_df
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">name</th>
+<th align="right">height</th>
+<th align="right">mass</th>
+<th align="right">hair_color</th>
+<th align="right">skin_color</th>
+<th align="right">eye_color</th>
+<th align="right">birth_year</th>
+<th align="right">gender</th>
+<th align="right">homeworld</th>
+<th align="right">films</th>
+<th align="right">species</th>
+<th align="right">vehicles</th>
+<th align="right">starships</th>
+<th align="right">created</th>
+<th align="right">edited</th>
+<th>url</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">Luke Skywalker</td>
+<td align="right">172</td>
+<td align="right">77</td>
+<td align="right">blond</td>
+<td align="right">fair</td>
+<td align="right">blue</td>
+<td align="right">19BBY</td>
+<td align="right">male</td>
+<td align="right"><a href="http://swapi.dev/api/planets/1/">http://swapi.dev/api/planets/1/</a></td>
+<td align="right">[http://swapi.dev/api/films/1/, http://swapi.d&hellip;</td>
+<td align="right">[]</td>
+<td align="right">[http://swapi.dev/api/vehicles/14/, http://swa&hellip;</td>
+<td align="right">[http://swapi.dev/api/starships/12/, http://sw&hellip;</td>
+<td align="right">2014-12-09T13:50:51.644000Z</td>
+<td align="right">2014-12-20T21:17:56.891000Z</td>
+<td><a href="http://swapi.dev/api/people/1/">http://swapi.dev/api/people/1/</a></td>
+</tr>
+</tbody>
+</table>
+<p>All right, next step, we gonna load all characters from Star Wars.</p>
+<h2 id="welcome-all-characters-from-star-wars">Welcome All Characters from Star Wars</h2>
+<p>Before we start, we need to deal with something tricky. The detail about somebody cannot be found in the Star War dataset.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data_full <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;https://swapi.dev/api/people/17&#39;</span>)<span style="color:#f92672">.</span>json()
+data_full
+</code></pre></div><pre><code>{'detail': 'Not found'}
+</code></pre><p>So we have to check wheather each person exists or not. How can we do that?</p>
+<p>I find that it returns a <code>status code</code> of 200 when <code>requests</code> is succesful.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">c1 <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;https://swapi.dev/api/people/1&#39;</span>)
+c1<span style="color:#f92672">.</span>status_code
+</code></pre></div><pre><code>200
+</code></pre><p>However, it returns a <code>status code</code> of 404 when <code>requests</code> fails.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">person17 <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;https://swapi.dev/api/people/17&#39;</span>)
+person17<span style="color:#f92672">.</span>status_code
+</code></pre></div><pre><code>404
+</code></pre><p>Also, we can see we have 82 characters in total in the dataset.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">count <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;https://swapi.dev/api/people&#39;</span>)<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#39;count&#39;</span>]
+count
+</code></pre></div><pre><code>82
+</code></pre><p>Therefore, we loop through until we get 82 successful requests:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_full <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame()
+
+i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+
+<span style="color:#66d9ef">while</span> df_full<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;</span> count: 
+    
+    <span style="color:#75715e">#Make request</span>
+    character_request <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;https://swapi.dev/api/people/&#39;</span> <span style="color:#f92672">+</span> str(i))
+
+    <span style="color:#75715e">#Check if a character was found:</span>
+    status_code <span style="color:#f92672">=</span> character_request<span style="color:#f92672">.</span>status_code
+    <span style="color:#66d9ef">if</span> status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+
+        <span style="color:#75715e">#Transform to JSON</span>
+        character_json <span style="color:#f92672">=</span> character_request<span style="color:#f92672">.</span>json()
+
+        <span style="color:#75715e">#Transform to pandas dataframe</span>
+        character_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>json_normalize(character_json)
+
+        <span style="color:#75715e">#Concatenate to existing dataframe</span>
+        df_full <span style="color:#f92672">=</span> df_full<span style="color:#f92672">.</span>append(character_df)
+
+    i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</code></pre></div><p>Set the column &lsquo;name&rsquo; as the index of the dataframe and replace all &lsquo;unknown&rsquo; in the column &lsquo;birth_year&rsquo; as np.nan.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df_full <span style="color:#f92672">=</span> df_full<span style="color:#f92672">.</span>set_index([<span style="color:#e6db74">&#39;name&#39;</span>])
+df_full[<span style="color:#e6db74">&#34;birth_year&#34;</span>] <span style="color:#f92672">=</span> df_full[<span style="color:#e6db74">&#34;birth_year&#34;</span>]<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;unknown&#39;</span>,np<span style="color:#f92672">.</span>nan)
+df_full
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">height</th>
+<th align="right">mass</th>
+<th align="right">hair_color</th>
+<th align="right">skin_color</th>
+<th align="right">eye_color</th>
+<th align="right">birth_year</th>
+<th align="right">gender</th>
+<th align="right">homeworld</th>
+<th align="right">films</th>
+<th align="right">species</th>
+<th align="right">vehicles</th>
+<th align="right">starships</th>
+<th align="right">created</th>
+<th align="right">edited</th>
+<th align="right">url</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">name</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="right">Luke Skywalker</td>
+<td align="right">172</td>
+<td align="right">77</td>
+<td align="right">blond</td>
+<td align="right">fair</td>
+<td align="right">blue</td>
+<td align="right">19BBY</td>
+<td align="right">male</td>
+<td align="right"><a href="http://swapi.dev/api/planets/1/">http://swapi.dev/api/planets/1/</a></td>
+<td align="right">[http://swapi.dev/api/films/1/, http://swapi.d&hellip;</td>
+<td align="right">[]</td>
+<td align="right">[http://swapi.dev/api/vehicles/14/, http://swa&hellip;</td>
+<td align="right">[http://swapi.dev/api/starships/12/, http://sw&hellip;</td>
+<td align="right">2014-12-09T13:50:51.644000Z</td>
+<td align="right">2014-12-20T21:17:56.891000Z</td>
+<td align="right"><a href="http://swapi.dev/api/people/1/">http://swapi.dev/api/people/1/</a></td>
+</tr>
+<tr>
+<td align="right">C-3PO</td>
+<td align="right">167</td>
+<td align="right">75</td>
+<td align="right">n/a</td>
+<td align="right">gold</td>
+<td align="right">yellow</td>
+<td align="right">112BBY</td>
+<td align="right">n/a</td>
+<td align="right"><a href="http://swapi.dev/api/planets/1/">http://swapi.dev/api/planets/1/</a></td>
+<td align="right">[http://swapi.dev/api/films/1/, http://swapi.d&hellip;</td>
+<td align="right">[http://swapi.dev/api/species/2/]</td>
+<td align="right">[]</td>
+<td align="right">[]</td>
+<td align="right">2014-12-10T15:10:51.357000Z</td>
+<td align="right">2014-12-20T21:17:50.309000Z</td>
+<td align="right"><a href="http://swapi.dev/api/people/2/">http://swapi.dev/api/people/2/</a></td>
+</tr>
+<tr>
+<td align="right">R2-D2</td>
+<td align="right">96</td>
+<td align="right">32</td>
+<td align="right">n/a</td>
+<td align="right">white, blue</td>
+<td align="right">red</td>
+<td align="right">33BBY</td>
+<td align="right">n/a</td>
+<td align="right"><a href="http://swapi.dev/api/planets/8/">http://swapi.dev/api/planets/8/</a></td>
+<td align="right">[http://swapi.dev/api/films/1/, http://swapi.d&hellip;</td>
+<td align="right">[http://swapi.dev/api/species/2/]</td>
+<td align="right">[]</td>
+<td align="right">[]</td>
+<td align="right">2014-12-10T15:11:50.376000Z</td>
+<td align="right">2014-12-20T21:17:50.311000Z</td>
+<td align="right"><a href="http://swapi.dev/api/people/3/">http://swapi.dev/api/people/3/</a></td>
+</tr>
+<tr>
+<td align="right">Darth Vader</td>
+<td align="right">202</td>
+<td align="right">136</td>
+<td align="right">none</td>
+<td align="right">white</td>
+<td align="right">yellow</td>
+<td align="right">41.9BBY</td>
+<td align="right">male</td>
+<td align="right"><a href="http://swapi.dev/api/planets/1/">http://swapi.dev/api/planets/1/</a></td>
+<td align="right">[http://swapi.dev/api/films/1/, http://swapi.d&hellip;</td>
+<td align="right">[]</td>
+<td align="right">[]</td>
+<td align="right">[http://swapi.dev/api/starships/13/]</td>
+<td align="right">2014-12-10T15:18:20.704000Z</td>
+<td align="right">2014-12-20T21:17:50.313000Z</td>
+<td align="right"><a href="http://swapi.dev/api/people/4/">http://swapi.dev/api/people/4/</a></td>
+</tr>
+<tr>
+<td align="right">Leia Organa</td>
+<td align="right">150</td>
+<td align="right">49</td>
+<td align="right">brown</td>
+<td align="right">light</td>
+<td align="right">brown</td>
+<td align="right">19BBY</td>
+<td align="right">female</td>
+<td align="right"><a href="http://swapi.dev/api/planets/2/">http://swapi.dev/api/planets/2/</a></td>
+<td align="right">[http://swapi.dev/api/films/1/, http://swapi.d&hellip;</td>
+<td align="right">[]</td>
+<td align="right">[http://swapi.dev/api/vehicles/30/]</td>
+<td align="right">[]</td>
+<td align="right">2014-12-10T15:20:09.791000Z</td>
+<td align="right">2014-12-20T21:17:50.315000Z</td>
+<td align="right"><a href="http://swapi.dev/api/people/5/">http://swapi.dev/api/people/5/</a></td>
+</tr>
+<tr>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+<td align="right">&hellip;</td>
+</tr>
+<tr>
+<td align="right">Grievous</td>
+<td align="right">216</td>
+<td align="right">159</td>
+<td align="right">none</td>
+<td align="right">brown, white</td>
+<td align="right">green, yellow</td>
+<td align="right">NaN</td>
+<td align="right">male</td>
+<td align="right"><a href="http://swapi.dev/api/planets/59/">http://swapi.dev/api/planets/59/</a></td>
+<td align="right">[http://swapi.dev/api/films/6/]</td>
+<td align="right">[http://swapi.dev/api/species/36/]</td>
+<td align="right">[http://swapi.dev/api/vehicles/60/]</td>
+<td align="right">[http://swapi.dev/api/starships/74/]</td>
+<td align="right">2014-12-20T19:43:53.348000Z</td>
+<td align="right">2014-12-20T21:17:50.488000Z</td>
+<td align="right"><a href="http://swapi.dev/api/people/79/">http://swapi.dev/api/people/79/</a></td>
+</tr>
+<tr>
+<td align="right">Tarfful</td>
+<td align="right">234</td>
+<td align="right">136</td>
+<td align="right">brown</td>
+<td align="right">brown</td>
+<td align="right">blue</td>
+<td align="right">NaN</td>
+<td align="right">male</td>
+<td align="right"><a href="http://swapi.dev/api/planets/14/">http://swapi.dev/api/planets/14/</a></td>
+<td align="right">[http://swapi.dev/api/films/6/]</td>
+<td align="right">[http://swapi.dev/api/species/3/]</td>
+<td align="right">[]</td>
+<td align="right">[]</td>
+<td align="right">2014-12-20T19:46:34.209000Z</td>
+<td align="right">2014-12-20T21:17:50.491000Z</td>
+<td align="right"><a href="http://swapi.dev/api/people/80/">http://swapi.dev/api/people/80/</a></td>
+</tr>
+<tr>
+<td align="right">Raymus Antilles</td>
+<td align="right">188</td>
+<td align="right">79</td>
+<td align="right">brown</td>
+<td align="right">light</td>
+<td align="right">brown</td>
+<td align="right">NaN</td>
+<td align="right">male</td>
+<td align="right"><a href="http://swapi.dev/api/planets/2/">http://swapi.dev/api/planets/2/</a></td>
+<td align="right">[http://swapi.dev/api/films/1/, http://swapi.d&hellip;</td>
+<td align="right">[]</td>
+<td align="right">[]</td>
+<td align="right">[]</td>
+<td align="right">2014-12-20T19:49:35.583000Z</td>
+<td align="right">2014-12-20T21:17:50.493000Z</td>
+<td align="right"><a href="http://swapi.dev/api/people/81/">http://swapi.dev/api/people/81/</a></td>
+</tr>
+<tr>
+<td align="right">Sly Moore</td>
+<td align="right">178</td>
+<td align="right">48</td>
+<td align="right">none</td>
+<td align="right">pale</td>
+<td align="right">white</td>
+<td align="right">NaN</td>
+<td align="right">female</td>
+<td align="right"><a href="http://swapi.dev/api/planets/60/">http://swapi.dev/api/planets/60/</a></td>
+<td align="right">[http://swapi.dev/api/films/5/, http://swapi.d&hellip;</td>
+<td align="right">[]</td>
+<td align="right">[]</td>
+<td align="right">[]</td>
+<td align="right">2014-12-20T20:18:37.619000Z</td>
+<td align="right">2014-12-20T21:17:50.496000Z</td>
+<td align="right"><a href="http://swapi.dev/api/people/82/">http://swapi.dev/api/people/82/</a></td>
+</tr>
+<tr>
+<td align="right">Tion Medon</td>
+<td align="right">206</td>
+<td align="right">80</td>
+<td align="right">none</td>
+<td align="right">grey</td>
+<td align="right">black</td>
+<td align="right">NaN</td>
+<td align="right">male</td>
+<td align="right"><a href="http://swapi.dev/api/planets/12/">http://swapi.dev/api/planets/12/</a></td>
+<td align="right">[http://swapi.dev/api/films/6/]</td>
+<td align="right">[http://swapi.dev/api/species/37/]</td>
+<td align="right">[]</td>
+<td align="right">[]</td>
+<td align="right">2014-12-20T20:35:04.260000Z</td>
+<td align="right">2014-12-20T21:17:50.498000Z</td>
+<td align="right"><a href="http://swapi.dev/api/people/83/">http://swapi.dev/api/people/83/</a></td>
+</tr>
+</tbody>
+</table>
+<p>82 rows × 15 columns</p>
+<h2 id="get-the-oldest-character">Get The Oldest Character</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">birth_year <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(df_full<span style="color:#f92672">.</span>birth_year)
+birth_year
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">birth_year</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">name</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Luke Skywalker</td>
+<td align="left">19BBY</td>
+</tr>
+<tr>
+<td align="left">C-3PO</td>
+<td align="left">112BBY</td>
+</tr>
+<tr>
+<td align="left">R2-D2</td>
+<td align="left">33BBY</td>
+</tr>
+<tr>
+<td align="left">Darth Vader</td>
+<td align="left">41.9BBY</td>
+</tr>
+<tr>
+<td align="left">Leia Organa</td>
+<td align="left">19BBY</td>
+</tr>
+<tr>
+<td align="left">&hellip;</td>
+<td align="left">&hellip;</td>
+</tr>
+<tr>
+<td align="left">Grievous</td>
+<td align="left">NaN</td>
+</tr>
+<tr>
+<td align="left">Tarfful</td>
+<td align="left">NaN</td>
+</tr>
+<tr>
+<td align="left">Raymus Antilles</td>
+<td align="left">NaN</td>
+</tr>
+<tr>
+<td align="left">Sly Moore</td>
+<td align="left">NaN</td>
+</tr>
+<tr>
+<td align="left">Tion Medon</td>
+<td align="left">NaN</td>
+</tr>
+</tbody>
+</table>
+<p>82 rows × 1 columns</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">set([each[<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>:] <span style="color:#66d9ef">for</span> each <span style="color:#f92672">in</span> df_full<span style="color:#f92672">.</span>birth_year<span style="color:#f92672">.</span>to_list() <span style="color:#66d9ef">if</span> each <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> np<span style="color:#f92672">.</span>nan])
+</code></pre></div><pre><code>{'BBY'}
+</code></pre><p>Here we can see that all characters born in XX BBY (except from &lsquo;NaN&rsquo;).</p>
+<p>What does BBY mean?</p>
+<p>It means <strong>B</strong>efore the <strong>B</strong>attle of <strong>Y</strong>evin. Now it is clear that the number before BBY larger, older the character is.</p>
+<p>Who is the oldest character in the Star Wars?  <strong>&lsquo;Yoda&rsquo;</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">birth_year[<span style="color:#e6db74">&#39;age&#39;</span>] <span style="color:#f92672">=</span> (birth_year<span style="color:#f92672">.</span>birth_year<span style="color:#f92672">.</span>str<span style="color:#f92672">.</span>
+                   replace(<span style="color:#e6db74">&#39;BBY&#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>)<span style="color:#f92672">.</span>
+                   astype(<span style="color:#e6db74">&#39;float&#39;</span>))
+birth_year <span style="color:#f92672">=</span> birth_year<span style="color:#f92672">.</span>sort_values([<span style="color:#e6db74">&#39;age&#39;</span>],ascending <span style="color:#f92672">=</span> False)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">birth_year<span style="color:#f92672">.</span>head(<span style="color:#ae81ff">1</span>)
+</code></pre></div><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">birth_year</th>
+<th align="left">age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">name</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Yoda</td>
+<td align="left">896BBY</td>
+<td align="left">896.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="all-the-films-yoda-appeared-in">All the Films Yoda Appeared in</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">films <span style="color:#f92672">=</span> df_full<span style="color:#f92672">.</span>loc[<span style="color:#e6db74">&#39;Yoda&#39;</span>,:][<span style="color:#e6db74">&#39;films&#39;</span>]
+
+films_title <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> each <span style="color:#f92672">in</span> films:
+    films_title<span style="color:#f92672">.</span>append(requests<span style="color:#f92672">.</span>get(each)<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#39;title&#39;</span>])
+
+films_title
+</code></pre></div><pre><code>['The Empire Strikes Back',
+ 'Return of the Jedi',
+ 'The Phantom Menace',
+ 'Attack of the Clones',
+ 'Revenge of the Sith']
+</code></pre>
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+<figure class="author-image">
+    <a class="img" href="https://yc392.github.io" style="background-image: url(/images/logo1.png)"><span class="hidden">Yuhua Cai's Picture</span></a>
+</figure>
+
+
+<section class="author">
+  <h4><a href="https://yc392.github.io">Yuhua Cai</a></h4>
+  
+  <p>Data Scientist from Duke</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Durham, NC, USA</span>
+    <span class="author-link icon-link"><a href="https://yc392.github.io">https://yc392.github.io</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Data%20Request%20and%20Extract%20From%20Star%20Wars%20ApI&nbsp;-&nbsp;Yuhua%20Cai&amp;url=https%3a%2f%2fyc392.github.io%2fstarwar%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyc392.github.io%2fstarwar%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fyc392.github.io%2fstarwar%2f&amp;description=Data%20Request%20and%20Extract%20From%20Star%20Wars%20ApI"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=https%3a%2f%2fyc392.github.io%2fstarwar%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "https:\/\/yc392.github.io\/starwar\/";  
+this.page.identifier = "https:\/\/yc392.github.io\/starwar\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://Yuhua.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+      <a class="read-next-story" style="no-cover" href="/spotify/">
+          <section class="post">
+              <h2>SQLite3 schema for Spotify dataset in 3NF</h2>
+              
+          </section>
+      </a>
+  
+  
+      <a class="read-next-story prev" style="no-cover" href="/support-vector-machine/">
+          <section class="post">
+              <h2>Support Vector Machine</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">Yuhua Cai</a> © Yuhua Cai Duke 2021</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+    
+</body>
+</html>
+
