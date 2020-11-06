@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="PhDs Dataset Exploration and Dashboard Deployment"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@"/>
+
+
+
+  	<meta property="og:title" content="PhDs Dataset Exploration and Dashboard Deployment &middot; Yuhua Cai" />
+  	<meta property="og:site_name" content="Yuhua Cai" />
+  	<meta property="og:url" content="https://yc392.github.io/phds/" />
+        <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+    </script>
+
+    
+        
+            <meta property="og:image" content="/images/cover1.png"/>
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2020-11-04T22:28:00&#43;02:00" />
+
+    
+    
+
+    <title>PhDs Dataset Exploration and Dashboard Deployment &middot; Yuhua Cai</title>
+
+    
+    <meta name="description" content="Description: Play with PhDs awarded in the US dataset. Do some analysis in pandas. Make a dashboard visualization of a few interesting aspects of the data using" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/css/nav.css" />
+
+    
+
+    
+
+    
+      
+          <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Yuhua Cai" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.74.3" />
+
+    <link rel="canonical" href="https://yc392.github.io/phds/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name":  null ,
+        "logo": "https://yc392.github.ioimages/logo1.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name":  null ,
+        
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://yc392.github.ioimages/logo1.png",
+            "width": 250,
+            "height": 250
+        }, 
+        
+        "url": "https://yc392.github.io",
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ],
+        "description": "Data Scientist from Duke"
+        
+    },
+    "headline": "PhDs Dataset Exploration and Dashboard Deployment",
+    "name": "PhDs Dataset Exploration and Dashboard Deployment",
+    "wordCount":  714 ,
+    "timeRequired": "PT4M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": "en"
+    },
+    "url": "https://yc392.github.io/phds/",
+    "datePublished": "2020-11-04T22:28Z",
+    "dateModified": "2020-11-04T22:28Z",
+    
+    
+    "description": "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://yc392.github.io/phds/"
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            <h3>Content</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="/post">Post</a>
+            </li>
+        
+            <h3>Contact me</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="/about-me">About me</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="https://www.linkedin.com/in/yuhua-cai-195080194/">Linkedin</a>
+            </li>
+        
+            <h3>Follow me</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="https://github.com/yc392">Github</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="/">Blog Site</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+      <a class="blog-logo" href="https://yc392.github.io"><img src="/images/logo1.png" alt="Home" /></a>
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">PhDs Dataset Exploration and Dashboard Deployment</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2020-11-04T22:28:00&#43;02:00">
+            Nov 4, 2020
+          </time>
+        
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p><strong>Description:</strong> Play with <a href="https://ncses.nsf.gov/pubs/nsf19301/data">PhDs awarded in the US</a> dataset. Do some analysis in <code>pandas</code>. Make a dashboard visualization of a few interesting aspects of the data using <a href="https://www.streamlit.io/"><code>streamlit</code></a>.</p>
+<h2 id="about-dataset">About Dataset</h2>
+<p>Data presented in <em>Doctorate Recipients from U.S. Universities:</em> <em>2017</em> were collected by the Survey of Earned Doctorates (SED). The Survey collects data on the number and characteristics of individuals receiving research doctoral degrees from U.S. academic institutions. There are 72 tables in total in this dataset. In this blog, we only explore few of them and play with dashboard tool &ndash; <a href="https://www.streamlit.io/"><code>streamlit</code></a>.</p>
+<h2 id="what-is-streamlit"><strong>What</strong> is Streamlit?</h2>
+<p>If you are a non-tech person who is looking for a way to build your own interactive dashboard, you can consider Streamlit.</p>
+<p>Streamlit is an open python package that helps you make deployable interactive web apps without any knowledge of HTML or CSS, etc. Python is all you need. The great thing about Streamlit is that it can automatically refresh your web apps whenever the source codes have their inputs changed.</p>
+<p>There are numerous visualization libraries that Streamlit supports for building interactive dashboards, such as Plotly, Altair, Bokeh, etc., With these, telling a story through bar, pie, line charts, etc., has never been simpler.</p>
+<h2 id="get-started">Get started</h2>
+<p>In order to use Streamlit, you have to install it first by using the command:</p>
+<pre><code>Pip install streamlit
+</code></pre><p>Now, if you want to explore the samples of Streamlit dashboards, let’s open command window and type</p>
+<pre><code>Streamlit hello
+</code></pre><p>You can have your first glance at Streamlit visualizations by exploring different demos listed on the “Welcome to Streamlit” page, which is run at a local URL.</p>
+<p>It is a must to have a “.py” file to run Streamlit. There are multiple code editors that you may use.</p>
+<h4 id="dashboard-building"><strong>Dashboard building</strong></h4>
+<p>Let’s begin to create the dash by first importing some required libraries:</p>
+<pre><code>import streamlit as st
+import pandas as pd
+import numpy as np
+from plotly import tools
+import plotly.offline as py
+import plotly.express as px
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+import matplotlib.pyplot as plt
+</code></pre><p>Preparing my dataset, here I used <em>sed17-sr-tab005.xlsx</em>:</p>
+<pre><code>df = pd.read_excel('data_tables/sed17-sr-tab005.xlsx')
+df = df[2:]
+df.columns = df.iloc[0]
+df = df.drop(df.index[0])
+df_ = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/2011_us_ag_exports.csv')
+df_code = df_[['code','state']]
+result = pd.merge(df, df_code, how='inner', left_on='State or location', right_on='state')
+result.head()
+</code></pre><table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="right">State or location</th>
+<th align="right">Rank</th>
+<th align="right">Doctorate recipients</th>
+<th align="right">code</th>
+<th align="right">state</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">0</td>
+<td align="right">California</td>
+<td align="right">1</td>
+<td align="right">6105</td>
+<td align="right">CA</td>
+<td align="right">California</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">Texas</td>
+<td align="right">2</td>
+<td align="right">4068</td>
+<td align="right">TX</td>
+<td align="right">Texas</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="right">New York</td>
+<td align="right">3</td>
+<td align="right">4064</td>
+<td align="right">NY</td>
+<td align="right">New York</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="right">Massachusetts</td>
+<td align="right">4</td>
+<td align="right">2879</td>
+<td align="right">MA</td>
+<td align="right">Massachusetts</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">Pennsylvania</td>
+<td align="right">5</td>
+<td align="right">2628</td>
+<td align="right">PA</td>
+<td align="right">Pennsylvania</td>
+</tr>
+</tbody>
+</table>
+<p>Now, the first step is to name your dashboard and give it a description. Below is a simple one:</p>
+<pre><code>st.title(&quot;**♟**PhDs Dataset Exploration**♟**&quot;)
+st.write(&quot;Data presented in *Doctorate Recipients from U.S. Universities:* *2017* were collected by the Survey of Earned Doctorates (SED). The Survey collects data on the number and characteristics of individuals receiving research doctoral degrees from U.S. academic institutions. There are 72 tables in total in this dataset.&quot;)
+</code></pre><p>Next, people might get curious about how my data frame looks, so I will set an option for everyone to select the availability of my data frame.</p>
+<pre><code>if st.checkbox('Show dataframe'):
+	st.write(df)
+</code></pre><p>It is time to build the graphs to tell the story. Let&rsquo;s do some visualizations.</p>
+<pre><code>fig = go.Figure(data=go.Choropleth(
+    locations=result['code'], # Spatial coordinates
+    z = result['Doctorate recipients'].astype(float), # Data to be color-coded
+    locationmode = 'USA-states', # set of locations match entries in `locations`
+    colorscale = 'Reds',
+    colorbar_title = &quot;Number of Doctorate recipients&quot;,
+))
+
+fig.update_layout(
+    title_text = 'State, ranked by number of doctorate recipients: 2017',
+    geo_scope='usa', # limite map scope to USA
+)
+</code></pre><p>Here, I built a choropleth map to discribe the number of doctorate recipients from U.S. universities by states.</p>
+<p><img src="https://media.giphy.com/media/Dd33e5VEDRxsyzrtKy/giphy.gif" alt="2"></p>
+<pre><code>df_6 = pd.read_excel('data_tables/sed17-sr-tab006.xlsx')
+df_6 = df_6.iloc[2:5,1:]
+subjects = df_6.iloc[0].dropna().to_list()
+sex = ['Male','Female']
+df_male = df_6.iloc[2].to_list()[::2]
+df_female = df_6.iloc[2].to_list()[1::2]
+df_6 = pd.DataFrame({'Male': df_male,'Female': df_female},index=subjects)
+</code></pre><pre><code>if st.checkbox('Show Dataframe--Doctorates awarded by sex'):
+  st.write(df_6)
+
+selected_metrics_2 = st.selectbox(
+  label=&quot;Choose...&quot;, options=subjects
+)
+
+fig = go.Figure()
+for i in subjects:
+  if selected_metrics_2 == i:
+  	fig = go.Figure(data=[go.Pie(labels=sex, values=df_6.loc[i],title= i+' Doctorates awarded by sex')])
+
+st.plotly_chart(fig, use_container_width=**True**)
+</code></pre><p><img src="https://media.giphy.com/media/WZxHnuDPqnggXKg6Hm/giphy.gif" alt="1"></p>
+<pre><code>df_2 = pd.read_excel('data_tables/sed17-sr-tab002.xlsx')
+df_2 = df_2.iloc[4:,:]
+df_2.columns = ['Year','Doctorate-granting institutions','Total','Mean (per institution)','Median (per institution)']
+
+Year = list(df_2.Year)
+
+df_2 = df_2.iloc[:,1:]
+
+if st.checkbox('Show Dataframe--Number of Doctorate recipients by Institutions'):
+  st.write(df_2)
+</code></pre><pre><code>subset_data = df_2
+
+country_name_input = st.multiselect('Choose one or more', df_2.columns)
+
+if len(country_name_input) &gt; 0:
+  subset_data = df_2[country_name_input]
+  
+fig = go.Figure()
+
+for i in subset_data.columns:
+	fig.add_trace(go.Scatter(x=Year, y=df_2[i],mode='lines+markers',name=i))
+	
+st.plotly_chart(fig, use_container_width=True)
+</code></pre><p><img src="https://media.giphy.com/media/9lCVt5Y3dp8IiI1xgw/giphy.gif" alt="3"></p>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+<figure class="author-image">
+    <a class="img" href="https://yc392.github.io" style="background-image: url(/images/logo1.png)"><span class="hidden">Yuhua Cai's Picture</span></a>
+</figure>
+
+
+<section class="author">
+  <h4><a href="https://yc392.github.io">Yuhua Cai</a></h4>
+  
+  <p>Data Scientist from Duke</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Durham, NC, USA</span>
+    <span class="author-link icon-link"><a href="https://yc392.github.io">https://yc392.github.io</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=PhDs%20Dataset%20Exploration%20and%20Dashboard%20Deployment&nbsp;-&nbsp;Yuhua%20Cai&amp;url=https%3a%2f%2fyc392.github.io%2fphds%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyc392.github.io%2fphds%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fyc392.github.io%2fphds%2f&amp;description=PhDs%20Dataset%20Exploration%20and%20Dashboard%20Deployment"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=https%3a%2f%2fyc392.github.io%2fphds%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "https:\/\/yc392.github.io\/phds\/";  
+this.page.identifier = "https:\/\/yc392.github.io\/phds\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://Yuhua.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+      <a class="read-next-story" style="no-cover" href="/spotify/">
+          <section class="post">
+              <h2>SQLite3 schema for Spotify dataset in 3NF</h2>
+              
+          </section>
+      </a>
+  
+  
+      <a class="read-next-story prev" style="no-cover" href="/starwar/">
+          <section class="post">
+              <h2>Data Request and Extract From Star Wars ApI</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">Yuhua Cai</a> © Yuhua Cai Duke 2021</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+    
+</body>
+</html>
+

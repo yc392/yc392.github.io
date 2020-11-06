@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Yuhua Cai Duke 2021</copyright>
-    <lastBuildDate>Wed, 21 Oct 2020 22:28:00 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 04 Nov 2020 22:28:00 +0200</lastBuildDate>
     
 	<atom:link href="https://yc392.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -69,6 +69,16 @@ Malaria Dataset Malaria Dataset includes 3 informative datasets.
       <description>Description: Download the Spotify songs data set. Create a SQLite3 schema to store this data in at least 3rd normal form (3NF), and populate the tables. Use an SQL query to find the names of all playlists that contain instrumentals.
 Spotify Songs Dataset First, let&amp;rsquo;s download and see the dataset we gonna use. It is a dataset of Spotify songs.
 df = pd.read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-01-21/spotify_songs.csv&#39;)` df    track_id track_name track_artist track_popularity track_album_id track_album_name track_album_release_date playlist_name playlist_id playlist_genre &amp;hellip; key loudness mode speechiness acousticness instrumentalness liveness valence tempo duration_ms      0 6f807x0ima9a1j3VPbc7VN I Don&amp;rsquo;t Care (with Justin Bieber) - Loud Luxur&amp;hellip; Ed Sheeran 66 2oCs0DGTsRO98Gh5ZSl2Cx I Don&amp;rsquo;t Care (with Justin Bieber) [Loud Luxury&amp;hellip; 2019-06-14 Pop Remix 37i9dQZF1DXcZDD7cfEKhW pop &amp;hellip; 6 -2.</description>
+    </item>
+    
+    <item>
+      <title>PhDs Dataset Exploration and Dashboard Deployment</title>
+      <link>https://yc392.github.io/phds/</link>
+      <pubDate>Wed, 04 Nov 2020 22:28:00 +0200</pubDate>
+      
+      <guid>https://yc392.github.io/phds/</guid>
+      <description>Description: Play with PhDs awarded in the US dataset. Do some analysis in pandas. Make a dashboard visualization of a few interesting aspects of the data using streamlit.
+About Dataset Data presented in Doctorate Recipients from U.S. Universities: 2017 were collected by the Survey of Earned Doctorates (SED). The Survey collects data on the number and characteristics of individuals receiving research doctoral degrees from U.S. academic institutions. There are 72 tables in total in this dataset.</description>
     </item>
     
     <item>
