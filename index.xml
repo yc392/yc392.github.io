@@ -72,16 +72,6 @@ df = pd.read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytues
     </item>
     
     <item>
-      <title>PhDs Dataset Exploration and Dashboard Deployment</title>
-      <link>https://yc392.github.io/phds/</link>
-      <pubDate>Wed, 04 Nov 2020 22:28:00 +0200</pubDate>
-      
-      <guid>https://yc392.github.io/phds/</guid>
-      <description>Description: Play with PhDs awarded in the US dataset. Do some analysis in pandas. Make a dashboard visualization of a few interesting aspects of the data using streamlit.
-About Dataset Data presented in Doctorate Recipients from U.S. Universities: 2017 were collected by the Survey of Earned Doctorates (SED). The Survey collects data on the number and characteristics of individuals receiving research doctoral degrees from U.S. academic institutions. There are 72 tables in total in this dataset.</description>
-    </item>
-    
-    <item>
       <title>Data Request and Extract From Star Wars ApI</title>
       <link>https://yc392.github.io/starwar/</link>
       <pubDate>Wed, 21 Oct 2020 22:28:00 +0200</pubDate>
@@ -90,6 +80,16 @@ About Dataset Data presented in Doctorate Recipients from U.S. Universities: 201
       <description>Description: Using the requests library, download all the people in the Star Wars universe using the Star Wars API (https://swapi.dev/documentation). Show the name of the oldest person (or robot or alien) and list the titles of all the films they appeared in.
 The Requests Package The requests module allows us to send HTTP requests using Python.
 The HTTP request returns a Response Object with all the response data (content, encoding, status, etc).</description>
+    </item>
+    
+    <item>
+      <title>PhDs Dataset Exploration and Dashboard Deployment</title>
+      <link>https://yc392.github.io/phds/</link>
+      <pubDate>Wed, 04 Nov 2020 22:28:00 +0200</pubDate>
+      
+      <guid>https://yc392.github.io/phds/</guid>
+      <description>Description: Play with PhDs awarded in the US dataset. Do some analysis in pandas. Make a dashboard visualization of a few interesting aspects of the data using streamlit.
+About Dataset Data presented in Doctorate Recipients from U.S. Universities: 2017 were collected by the Survey of Earned Doctorates (SED). The Survey collects data on the number and characteristics of individuals receiving research doctoral degrees from U.S. academic institutions. There are 72 tables in total in this dataset.</description>
     </item>
     
     <item>

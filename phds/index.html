@@ -120,7 +120,7 @@
     },
     "headline": "PhDs Dataset Exploration and Dashboard Deployment",
     "name": "PhDs Dataset Exploration and Dashboard Deployment",
-    "wordCount":  714 ,
+    "wordCount":  846 ,
     "timeRequired": "PT4M",
     "inLanguage": {
       "@type": "Language",
@@ -247,7 +247,6 @@
 </code></pre><p>Now, if you want to explore the samples of Streamlit dashboards, let’s open command window and type</p>
 <pre><code>Streamlit hello
 </code></pre><p>You can have your first glance at Streamlit visualizations by exploring different demos listed on the “Welcome to Streamlit” page, which is run at a local URL.</p>
-<p>It is a must to have a “.py” file to run Streamlit. There are multiple code editors that you may use.</p>
 <h4 id="dashboard-building"><strong>Dashboard building</strong></h4>
 <p>Let’s begin to create the dash by first importing some required libraries:</p>
 <pre><code>import streamlit as st
@@ -328,7 +327,8 @@ st.write(&quot;Data presented in *Doctorate Recipients from U.S. Universities:* 
 </code></pre><p>Next, people might get curious about how my data frame looks, so I will set an option for everyone to select the availability of my data frame.</p>
 <pre><code>if st.checkbox('Show dataframe'):
 	st.write(df)
-</code></pre><p>It is time to build the graphs to tell the story. Let&rsquo;s do some visualizations.</p>
+</code></pre><h4 id="choropleth-map">Choropleth map</h4>
+<p>It is time to build the graphs to tell the story. Let&rsquo;s do some visualizations.</p>
 <pre><code>fig = go.Figure(data=go.Choropleth(
     locations=result['code'], # Spatial coordinates
     z = result['Doctorate recipients'].astype(float), # Data to be color-coded
@@ -343,6 +343,7 @@ fig.update_layout(
 )
 </code></pre><p>Here, I built a choropleth map to discribe the number of doctorate recipients from U.S. universities by states.</p>
 <p><img src="https://media.giphy.com/media/Dd33e5VEDRxsyzrtKy/giphy.gif" alt="2"></p>
+<p>Second, I used <em>sed17-sr-tab006.xlsx</em>:</p>
 <pre><code>df_6 = pd.read_excel('data_tables/sed17-sr-tab006.xlsx')
 df_6 = df_6.iloc[2:5,1:]
 subjects = df_6.iloc[0].dropna().to_list()
@@ -350,7 +351,8 @@ sex = ['Male','Female']
 df_male = df_6.iloc[2].to_list()[::2]
 df_female = df_6.iloc[2].to_list()[1::2]
 df_6 = pd.DataFrame({'Male': df_male,'Female': df_female},index=subjects)
-</code></pre><pre><code>if st.checkbox('Show Dataframe--Doctorates awarded by sex'):
+</code></pre><h4 id="pie-charts-with-selectbox">Pie charts with Selectbox</h4>
+<pre><code>if st.checkbox('Show Dataframe--Doctorates awarded by sex'):
   st.write(df_6)
 
 selected_metrics_2 = st.selectbox(
@@ -364,6 +366,7 @@ for i in subjects:
 
 st.plotly_chart(fig, use_container_width=**True**)
 </code></pre><p><img src="https://media.giphy.com/media/WZxHnuDPqnggXKg6Hm/giphy.gif" alt="1"></p>
+<p>Third, I used <em>sed17-sr-tab002.xlsx</em>:</p>
 <pre><code>df_2 = pd.read_excel('data_tables/sed17-sr-tab002.xlsx')
 df_2 = df_2.iloc[4:,:]
 df_2.columns = ['Year','Doctorate-granting institutions','Total','Mean (per institution)','Median (per institution)']
@@ -374,13 +377,14 @@ df_2 = df_2.iloc[:,1:]
 
 if st.checkbox('Show Dataframe--Number of Doctorate recipients by Institutions'):
   st.write(df_2)
-</code></pre><pre><code>subset_data = df_2
+</code></pre><h4 id="line-chart-with-multiselectbox">Line chart with Multiselectbox</h4>
+<pre><code>subset_data = df_2
 
 country_name_input = st.multiselect('Choose one or more', df_2.columns)
 
 if len(country_name_input) &gt; 0:
   subset_data = df_2[country_name_input]
-  
+
 fig = go.Figure()
 
 for i in subset_data.columns:
@@ -388,6 +392,14 @@ for i in subset_data.columns:
 	
 st.plotly_chart(fig, use_container_width=True)
 </code></pre><p><img src="https://media.giphy.com/media/9lCVt5Y3dp8IiI1xgw/giphy.gif" alt="3"></p>
+<p>The 3 plots above are examples of how screamlit works. You can create as many charts and sections as you need. Now, to view these charts on Streamlit, let’s run a few more commands:</p>
+<ul>
+<li>It is a must to have a “.py” file to run Streamlit. So save your script as a “.py” file</li>
+<li>Open Command Window and direct to where the file is saved. Then, run the command “streamlit run “yourfilename.py”. A pop-up tab displaying your dashboard will appear automatically</li>
+</ul>
+<p>In my case, I saved my file as “hw6.py” and stored it on the desktop. So, here is how I run it:</p>
+<pre><code>streamlit run hw6.py
+</code></pre><p>Here are just some basics of how I explored Streamlit and simple visualizations for PhDs dataset. Now it’s your turn to play with these resources and create incredible dashboards.</p>
 
     </section>
 
@@ -483,17 +495,17 @@ s.setAttribute('data-timestamp', +new Date());
 
   <aside class="read-next">
   
-      <a class="read-next-story" style="no-cover" href="/spotify/">
+      <a class="read-next-story" style="no-cover" href="/starwar/">
           <section class="post">
-              <h2>SQLite3 schema for Spotify dataset in 3NF</h2>
+              <h2>Data Request and Extract From Star Wars ApI</h2>
               
           </section>
       </a>
   
   
-      <a class="read-next-story prev" style="no-cover" href="/starwar/">
+      <a class="read-next-story prev" style="no-cover" href="/support-vector-machine/">
           <section class="post">
-              <h2>Data Request and Extract From Star Wars ApI</h2>
+              <h2>Support Vector Machine</h2>
           </section>
       </a>
   
