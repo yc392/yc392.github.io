@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="Insects Images Classification with Deep Learning"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@"/>
+
+
+
+  	<meta property="og:title" content="Insects Images Classification with Deep Learning &middot; Yuhua Cai" />
+  	<meta property="og:site_name" content="Yuhua Cai" />
+  	<meta property="og:url" content="https://yc392.github.io/deep-learning/" />
+        <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+    </script>
+
+    
+        
+            <meta property="og:image" content="/images/cover1.png"/>
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2020-11-16T22:28:00&#43;02:00" />
+
+    
+    
+
+    <title>Insects Images Classification with Deep Learning &middot; Yuhua Cai</title>
+
+    
+    <meta name="description" content="Description: Train a deep learning model to classify beetles, cockroaches and dragonflies using these images. Note: Original images from https://www.insectimage" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/css/nav.css" />
+
+    
+
+    
+
+    
+      
+          <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Yuhua Cai" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.74.3" />
+
+    <link rel="canonical" href="https://yc392.github.io/deep-learning/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name":  null ,
+        "logo": "https://yc392.github.ioimages/logo1.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name":  null ,
+        
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://yc392.github.ioimages/logo1.png",
+            "width": 250,
+            "height": 250
+        }, 
+        
+        "url": "https://yc392.github.io",
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ],
+        "description": "Data Scientist from Duke"
+        
+    },
+    "headline": "Insects Images Classification with Deep Learning",
+    "name": "Insects Images Classification with Deep Learning",
+    "wordCount":  803 ,
+    "timeRequired": "PT4M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": "en"
+    },
+    "url": "https://yc392.github.io/deep-learning/",
+    "datePublished": "2020-11-16T22:28Z",
+    "dateModified": "2020-11-16T22:28Z",
+    
+    
+    "description": "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://yc392.github.io/deep-learning/"
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            <h3>Content</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="/post">Post</a>
+            </li>
+        
+            <h3>Contact me</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="/about-me">About me</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="https://www.linkedin.com/in/yuhua-cai-195080194/">Linkedin</a>
+            </li>
+        
+            <h3>Follow me</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="https://github.com/yc392">Github</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="/">Blog Site</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+      <a class="blog-logo" href="https://yc392.github.io"><img src="/images/logo1.png" alt="Home" /></a>
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Insects Images Classification with Deep Learning</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2020-11-16T22:28:00&#43;02:00">
+            Nov 16, 2020
+          </time>
+        
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p><strong>Description:</strong> Train a deep learning model to classify beetles, cockroaches and dragonflies using these <a href="https://www.dropbox.com/s/fn73sj2e6c9rhf6/insects.zip?dl=0">images</a>. Note: Original images from <a href="https://www.insectimages.org/index.cfm">https://www.insectimages.org/index.cfm</a>.</p>
+<h2 id="insect-image-dataset">Insect Image Dataset</h2>
+<p>The original <a href="https://www.insectimages.org/index.cfm">dataset</a> is found at the Insect Image websites. There are total 1199 images of beetles, cockroaches and dragonflies. In this project, we will train a neural network model to classfy these three different types of insects. So first let&rsquo;s take a look at these insects.</p>
+<h4 id="beetles">Beetles</h4>
+<pre><code>import matplotlib.image as mpimg
+import matplotlib.pyplot as plt
+beetle = mpimg.imread('train/beetles/5556579.jpg')
+plt.imshow(beetle)
+</code></pre><p><img src="/images/insect1.png" alt="insect1"></p>
+<h4 id="cockroach">Cockroach</h4>
+<pre><code>cockroach = mpimg.imread('train/cockroach/5380158.jpg')
+plt.imshow(cockroach)
+</code></pre><p><img src="/images/insect2.png" alt="insect2"></p>
+<h4 id="dragonflies">Dragonflies</h4>
+<pre><code>dragonfly = mpimg.imread('train/dragonflies/5343077.jpg')
+plt.imshow(dragonfly)
+</code></pre><p><img src="/images/insect3.png" alt="insect3"></p>
+<h2 id="load-train-and-test-dataset">Load train and test dataset</h2>
+<p>After we download our train and test dataset, the images may not all consist in the exact same shapes. Thus, we have to resize each image into (64,64,3) (height, width, color channel) shape and stored all images as a numpy array.</p>
+<pre><code>def load_images(folder):
+    '''load all images in current folder and return as a numpy array
+    Parameters
+    ----------
+    folder: current directory. string
+    
+    Return
+    ------
+    imageArray: array of imgaes. numpy.array
+    
+    '''
+    images = []
+    for filename in os.listdir(folder):
+        img = Image.open(os.path.join(folder, filename))
+        #img = ImageOps.grayscale(img)
+        if img is not None:
+            image_resized = img_to_array(img.resize((64, 64)))
+            images.append(image_resized)
+    return np.array(images)
+</code></pre><p>Now we have 1109 training images and 180 testing images with exact same shape (64,64,3)!</p>
+<h2 id="convolutional-neural-network">Convolutional Neural network</h2>
+<p>A Convolutional Neural Network (CNN) is a deep learning algorithm that can recognize and classify features in images for computer vision. It is a multi-layer neural network designed to analyze visual inputs and perform tasks such as image classification, segmentation and object detection.</p>
+<h4 id="build-our-cnn">Build our CNN</h4>
+<p>Here&rsquo;s the code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ImageModel</span>(input_shape):
+    <span style="color:#75715e"># Define the input placeholder as a tensor with shape input_shape. Think of this as your input image!</span>
+    X_input <span style="color:#f92672">=</span> Input(input_shape)
+    X <span style="color:#f92672">=</span> X_input
+
+    <span style="color:#75715e"># CONV -&gt; BN -&gt; RELU Block applied to X</span>
+    X <span style="color:#f92672">=</span> Conv2D(<span style="color:#ae81ff">32</span>, (<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">4</span>), strides <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;conv0&#39;</span>)(X)
+    X <span style="color:#f92672">=</span> BatchNormalization(axis <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bn0&#39;</span>)(X)
+    X <span style="color:#f92672">=</span> Activation(<span style="color:#e6db74">&#39;relu&#39;</span>)(X)
+
+    <span style="color:#75715e"># MAXPOOL</span>
+    X <span style="color:#f92672">=</span> MaxPooling2D((<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;max_pool1&#39;</span>)(X)
+    
+    <span style="color:#75715e"># CONV -&gt; BN -&gt; RELU Block applied to X</span>
+    X <span style="color:#f92672">=</span> Conv2D(<span style="color:#ae81ff">64</span>, (<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">4</span>), strides <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;conv1&#39;</span>)(X)
+    X <span style="color:#f92672">=</span> BatchNormalization(axis <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bn1&#39;</span>)(X)
+    X <span style="color:#f92672">=</span> Activation(<span style="color:#e6db74">&#39;relu&#39;</span>)(X)
+
+    <span style="color:#75715e"># MAXPOOL</span>
+    X <span style="color:#f92672">=</span> MaxPooling2D((<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;max_pool2&#39;</span>)(X)
+
+    <span style="color:#75715e"># FLATTEN X (means convert it to a vector) + FULLYCONNECTED</span>
+    X <span style="color:#f92672">=</span> Flatten()(X)
+    X <span style="color:#f92672">=</span> Dense(<span style="color:#ae81ff">4</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softmax&#39;</span>, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;fc&#39;</span>)(X)
+
+    <span style="color:#75715e"># Create model. This creates your Keras model instance, you&#39;ll use this instance to train/test the model.</span>
+    model <span style="color:#f92672">=</span> Model(inputs <span style="color:#f92672">=</span> X_input, outputs <span style="color:#f92672">=</span> X, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ImageModel&#39;</span>)
+    
+    <span style="color:#66d9ef">return</span> model
+</code></pre></div><p>Our CNN network looks like this:</p>
+<p><img src="/images/insect4.png" alt="insect4"></p>
+<h4 id="train">Train</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Model<span style="color:#f92672">.</span>fit(x<span style="color:#f92672">=</span>X_train, y<span style="color:#f92672">=</span>y_train, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">25</span>, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>,shuffle<span style="color:#f92672">=</span>True,verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</code></pre></div><h4 id="test">Test</h4>
+<pre><code>test_loss, test_acc = model.evaluate(X_test, y_test)
+test_acc
+</code></pre><pre><code>&gt;&gt;&gt; 0.8111110925674438
+</code></pre><p>The accuracy is about 80%. For a simple model with limited training set, this performance is not bad.</p>
+<h2 id="how-our-model-classify-insects">How our model classify insects</h2>
+<p><em>To explain</em> how the neural network classified the images, we need to figure out how CNNs work.</p>
+<h4 id="how-cnns-works">How CNNs Works</h4>
+<p>A CNN operates in three stages. The first is a <em>convolution</em>, in which the image is “scanned” a few pixels at a time, and a <em>feature map</em> is created with probabilities that each feature belongs to the required class (in a simple classification example). The second stage is <em>pooling</em> (also called downsampling), which reduces the dimensionality of each feature while maintaining its most important information. The pooling stage creates a “summary” of the most important features in the image.</p>
+<p><img src="/images/insect5.png" alt="insect5"></p>
+<p>Most CNNs use “max pooling”, in which the highest value is taken from each pixel area scanned by the CNN, as illustrated below.</p>
+<p><img src="/images/insect6.png" alt="insect6"></p>
+<p>A CNN can perform several rounds of convolution then pooling. For example, in the first round, an image can be broken down into objects, such as a boat, a person, a plane of grass. In the second round, the CNN can identify features within each object, for example, a face, torso, hands, legs. In a third round, the CNN could go deeper and analyze features within the face, etc.</p>
+<p>Finally, when the features are at the right level of granularity, the CNN enters the third stage, which is a fully-connected neural network that analyzes the final probabilities, and decides which class the image belongs to. The final step can also be used for other tasks, such as generating text—a common use of convolutional networks is to automatically generate captions for images.</p>
+<h4 id="interpret-with-shap">Interpret with SHAP</h4>
+<p>As we know, SHAP is giving us the opportunity to better understand the model and which features contributed to which prediction. The package allows us to check whether we are taking just features into account which make sense. Thus, machine learning becomes less of a “black box”. This way, we are getting closer to explainable machine learning. The SHAP package is also useful in image recognition tasks.</p>
+<p>Here I took the first ten testing insect images as example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">explainer <span style="color:#f92672">=</span> shap<span style="color:#f92672">.</span>GradientExplainer(model, X_train)
+sv <span style="color:#f92672">=</span> explainer<span style="color:#f92672">.</span>shap_values(X_test[:<span style="color:#ae81ff">10</span>]);
+shap<span style="color:#f92672">.</span>image_plot([sv[i] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">3</span>)], X_test[:<span style="color:#ae81ff">10</span>])
+</code></pre></div><p><img src="/images/shap.png" alt="shap"></p>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+<figure class="author-image">
+    <a class="img" href="https://yc392.github.io" style="background-image: url(/images/logo1.png)"><span class="hidden">Yuhua Cai's Picture</span></a>
+</figure>
+
+
+<section class="author">
+  <h4><a href="https://yc392.github.io">Yuhua Cai</a></h4>
+  
+  <p>Data Scientist from Duke</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Durham, NC, USA</span>
+    <span class="author-link icon-link"><a href="https://yc392.github.io">https://yc392.github.io</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Insects%20Images%20Classification%20with%20Deep%20Learning&nbsp;-&nbsp;Yuhua%20Cai&amp;url=https%3a%2f%2fyc392.github.io%2fdeep-learning%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyc392.github.io%2fdeep-learning%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fyc392.github.io%2fdeep-learning%2f&amp;description=Insects%20Images%20Classification%20with%20Deep%20Learning"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=https%3a%2f%2fyc392.github.io%2fdeep-learning%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "https:\/\/yc392.github.io\/deep-learning\/";  
+this.page.identifier = "https:\/\/yc392.github.io\/deep-learning\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://Yuhua.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+      <a class="read-next-story" style="no-cover" href="/support-vector-machine/">
+          <section class="post">
+              <h2>Support Vector Machine</h2>
+              
+          </section>
+      </a>
+  
+  
+      <a class="read-next-story prev" style="no-cover" href="/cart4.5-id3-and-random-forest/">
+          <section class="post">
+              <h2>CART4.5, ID3 and Random Forest</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">Yuhua Cai</a> © Yuhua Cai Duke 2021</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+    
+</body>
+</html>
+

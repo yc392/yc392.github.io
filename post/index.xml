@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© Yuhua Cai Duke 2021</copyright>
-    <lastBuildDate>Wed, 04 Nov 2020 22:28:00 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2020 22:28:00 +0200</lastBuildDate>
     
 	<atom:link href="https://yc392.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -100,6 +100,16 @@ About Dataset Data presented in Doctorate Recipients from U.S. Universities: 201
       <guid>https://yc392.github.io/support-vector-machine/</guid>
       <description>LINEAR SVM Due Date : 9/28 Monday 10:15 PM EST import numpy as np import matplotlib.pyplot as plt import scipy.io as io import libsvm from libsvm.svmutil import * import pandas as pd %matplotlib inline 3.1 Linear Support Vector Machine on toy data 3.1.1 Generate a training set of size $100$ with 2D features (X) drawn at random as follows:
  X_{neg} $\sim$ $\mathcal{N}$($[-5, -5]$, 5*$I_2$) and correspond to negative labels (-1) X_{pos} $\sim$ $\mathcal{N}$($[5, 5]$, 5*$I_2$) and correspond to positive labels (+1) Accordingly, $X = [X_{neg}, X_{pos}]$ is a $100\times2$ array, Y is a $100\times1$ array of values $\in {-1, 1}$.</description>
+    </item>
+    
+    <item>
+      <title>Insects Images Classification with Deep Learning</title>
+      <link>https://yc392.github.io/deep-learning/</link>
+      <pubDate>Mon, 16 Nov 2020 22:28:00 +0200</pubDate>
+      
+      <guid>https://yc392.github.io/deep-learning/</guid>
+      <description>Description: Train a deep learning model to classify beetles, cockroaches and dragonflies using these images. Note: Original images from https://www.insectimages.org/index.cfm.
+Insect Image Dataset The original dataset is found at the Insect Image websites. There are total 1199 images of beetles, cockroaches and dragonflies. In this project, we will train a neural network model to classfy these three different types of insects. So first let&amp;rsquo;s take a look at these insects.</description>
     </item>
     
     <item>
