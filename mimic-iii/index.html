@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+        <meta name="twitter:card" content="summary"/>
+    
+
+
+
+<meta name="twitter:title" content="Mortality Prediction Models using MIMIC-III"/>
+<meta name="twitter:description" content=""/>
+<meta name="twitter:site" content="@"/>
+
+
+
+  	<meta property="og:title" content="Mortality Prediction Models using MIMIC-III &middot; Yuhua Cai" />
+  	<meta property="og:site_name" content="Yuhua Cai" />
+  	<meta property="og:url" content="https://yc392.github.io/mimic-iii/" />
+        <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+    </script>
+
+    
+        
+            <meta property="og:image" content="/images/cover1.png"/>
+        
+    
+
+    
+    <meta property="og:description" content="" />
+  	<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2020-11-16T22:28:00&#43;02:00" />
+
+    
+    
+
+    <title>Mortality Prediction Models using MIMIC-III &middot; Yuhua Cai</title>
+
+    
+    <meta name="description" content="Description: This is the final project for Duke BIOS-823-2020.
+Brief Introduction An intensive care unit (ICU) provides intensive treatment medicine for patient" />
+    
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/css/nav.css" />
+
+    
+
+    
+
+    
+      
+          <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Yuhua Cai" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.74.3" />
+
+    <link rel="canonical" href="https://yc392.github.io/mimic-iii/" />
+
+    
+      
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name":  null ,
+        "logo": "https://yc392.github.ioimages/logo1.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name":  null ,
+        
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://yc392.github.ioimages/logo1.png",
+            "width": 250,
+            "height": 250
+        }, 
+        
+        "url": "https://yc392.github.io",
+        "sameAs": [
+            
+            
+             
+             
+             
+             
+             
+            
+        ],
+        "description": "Data Scientist from Duke"
+        
+    },
+    "headline": "Mortality Prediction Models using MIMIC-III",
+    "name": "Mortality Prediction Models using MIMIC-III",
+    "wordCount":  1132 ,
+    "timeRequired": "PT6M",
+    "inLanguage": {
+      "@type": "Language",
+      "alternateName": "en"
+    },
+    "url": "https://yc392.github.io/mimic-iii/",
+    "datePublished": "2020-11-16T22:28Z",
+    "dateModified": "2020-11-16T22:28Z",
+    
+    
+    "description": "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://yc392.github.io/mimic-iii/"
+    }
+}
+    </script>
+    
+
+
+    
+
+    
+
+    
+</head>
+<body class="nav-closed">
+
+  <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        
+        
+        
+            <h3>Content</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="/post">Post</a>
+            </li>
+        
+            <h3>Contact me</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="/about-me">About me</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="https://www.linkedin.com/in/yuhua-cai-195080194/">Linkedin</a>
+            </li>
+        
+            <h3>Follow me</h3>
+            <li class="nav-opened" role="presentation">
+            	<a href="https://github.com/yc392">Github</a>
+            </li>
+        
+            
+            <li class="nav-opened" role="presentation">
+            	<a href="/">Blog Site</a>
+            </li>
+        
+        
+    </ul>
+
+    
+    <a class="subscribe-button icon-feed" href="/index.xml">Subscribe</a>
+    
+</div>
+<span class="nav-cover"></span>
+
+
+ <div class="site-wrapper">
+
+
+
+<header class="main-header post-head no-cover">
+  <nav class="main-nav clearfix">
+
+
+  
+      <a class="blog-logo" href="https://yc392.github.io"><img src="/images/logo1.png" alt="Home" /></a>
+  
+  
+      <a class="menu-button" href="#"><span class="burger">&#9776;</span><span class="word">Menu</span></a>
+  
+  </nav>
+</header>
+
+
+
+<main class="content" role="main">
+
+
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Mortality Prediction Models using MIMIC-III</h1>
+        <small></small>
+
+        <section class="post-meta">
+        
+          <time class="post-date" datetime="2020-11-16T22:28:00&#43;02:00">
+            Nov 16, 2020
+          </time>
+        
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <p><strong>Description:</strong> This is the final project for Duke BIOS-823-2020.</p>
+<p><img src="/images/final6.jpg" alt="final6"></p>
+<h2 id="brief-introduction">Brief Introduction</h2>
+<p>An intensive care unit (ICU) provides intensive treatment medicine for patients with severe and life-threatening illness and injuries, or those directly transferred from emergency department. ICUs have higher sta-to-patient ratio then normal wards to provide intensive care and comprehensive monitoring to severe patients, and hence generate a massive amount of electronic healthcare records (EHR) which are useful to predict patients&rsquo; disease status and the amount of healthcare needed. The Medical Information Mart for Intensive Care III (MIMIC-III) is a freely-accessible ICU database comprising de-identied EHR of over 60,000 ICU stays for around 40,000 patients who stayed in critical care units of the Beth Israel Deaconess Medical Center between 2001 and 2012. The database consists of rich information about patients&rsquo; demographic characteristics, such as gender, age, ethnicity, admission type, and various in-hospital measurements, laboratory tests, procedures and medication of ICU patients over the time. The database provides data from two electronic healthcare record systems, namely the CareVue (from 2001 to 2008) and MetaVision (from 2008 to 2012), which collect and store data dierently.</p>
+<h2 id="objective">Objective</h2>
+<p>The goal is to build a model framework to predict in-hospital mortality. The model would be useful to promptly identify high-risk patients who might be dead within hours or days since ICU admission, so that resources can be eciently allocated during the early stage of ICU st.</p>
+<h2 id="database-description">Database Description</h2>
+<p>We referred to the instruction form MIMIC ocial website to set up our database in PostgreSQL. We firstly downloaded the whole dataset from the website. And then we referred the mimiciii schema and build a set of empty tables. After that we import the CSV data les into the empty tables. To interface with Python, we use psycopg2 to connect to database.</p>
+<h2 id="feature-extraction">Feature Extraction</h2>
+<p>In this project, to predict the mortality in the early stage of ICU stay, we are using three severityscores: SAPS II, APACHE II, and SOFA scores. For APACHE II, it is calculated from a patient&rsquo;s age and 12 routine physiological measurements. And measurements are measured during the rst 24 hours after admission, and utilized in addition to information about previous health status (recent surgery, history of severe organ insuciency, immunocompromised state) and baseline demographics such as age. Another key thing is that APACHE II only consider the most deranged physiology value physiology, which means we need to extract the minimum and maximum value with 24 hours.</p>
+<p><img src="/images/final2.png" alt="final2"></p>
+<p>In order to extract the target variables, we rst need a deep understanding on the data schema. According our observation, we found out that the main ICU admission data are included in table \icustays&rdquo;. And the variable required to calculated these 3 score are distributed in \labevents&rdquo; table and \chartevents&rdquo; table. And these two tables connect to \icustay&rdquo; through a key called subjectID. Table 2 provides the list of extracted features used in the study.</p>
+<p><img src="/images/final1.png" alt="final1"></p>
+<h2 id="prediction-modeling">Prediction Modeling</h2>
+<p>The ultimate goal is to build a model framework to predict in-hospital mortality. For the rst try, a binary classier was trained using the extracted features listed in Table 2 to predict in-hospital mortality. 49,632 ICU stays of our study population were split into 80 percent of training set and 20 percent of test set. Random forest classiers were trained on the training set to predict the in-hospital mortality label (around 12 percent were dead) using 24-hour ICU stay data. Hyperpa- rameter tuning was performed using grid search on 5-fold cross-validation (CV) of the training set. The model performance of the best classier resulted from the grid search were then compared and evaluated on the test set.</p>
+<p>Secondly, we trained a Logistic Regression Model with the same test-train split, hyperparameter tuning and CV techniques. Experimental results in the later sections show that both of machine learning models provide us a base to identify high-risk patients who might be dead within 24-hour since ICU admission in the early stage of ICU stay.</p>
+<p>Finally, we used neural network. A simple, basic, fully connected neural network with four layers, and four neurons per layer is implemented using Keras. After this initial success, the network should be tuned to increase its performance in order to make better predictions. Predictive power is determined by several factors, mostly network parameter tuning. Tuning is performed in an iterative manner, by trying out several congurations until we nd an optimal one that maximizes accuracy. The following parameters were tuned:</p>
+<ul>
+<li>Number of hidden layers</li>
+<li>Epoch</li>
+<li>Batch Size</li>
+<li>Optimization algorithm</li>
+</ul>
+<p>Three main tuning strategies can be used to accomplish this task. The most time consuming, Grid Search, involves trying out all possible combinations of parameters. This is often unfeasible in complex scenarios, as the combinations may easily exceed 10k, which given a training time of about 5 mins would mean that we need to wait for months to nd the optimal parameter conguration. An alternative to Grid Search is Random Search, which tests a predened number of random congurations, maybe 50 or 100, and picks the best one.</p>
+<p>After 50 iterations, the optimal parameters are gifted to us: 6 hidden layers, 8 neurons per layer, a batch size of 50, epoch of 25 and Adam algorithm as optimization function.</p>
+<h2 id="evaluation">Evaluation</h2>
+<p>The dataset was split into 80 percent of training set and 20 percent of test set. Hyperparameter tuning was done on 5-fold CV of the training set and the nal evaluation of model performance was done on the test set. Multiple machine learning models in this project were evaluated and compared using the Area under the Receiver Operating Characteristic curve (AUROC) on the test set. The ROC curve is the true positive rate against the false positive rate at various threshold settings. AUROC provides a single measure of the diagnostic ability of a binary classier as its discrimination threshold is varied. We have used AUROC to compare the model performance of the binary classiers.</p>
+<h2 id="experimental-results">Experimental Results</h2>
+<p>ROC curve for Logistic Regression Model:</p>
+<p><img src="/images/final3.png" alt="final3"></p>
+<p>ROC curve for Random Forest:</p>
+<p><img src="/images/final4.png" alt="final4"></p>
+<p>ROC curve for Neural Network:</p>
+<p><img src="/images/final5.png" alt="final5"></p>
+<h2 id="discussion">Discussion</h2>
+<p>Even though the main objective has been achieved, earning my bachelor&rsquo;s degree, some improvements could be made to boost the model&rsquo;s performance and achieve better prediction capabilities. For example, more features could be added, and Long Short-Term Memory Network (LSTM) might can be deployed to handle time series data instead of using aggregation of features.</p>
+<p>In addition, results obtained are great, but we are not sure it is conclusive enough to be used in medical practice Even though the mathematical reasoning behind many algorithms used in AI tools is clear, its complexity has made it dicult to comprehend it under the hood. If we are willing to put our lives in the hands of AI, we must make sure we fully understand how this tool works, as well as creating a well thought out legal regulation around its use.</p>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+
+
+
+
+
+
+
+
+<figure class="author-image">
+    <a class="img" href="https://yc392.github.io" style="background-image: url(/images/logo1.png)"><span class="hidden">Yuhua Cai's Picture</span></a>
+</figure>
+
+
+<section class="author">
+  <h4><a href="https://yc392.github.io">Yuhua Cai</a></h4>
+  
+  <p>Data Scientist from Duke</p>
+  
+  <div class="author-meta">
+    <span class="author-location icon-location">Durham, NC, USA</span>
+    <span class="author-link icon-link"><a href="https://yc392.github.io">https://yc392.github.io</a></span>
+  </div>
+</section>
+
+
+
+
+    
+<section class="share">
+  <h4>Share this post</h4>
+  <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Mortality%20Prediction%20Models%20using%20MIMIC-III&nbsp;-&nbsp;Yuhua%20Cai&amp;url=https%3a%2f%2fyc392.github.io%2fmimic-iii%2f"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="hidden">Twitter</span>
+  </a>
+  <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyc392.github.io%2fmimic-iii%2f"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="hidden">Facebook</span>
+  </a>
+  <a class="icon-pinterest" style="font-size: 1.4em" href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fyc392.github.io%2fmimic-iii%2f&amp;description=Mortality%20Prediction%20Models%20using%20MIMIC-III"
+      onclick="window.open(this.href, 'pinterest-share','width=580,height=296');return false;">
+      <span class="hidden">Pinterest</span>
+  </a>
+  <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=https%3a%2f%2fyc392.github.io%2fmimic-iii%2f"
+     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+      <span class="hidden">Google+</span>
+  </a>
+</section>
+
+
+
+    
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "https:\/\/yc392.github.io\/mimic-iii\/";  
+this.page.identifier = "https:\/\/yc392.github.io\/mimic-iii\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://Yuhua.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+
+
+  </footer>
+</article>
+
+</main>
+
+
+  <aside class="read-next">
+  
+      <a class="read-next-story" style="no-cover" href="/deep-learning/">
+          <section class="post">
+              <h2>Insects Images Classification with Deep Learning</h2>
+              
+          </section>
+      </a>
+  
+  
+      <a class="read-next-story prev" style="no-cover" href="/phds/">
+          <section class="post">
+              <h2>PhDs Dataset Exploration and Dashboard Deployment</h2>
+          </section>
+      </a>
+  
+</aside>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">Yuhua Cai</a> © Yuhua Cai Duke 2021</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="http://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/vjeantet/hugo-theme-casper">Casper</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+    
+</body>
+</html>
+

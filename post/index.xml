@@ -93,6 +93,16 @@ Insect Image Dataset The original dataset is found at the Insect Image websites.
     </item>
     
     <item>
+      <title>Mortality Prediction Models using MIMIC-III</title>
+      <link>https://yc392.github.io/mimic-iii/</link>
+      <pubDate>Mon, 16 Nov 2020 22:28:00 +0200</pubDate>
+      
+      <guid>https://yc392.github.io/mimic-iii/</guid>
+      <description>Description: This is the final project for Duke BIOS-823-2020.
+Brief Introduction An intensive care unit (ICU) provides intensive treatment medicine for patients with severe and life-threatening illness and injuries, or those directly transferred from emergency department. ICUs have higher sta-to-patient ratio then normal wards to provide intensive care and comprehensive monitoring to severe patients, and hence generate a massive amount of electronic healthcare records (EHR) which are useful to predict patients&amp;rsquo; disease status and the amount of healthcare needed.</description>
+    </item>
+    
+    <item>
       <title>PhDs Dataset Exploration and Dashboard Deployment</title>
       <link>https://yc392.github.io/phds/</link>
       <pubDate>Wed, 04 Nov 2020 22:28:00 +0200</pubDate>
